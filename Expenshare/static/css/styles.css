@@ -1,0 +1,18 @@
+body{
+	background-color: #008798;
+}
+#bodyContent{
+	background-color: #00C3A9;
+	border: solid black 1px;
+}
+#infoBox{
+	margin-top: 7em;
+	background-color: #AFD867;
+	margin-bottom: 7em;
+	border: solid black 5px;
+	padding-bottom: 3em;
+}
+footer{
+	text-align: center;
+	color: #FFFFFF;
+}
