@@ -6,8 +6,62 @@
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 	</head>
+
 	<body>
-		<h1> THIS WILL BE THE LOGIN PAGE</h1>
+		<div cloass="container-fluid">
+			
+			<div class="row">
+	            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		            <div class="container-fluid">
+		              <div class="row-fluid">
+		                <div class="col-md-10">
+		                  <a class="navbar-brand" id="navName" href="/ianchar/home"> Expenshare</a>
+			                 <ul class="nav navbar-nav">
+			                  	<!--Put links to different parts of the site here-->
+			                 </ul>
+		                </div>
+		            </div>
+	          	</nav>
+			</div>
+			<div class="container" id="bodyContainer">
+				<div class="row">
+					<div class="col-md-1"> </div>
+					<div class="container" id="bodyContent">
+						<div class="row">
+							<div class="col-md-2"></div>
+							<div class="col-md-8" id="infoBox">
+								<h2>Welcome to ExpenShare</h2>
+								<h4>Log in or sign up to get started!</h4>
+								<form role="form">
+								  <div class="form-group">
+								    <label for="loginEmail">Email address</label>
+								    <input type="email" class="form-control" id="emailInput" placeholder="Enter email">
+								  </div>
+								  <div class="form-group">
+								    <label for="loginPassword">Password</label>
+								    <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+								  </div>
+								</form>
+								<div class="row">
+								  <div class="col-md-6">
+								  	<button type="button" class="btn btn-default btn-lg btn-block">Submit</button>
+								  </div>
+								  <div class="col-md-6">
+								  	<button type="button" class="btn btn-default btn-lg btn-block">Sign Up</button>
+								  </div>
+								</div>
+							</div>
+							<div class="col-md-2"></div>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+				</div>	
+			</div>
+			<footer>
+				<p> &copy Taylor Andrews, Ian Char, and Brennan McConnell 2014 </p>
+			</footer>
+		</div>
 	</body>
 </html>
