@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ExpenShare Login</title>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+	</head>
+
+	<body>
+		<div cloass="container-fluid">
+			
+			<div class="row">
+	            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		            <div class="container-fluid">
+		              <div class="row-fluid">
+		                <div class="col-md-10">
+		                  <a class="navbar-brand" href="/share/home"> Expenshare</a>
+		                  <ul class="nav navbar-nav">
+		                  	<li><a href="">Groups</a></li>
+		                  	<li><a href="">Payment Logs</a></li>
+		                  	<li><a href="">About</a></li>
+		                  </ul>
+		                  <button type="button" id="signOut" class="btn btn-default">Sign Out</button>
+		                </div>
+		            </div>
+	          	</nav>
+			</div>
+			<div class="container" id="bodyContainer">
+				<div class="row">
+					<div class="col-md-1"> </div>
+					<div class="container-fluid" id="bodyContent">
+						<div class="row-fluid">
+							<div class="col-md-8" id="mainBoxOuter">
+								<div id="mainBoxInner">
+									<!--Temporary content -->
+									<h1> List all of the groups here </h1>
+									<hr>
+									<div class="row">
+										<div class="col-md-8">
+											<h3>Group 1 </h3>
+											<p>Short description of group 1 here</p>
+										</div>
+										<div class='col-md-4'>
+											<h4>Groupmates</h4>
+											<ul>
+												<li>Groupmate1</li>
+												<li>Groupmate2</li>
+												<li>Groupmate3</li>
+											</ul>
+										</div>
+									</div>
+									<hr>
+																		<hr>
+									<div class="row">
+										<div class="col-md-8">
+											<h3>Group 2 </h3>
+											<p>Short description of group 2 here</p>
+										</div>
+										<div class='col-md-4'>
+											<h4>Groupmates</h4>
+											<ul>
+												<li>Groupmate1</li>
+												<li>Groupmate2</li>
+												<li>Groupmate3</li>
+											</ul>
+										</div>
+									</div>
+									<hr>
+																		<hr>
+									<div class="row">
+										<div class="col-md-8">
+											<h3>Group 3 </h3>
+											<p>Short description of group 3 here</p>
+										</div>
+										<div class='col-md-4'>
+											<h4>Groupmates</h4>
+											<ul>
+												<li>Groupmate1</li>
+												<li>Groupmate2</li>
+												<li>Groupmate3</li>
+											</ul>
+										</div>
+									</div>
+									<hr>
+								</div>
+							</div>
+							<div class="col-md-3" id="infoBox">
+								<h3>Looking for a group?</h3>
+								  	<button type="button" class="btn btn-default btn-lg btn">Find a Group</button>
+								<h3>Want to start a group?</h3>
+									<button type="button" class="btn btn-default btn-lg btn">Create a Group</button>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+				</div>	
+			</div>
+			<footer>
+				<p> &copy Taylor Andrews, Ian Char, and Brennan McConnell 2014 </p>
+			</footer>
+		</div>
+	</body>
+</html>

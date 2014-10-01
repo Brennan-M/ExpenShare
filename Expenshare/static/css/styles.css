@@ -1,6 +1,22 @@
 body{
 	background-color: #008798;
 }
+
+#mainBoxInner{
+	border: solid black 3px;
+	background-color: #FFFFFF;
+	padding-left: 1em;
+}
+
+#mainBoxOuter{
+	margin-top: 7em;
+	background-color: #AFD867;
+	margin-bottom: 7em;
+	border: solid black 5px;
+	padding: 1em;
+	margin-right: 1em;
+	margin-left: 3em;
+}
 #bodyContent{
 	background-color: #00C3A9;
 	border: solid black 1px;
@@ -11,8 +27,17 @@ body{
 	margin-bottom: 7em;
 	border: solid black 5px;
 	padding-bottom: 3em;
+	margin-left: 58.75em;
+	position: fixed;
 }
 footer{
 	text-align: center;
 	color: #FFFFFF;
+}
+nav{
+	border: solid black 5px;
+}
+#signOut{
+	margin-left: 70em;
+	margin-top: -5em;
 }
