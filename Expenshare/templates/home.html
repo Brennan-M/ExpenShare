@@ -6,6 +6,8 @@
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 	    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 	</head>
 
@@ -19,11 +21,9 @@
 		                <div class="col-md-10">
 		                  <a class="navbar-brand" href="/share/home"> Expenshare</a>
 		                  <ul class="nav navbar-nav">
-		                  	<li><a href="">Groups</a></li>
-		                  	<li><a href="">Payment Logs</a></li>
-		                  	<li><a href="">About</a></li>
-		                  </ul>
+		                  	<li><a href="">Help</a></li>
 		                  <button type="button" id="signOut" class="btn btn-default"><a href="/share/">Sign Out</a></button>
+		                  </ul>
 		                </div>
 		            </div>
 	          	</nav>
@@ -36,24 +36,66 @@
 							<div class="col-md-8" id="mainBoxOuter">
 								<div id="mainBoxInner">
 									<!--Temporary content -->
-									<h1> List all of the groups here </h1>
+									<h1> UserName </h1>
 									<hr>
 									<div class="row">
 										<div class="col-md-8">
-											<h3>Group 1 </h3>
-											<p>Short description of group 1 here</p>
+											<h3>Group <h3>
+											<h5>Current Balance: $ </h5>
+			
+											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+											Report Expense</button>
+											<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											  <div class="container" id="bodyContainer">
+												<div class="row">
+													<div class="col-md-1"> </div>
+													<div class="container" id="bodyContent">
+														<div class="row">
+															<div class="col-md-2"></div>
+															<div class="col-md-8" id="infoBox">
+																<h2>Report a Transaction</h2>
+																<form role="form">
+																  <div class="form-group">
+																    <label for="Cost">Transaction Cost</label>
+																    <input type="price" class="form-control" id="costInput" placeholder="Enter Dollar Amount">
+																  </div>
+																  <div class="form-group">
+																    <label for="comment">Description</label>
+																    <input type="comment" class="form-control" id="descriptionInput" placeholder="Enter Item Description">
+																  </div>
+																</form>
+																<div class="row">
+																  <div class="col-md-6">
+																  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Submit Transaction</a></button>
+																  </div>
+																  <div class="col-md-6">
+																  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Cancel </a></button>
+																  </div>
+																</div>
+															</div>
+															<div class="col-md-1"> </div>
+															<div class="col-md-1"></div>
+														</div>
+													</div>
+													<div class="col-md-1"></div>
+												</div>	
+											</div>
+											</div>
+											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a href="/share/history"> Expense Log </a></button>
+
 										</div>
 										<div class='col-md-4'>
-											<h4>Groupmates</h4>
+											<h4>Group Members</h4>
 											<ul>
-												<li>Groupmate1</li>
-												<li>Groupmate2</li>
-												<li>Groupmate3</li>
+												<li>Groupmate1: $</li>
+												<li>Groupmate2: $</li>
+												<li>Groupmate3: $</li>
 											</ul>
 										</div>
 									</div>
 									<hr>
 																		<hr>
+									<!--
 									<div class="row">
 										<div class="col-md-8">
 											<h3>Group 2 </h3>
@@ -84,15 +126,90 @@
 											</ul>
 										</div>
 									</div>
-									<hr>
+									<hr> -->
 								</div>
 							</div>
 							<div class="col-md-3" id="infoBox">
-								<h3>Looking for a group?</h3>
-								  	<button type="button" class="btn btn-default btn-lg btn">Find a Group</button>
-								<h3>Want to start a group?</h3>
-									<button type="button" class="btn btn-default btn-lg btn">Create a Group</button>
+								<h3>Join Existing Group</h3>
+								  	<!-- Large modal -->
+									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupBox">
+										  Find a Group
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="groupBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+										        <h4 class="modal-title" id="myModalLabel">Join a Group</h4>
+										      </div>
+										      <div class="modal-body">
+										      <form role="form">
+												  <div class="form-group">
+												    <label for="loginEmail">Group Name</label>
+												    <input type="email" class="form-control" id="groupname" placeholder="Group Name">
+												  </div>
+												  <div class="form-group">
+												    <label for="loginEmail">Group Password</label>
+												    <input type="email" class="form-control" id="grouppass" placeholder="Group Password">
+												  </div>											  
+											  </form>
+											  </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-default" data-dismiss="modal">Join Group</button>
+										        <button type="button" id="report" class="btn btn-default"><a href="/share/home/">Exit</a></button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+								<h3>Create New Group</h3>
+								  	<!-- Large modal -->
+									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupBox">
+										  Make a Group
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="groupBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+										        <h4 class="modal-title" id="myModalLabel">Create a Group</h4>
+										      </div>
+										      <div class="modal-body">
+										      <form role="form">
+												  <div class="form-group">
+												    <label for="loginEmail">Create Group Name</label>
+												    <input type="email" class="form-control" id="groupname" placeholder="Group Name">
+												  </div>
+												  <div class="form-group">
+												    <label for="loginEmail">Create Group Password</label>
+												    <input type="email" class="form-control" id="grouppass" placeholder="Group Password">
+												  </div>											  
+											  </form>
+											  </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-default" data-dismiss="modal">Join Group</button>
+										        <button type="button" id="report" class="btn btn-default"><a href="/share/home/">Exit</a></button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+
 							</div>
+							<!--
+								<h3>Start New Group</h3>
+									<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Create a Group</button>
+
+									<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+									  <div class="modal-dialog modal-lg">
+									    <div class="modal-content">
+									      Create a Group
+									    </div>
+									  </div>
+									</div>-->
+							
 							<div class="col-md-1"></div>
 						</div>
 					</div>
