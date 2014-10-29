@@ -7,22 +7,30 @@ from django.contrib.auth.models import User
 class PayGroup(models.Model):
 	#Django should create unique primary key already
 	name = models.OneToOneField(Group)
-	description = models.CharField(max_length=400)
+	description = models.CharField(max_length=400, default="")
 	members = models.ManyToManyField(User)
+	passcode = models.CharField(max_length=16, default="") #This may need to be hashed
+	#Should find out how to do owners later
 
 	def __unicode__(self):
-		return self.name
+		return self.name.name
 
 class PaymentLog(models.Model):
 	#Django should create unique primary key already
 	amount = models.IntegerField(default=0)
-	description = models.CharField(max_length=400)
-	date = models.DateField()
-	group = models.ForeignKey(Group)
+	description = models.CharField(max_length=400, default="")
+	date = models.DateField(default="1995-04-04")
+	group = models.ForeignKey(PayGroup)
 	user = models.ForeignKey(User)
+	contested = models.BooleanField(default=False)
+	contestedMessage = models.CharField(max_length=140, default="")
 
 	#For other features may need...
 	# contested : boolean, contestedMessage : CharField
 	def __unicode__(self):
-		return self.name
+		return self.amount
 
+class groupRequest(models.Model):
+	#Primary key already created
+	user = models.ForeignKey(User)
+	group = models.ForeignKey(PayGroup)
