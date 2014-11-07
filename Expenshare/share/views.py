@@ -1,7 +1,13 @@
+import django
+django.setup()
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.forms import ModelForm
+import models
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Expenshare.settings')
 
 # Create your views here.
 def index(request):
@@ -46,4 +52,8 @@ def history(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('ExpenseLog.html', context_dict, context)
 
-
+def post_transaction(request, amount, description):
+    if request.method == 'POST':
+        transaction = PaymentLog.objects.post(amount=amount, description=description)
+        transaction.save()
+   # return HttpResponse(request.POST[transaction])

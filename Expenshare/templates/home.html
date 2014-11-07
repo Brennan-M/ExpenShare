@@ -56,8 +56,11 @@
 																<h2>Report a Transaction</h2>
 																<form role="form">
 																  <div class="form-group">
-																    <label for="Cost">Transaction Cost</label>
-																    <input type="price" class="form-control" id="costInput" placeholder="Enter Dollar Amount">
+																  	<form action="{% url post_transaction transaction.amount transaction.description %}" method="POST">
+																  	{% csrf_token %}
+																	    <label for="Cost">Transaction Cost</label>
+																	    <input type="price" class="form-control" id="costInput" placeholder="Enter Dollar Amount">
+																    </form>
 																  </div>
 																  <div class="form-group">
 																    <label for="comment">Description</label>
