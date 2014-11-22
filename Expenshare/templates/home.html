@@ -39,9 +39,13 @@
 									<h1> UserName </h1>
 									<body>
 									{% if paygroups %}
-									        <strong>yes</strong>
+									        <ul>
+										    {% for paygroup in paygroups %}
+										    <li>{{ paygroup.name }}</li>
+										    {% endfor %}
+										</ul>
 									{% else %}
-										<strong>nope</strong>
+										<strong>there are no paygroups present</strong>
 									{% endif %}
 									</body>
 									<hr>
