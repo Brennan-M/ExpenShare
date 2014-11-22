@@ -27,8 +27,8 @@ def populate():
 	pg1.save()
 	pg2.save()
 
-	pl1 = PaymentLog(amount=10, description="Group 1", group=pg1, user=usr1)
-	pl2 = PaymentLog(amount=20, description="Group 2", group=pg2, user=usr3)
+	pl1 = PaymentLog(amount=10, description="food", group=pg1, user=usr1)
+	pl2 = PaymentLog(amount=20, description="water", group=pg2, user=usr3)
 	pl1.save()
 	pl2.save()
 

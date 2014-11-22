@@ -44,15 +44,12 @@
 						                        <td>Cost</td>
 						                    </tr>
 						                    <tr>
-						                        <td>John</td>
-						                        <td>Item</td>
-						                        <td>$</td>
+						                        {% for log in paylog %}
+                                                                        <td>{{ log.user }}</td>
+						                        <td>{{ log.description }}</td>
+						                        <td>${{ log.amount }}</td>
 						                    </tr>
-						                    <tr>
-						                        <td>John</td>
-						                        <td>Item</td>
-						                        <td>$</td>
-						                    </tr>
+								       {% endfor %}
 						                </table>
 						            </div>
             
