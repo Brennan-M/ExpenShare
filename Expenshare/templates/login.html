@@ -34,20 +34,15 @@
 							<div class="col-md-4" id="infoBox">
 								<h2>Welcome to ExpenShare</h2>
 								<h4>Log in or sign up to get started!</h4>
-								<form role="form">
-								  <div class="form-group">
-								    <label for="loginEmail">Email address</label>
-								    <input type="email" class="form-control" id="emailInput" placeholder="Enter email">
-								  </div>
-								  <div class="form-group">
-								    <label for="loginPassword">Password</label>
-								    <input type="password" class="form-control" id="passwordInput" placeholder="Password">
-								  </div>
+								<form id="login_form" method="post" action="/share/login/">
+								  {% csrf_token %}
+								  Username: <input type="text" name="username" value="" size="20em"/>
+								  <br>
+								  Password: <input type="text" name="password" value="" size="20em"/>
+								  <br>
+								  <input type="submit" value="submit"/>
 								</form>
 								<div class="row">
-								  <div class="col-md-6">
-								  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Submit </a></button>
-								  </div>
 								  <div class="col-md-6">
 								  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/register/">Sign Up</a></button>
 								  </div>
