@@ -37,13 +37,24 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>{{ user.username }}</h1>
+									<body>
+									{% if paygroups %}
+									        <ul>
+										    {% for paygroup in paygroups %}
+										    <li>{{ paygroup.name }}</li>
+										    {% endfor %}
+										</ul>
+									{% endif %}
+									</body>
 									<hr>
+									{% for paygroup in paygroups %}
 									<div class="row">
 										<div class="col-md-8">
-											<h3>Group <h3>
+											<h3>{{ paygroup.name }}<h3>
 											<h5>Current Balance: $ </h5>
 			
-											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal">Report Expense</button>
+											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+											Report Expense</button>
 											<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											  <div class="container" id="bodyContainer">
 												<div class="row">
@@ -53,21 +64,7 @@
 															<div class="col-md-2"></div>
 															<div class="col-md-8" id="infoBox">
 																<h2>Report a Transaction</h2>
-																<fieldset>
-																<form id="PayForm" method="post" action="/share/add_payform/">
-																	{% csrf_token %}
-																	<!--
-																	<label for="Amount"> Amount: </label>
-																	<input type="text" class="form-control" id="amount" placeholder="Enter Dollar Amount" value = "{{ PayForm.amount }}"/>
-																	<label for="Description"> Description: </label>
-																	<input type="text" class="form-control" id="description" placeholder="Enter Item Description" value = "{{ PayForm.description }}"/>
-																	-->
-																	{{ PayForm.as_p }}													
-
-																	<input type="submit" name="pay" value="pay"/> 
-																</form>
-																</fieldset>
-																<!-- 
+																<form role="form">
 																  <div class="form-group">
 																    <label for="Cost">Transaction Cost</label>
 																    <input type="price" class="form-control" id="costInput" placeholder="Enter Dollar Amount">
@@ -76,10 +73,7 @@
 																    <label for="comment">Description</label>
 																    <input type="comment" class="form-control" id="descriptionInput" placeholder="Enter Item Description">
 																  </div>
-
-
 																</form>
-																
 																<div class="row">
 																  <div class="col-md-6">
 																  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Submit Transaction</a></button>
@@ -88,7 +82,6 @@
 																  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Cancel </a></button>
 																  </div>
 																</div>
-																-->
 															</div>
 															<div class="col-md-1"> </div>
 															<div class="col-md-1"></div>
@@ -110,6 +103,7 @@
 											</ul>
 										</div>
 									</div>
+									{% endfor %}
 									<hr>
 																		<hr>
 									<!--
