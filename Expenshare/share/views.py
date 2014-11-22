@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from share.models import PayGroup, PaymentLog
-from share.forms import UserForm
+from share.forms import UserForm, PayForm
 
 # Create your views here.
 def index(request):
@@ -81,6 +81,28 @@ def register(request):
     contextDict = {'userForm': userForm, 'registered': registered}
 
     return render_to_response('register.html', contextDict, context)
+
+# Alter this for add_payform
+#@login_required
+def add_payform(request):
+    context = RequestContext(request)
+    context_dict={'PayForm' : PayForm}
+    #user = User.objects.get(username=request.user)
+
+    if (request.method=='POST'):
+        payform = PayForm(data=request.POST)
+
+        if (payform.is_valid()):
+            cost = payform.save()           
+            cost.save()
+
+            return render_to_response('ExpenseLog.html')   #After submitting the form, redirects the user back to the homepage
+        else:
+            print ("Error Processing your Payment")
+    else:
+        payform = PayForm()
+
+    return render_to_response('home.html', context_dict, context)
 
 
 
