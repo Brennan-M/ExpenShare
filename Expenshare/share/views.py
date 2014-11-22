@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from share.forms import UserForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -20,6 +21,7 @@ def index(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('login.html', context_dict, context)
 
+@login_required
 def home(request):
     # Request the context of the request.
     # The context contains information such as the client's machine details, for example.
@@ -34,6 +36,7 @@ def home(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('home.html', context_dict, context)
 
+@login_required
 def history(request):
     # Request the context of the request.
     # The context contains information such as the client's machine details, for example.
@@ -104,3 +107,8 @@ def userLogin(request):
 	#Blank form
 	else:
 		return render_to_response('login.html', {}, context)
+
+@login_required
+def userLogout(request):
+	logout(request)
+	return HttpResponseRedirect('/share/')
