@@ -36,7 +36,7 @@
 							<div class="col-md-8" id="mainBoxOuter">
 								<div id="mainBoxInner">
 									<!--Temporary content -->
-									<h1> UserName </h1>
+									<h1>{{ user.username }}</h1>
 									<body>
 									{% if paygroups %}
 									        <ul>
@@ -44,8 +44,6 @@
 										    <li>{{ paygroup.name }}</li>
 										    {% endfor %}
 										</ul>
-									{% else %}
-										<strong>there are no paygroups present</strong>
 									{% endif %}
 									</body>
 									<hr>
