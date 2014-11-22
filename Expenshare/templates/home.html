@@ -47,9 +47,10 @@
 									{% endif %}
 									</body>
 									<hr>
+									{% for paygroup in paygroups %}
 									<div class="row">
 										<div class="col-md-8">
-											<h3>Group <h3>
+											<h3>{{ paygroup.name }}<h3>
 											<h5>Current Balance: $ </h5>
 			
 											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal">
@@ -102,6 +103,7 @@
 											</ul>
 										</div>
 									</div>
+									{% endfor %}
 									<hr>
 																		<hr>
 									<!--
