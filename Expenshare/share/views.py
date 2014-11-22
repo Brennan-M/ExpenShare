@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from share.forms import UserForm
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def index(request):
@@ -80,7 +81,26 @@ def register(request):
 
     return render_to_response('register.html', contextDict, context)
 
+def userLogin(request):
+	context = RequestContext(request)
 
+	if(request.method == 'POST'):
+		username = request.POST['username']
+		password = request.POST['password']
 
+		user = authenticate(username=username, password=password)
 
-
+		#Check to see if a user with the submitted credentials was found
+		if(user):
+			#Check to see if the user account is active
+			if(user.is_active):
+				login(request, user)
+				return HttpResponseRedirect('/share/home')
+			else:
+				return HttpResponse("Sorry, this account has been disabled.")
+		else:
+			print("Nothing found with username: {0} and password: {1}".format(username, password))
+			return HttpResponse('Either the username or password entered is incorrect')
+	#Blank form
+	else:
+		return render_to_response('login.html', {}, context)
