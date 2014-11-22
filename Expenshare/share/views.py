@@ -55,12 +55,6 @@ def history(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('ExpenseLog.html', context_dict, context)
 
-def post_transaction(request, amount, description):
-    if request.method == 'POST':
-        transaction = PaymentLog.objects.post(amount=amount, description=description)
-        transaction.save()
-   # return HttpResponse(request.POST[transaction])
-
 #View for registering new users
 def register(request):
     context = RequestContext(request)
