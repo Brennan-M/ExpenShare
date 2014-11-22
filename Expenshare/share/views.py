@@ -93,7 +93,7 @@ def register(request):
 #@login_required
 def add_payform(request):
     context = RequestContext(request)
-    context_dict={'PayForm' : PayForm}
+    
     #user = User.objects.get(username=request.user)
 
     if (request.method=='POST'):
@@ -109,6 +109,7 @@ def add_payform(request):
     else:
         payform = PayForm()
 
+    context_dict={'PayForm' : payform}    
     return render_to_response('home.html', context_dict, context)
 
 

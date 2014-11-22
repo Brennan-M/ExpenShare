@@ -62,13 +62,14 @@
 																<h2>Report a Transaction</h2>
 																<fieldset>
 																<form id="PayForm" method="post" action="/share/add_payform/">
-																	<!-- <label for="Amount"> Amount: </label>
-																	<input type="text" class="form-control" id="amount" placeholder="Enter Dollar Amount" value = "{{ amount }}" >
-																	<label for="Description"> Description: </label>
-																	<input type="text" class="form-control" id="description" placeholder="Enter Item Description" value = "{{ description }}">
-																	 -->
 																	{% csrf_token %}
-																	{{ PayForm.as_p }}
+																	<!--
+																	<label for="Amount"> Amount: </label>
+																	<input type="text" class="form-control" id="amount" placeholder="Enter Dollar Amount" value = "{{ PayForm.amount }}"/>
+																	<label for="Description"> Description: </label>
+																	<input type="text" class="form-control" id="description" placeholder="Enter Item Description" value = "{{ PayForm.description }}"/>
+																	-->
+																	{{ PayForm.as_p }}													
 
 																	<input type="submit" name="pay" value="pay"/> 
 																</form>
