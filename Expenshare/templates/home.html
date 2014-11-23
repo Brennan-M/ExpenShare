@@ -94,13 +94,14 @@
 											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a href="/share/history"> Expense Log </a></button>
 
 										</div>
+		
 										<div class='col-md-4'>
 											<h4>Group Members</h4>
 											<ul>
-												<li>Groupmate1: $</li>
-												<li>Groupmate2: $</li>
-												<li>Groupmate3: $</li>
-											</ul>
+											  {% for member in paygroup.members.all %}
+												<li>{{ member }}</li>
+											  {% endfor %}
+											</ul>	
 										</div>
 									</div>
 									{% endfor %}
