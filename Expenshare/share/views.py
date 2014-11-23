@@ -205,10 +205,9 @@ def userLogin(request):
 				login(request, user)
 				return HttpResponseRedirect('/share/home')
 			else:
-				return HttpResponse("Sorry, this account has been disabled.")
+                            return render_to_response('login.html', {'login_error2' : True}, context)
 		else:
-			print("Nothing found with username: {0} and password: {1}".format(username, password))
-			return HttpResponse('Either the username or password entered is incorrect')
+			return render_to_response('login.html', {'login_error1' : True}, context)
 	#Blank form
 	else:
 		return render_to_response('login.html', {}, context)

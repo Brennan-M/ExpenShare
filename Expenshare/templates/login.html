@@ -8,7 +8,6 @@
 	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 	    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 	</head>
-
 	<body>
 		<div class="container-fluid">
 			
@@ -33,7 +32,13 @@
 							<div class="col-md-1"></div>
 							<div class="col-md-4" id="infoBox">
 								<h2>Welcome to ExpenShare</h2>
+								{% if login_error1 %}
+								<h4>The username or password was incorrect, please try again!</h4>
+								{% elif login_error2 %}
+								<h4>Sorry, that account has been disabled!</h4>
+								{% else %}
 								<h4>Log in or sign up to get started!</h4>
+								{% endif %}
 								<form id="login_form" method="post" action="/share/login/">
 								  {% csrf_token %}
 								  Username: <input type="text" name="username" value="" size="20em"/>
