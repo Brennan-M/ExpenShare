@@ -37,18 +37,13 @@ def home(request):
     return render_to_response('home.html', context_dict, context)
 
 @login_required
-def history(request):
-    # Request the context of the request.                                                            
-    # The context contains information such as the client's machine details, for example.            
+def history(request):            
     context = RequestContext(request)
 
-    # Construct a dictionary to pass to the template engine as its context.                          
-    # Note the key boldmessage is the same as {{ boldmessage }} in the template!                     
-    paylog_list = PaymentLog.objects.all()
+    print(request.POST['group'])
+    paylog_list = PayGroup.objects.get(name=request.POST['group']).paymentLogs.order_by('-date')
+    print(paylog_list)
     context_dict = {'paylog': paylog_list}
-
-    # Return a rendered response to send to the client.                                              
-    # We make use of the shortcut function to make our lives easier.                                     # Note that the first parameter is the template we wish to use.                                   
     return render_to_response('ExpenseLog.html', context_dict, context)
 
 #View for registering new users
@@ -126,8 +121,11 @@ def add_payform(request):
             cost = payform.save(commit=False)   
             cost.user = request.user
             cost.save()
+            clickedGroup = PayGroup.objects.get(name=request.POST['group'])
+            clickedGroup.paymentLogs.add(cost)
+            payLogs = clickedGroup.paymentLogs.order_by('date')
 
-            return render_to_response('ExpenseLog.html')   #After submitting the form, redirects the user back to the homepage
+            return render_to_response('ExpenseLog.html', {'paylog' : payLogs})   #After submitting the form, redirects the user back to the homepage
         else:
             print ("Error Processing your Payment")
     else:

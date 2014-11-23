@@ -70,9 +70,8 @@
 																<fieldset>
 																	<form id="PayForm" method="post" action="/share/add_payform/">
 																	{% csrf_token %}
-																	
-																	{{ PayForm.as_p }}													
-
+																	{{ PayForm.as_p }}											
+																	<input type="hidden" name="group" value="{{ paygroup.name }}">
 																	<input type="submit" name="Pay" value="Pay"/> 
 																</form>
 																</fieldset>
@@ -85,7 +84,6 @@
 												</div>	
 											</div>
 											</div>
-											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a href="/share/history"> Expense Log </a></button>
 											<button type="button" id="leave_group" class="btn btn-default" data-toggle="modal" data-target="#myModal4">Leave a Group</button>
 											<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											  <div class="container" id="bodyContainer">
@@ -116,7 +114,11 @@
 												</div>	
 											</div>
 											</div>			
-
+											<form id="goToHistory" method="post" action="/share/history/">
+												{% csrf_token %}
+												<input type="hidden" name="group" value="{{ paygroup.name }}">
+												<input type="submit" name="historyButton" value="Payment Logs">
+ 											</form>			
 										</div>
 		
 										<div class='col-md-4'>

@@ -40,14 +40,16 @@
 						                <table >
 						                    <tr>
 						                        <td>User</td>
-						                        <td>Expense</td>
+						                        <td>Description</td>
 						                        <td>Cost</td>
+						                        <td>Date</td>
 						                    </tr>
 						                    <tr>
 						                        {% for log in paylog %}
                                                 <td>{{ log.user }}</td>
 						                        <td>{{ log.description }}</td>
 						                        <td>${{ log.amount }}</td>
+						                        <td>{{ log.date }}</td>
 						                    </tr>
 								       {% endfor %}
 						                </table>
