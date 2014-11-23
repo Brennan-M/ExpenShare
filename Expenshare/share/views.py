@@ -163,7 +163,7 @@ def joingroup_form(request):
     return render_to_response('home.html', context_dict, context)
 
 @login_required
-def leavegroup_form(request):
+def leavegroup(request):
     context = RequestContext(request)
     currPayUser = PayUser.objects.get(userKey=request.user)
     if (request.method == 'POST'):
