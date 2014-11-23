@@ -158,7 +158,7 @@ def joingroup_form(request):
             print ("Error joining Group.")
 
 
-    paygroup_list = PayGroup.objects.order_by('name')
+    paygroup_list = currPayUser.payGroups.all()
     groupform = MakeGroupForm()
     payform = PayForm()
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
