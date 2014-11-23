@@ -56,7 +56,7 @@
 										<div class="col-md-8">
 											<h3>{{ paygroup.name }}</h3>
 											<h5>Current Balance: $ </h5>
-			
+											<div class="row" id="buttons">
 											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 											Report Expense</button>
 											<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -71,9 +71,8 @@
 																<fieldset>
 																	<form id="PayForm" method="post" action="/share/add_payform/">
 																	{% csrf_token %}
-																	
-																	{{ PayForm.as_p }}													
-
+																	{{ PayForm.as_p }}											
+																	<input type="hidden" name="group" value="{{ paygroup.name }}">
 																	<input type="submit" name="Pay" value="Pay"/> 
 																</form>
 																</fieldset>
@@ -84,40 +83,19 @@
 													</div>
 													<div class="col-md-1"></div>
 												</div>	
-											</div>
-											</div>
-											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a href="/share/history"> Expense Log </a></button>
-											<button type="button" id="leave_group" class="btn btn-default" data-toggle="modal" data-target="#myModal4">Leave a Group</button>
-											<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-											  <div class="container" id="bodyContainer">
-												<div class="row">
-													<div class="col-md-1"> </div>
-													<div class="container" id="bodyContent">
-														<div class="row">
-															<div class="col-md-2"></div>
-															<div class="col-md-8" id="infoBox">
-																<h2>Leave Group</h2>
-																<fieldset>
-																<form id="LeaveGroupForm" method="post" action="/share/leavegroup_form/">
-																	{% csrf_token %}
-
-																	<label for="group">Group Name</label>
-												    				<input type="text" class="form-control" name="group" placeholder="Group Name"/>													
-
-																	<input type="submit" name="Leave" value="Leave"/> 
-																</form>
-																</fieldset>
-																
-															</div>
-															<div class="col-md-1"> </div>
-															<div class="col-md-1"></div>
-														</div>
-													</div>
-													<div class="col-md-1"></div>
-												</div>	
-											</div>
-											</div>			
-
+												</div>
+											</div>		
+											<form id="goToHistory" method="post" action="/share/history/">
+												{% csrf_token %}
+												<input type="hidden" name="group" value="{{ paygroup.name }}">
+												<input type="submit" class="btn btn-default" name="historyButton" value="Payment Logs">
+ 											</form>	
+											<form id="LeaveGroupForm" method="post" action="/share/leavegroup/">
+												{% csrf_token %}
+												<input type="hidden" name="group" value="{{ paygroup.name }}">
+												<input type="submit" class="btn btn-default" name="Leave" value="Leave Group">
+											</form>		
+										</div>
 										</div>
 		
 										<div class='col-md-4'>

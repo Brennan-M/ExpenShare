@@ -9,6 +9,6 @@ urlpatterns = patterns(' ',
 	url(r'^add_payform/$', views.add_payform, name='add_payform'),
 	url(r'^add_groupform/$', views.add_groupform, name='add_groupform'),
 	url(r'^joingroup_form/$', views.joingroup_form, name='joingroup_form'),
-	url(r'^leavegroup_form/$', views.leavegroup_form, name='leavegroup_form'),
+	url(r'^leavegroup/$', views.leavegroup, name='leavegroup'),
 	url(r'^login/$', views.userLogin, name='login'),
 	url(r'^logout/$', views.userLogout, name='logout'))
