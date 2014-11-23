@@ -15,7 +15,7 @@ class UserForm(forms.ModelForm):
 class PayForm(forms.ModelForm):
 	amount = forms.IntegerField(label = 'Amount')
 	description = forms.CharField(max_length=200, label = 'Description')
-
+	
 	class Meta:
 		model = models.PaymentLog
 		fields = ('amount', 'description')

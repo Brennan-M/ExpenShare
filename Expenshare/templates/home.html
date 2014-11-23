@@ -57,9 +57,9 @@
 											<h3>{{ paygroup.name }}</h3>
 											<h5>Current Balance: $ </h5>
 											<div class="row" id="buttons">
-											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#{{ paygroup.id }}ID">
 											Report Expense</button>
-											<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal fade" id="{{ paygroup.id }}ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											  <div class="container" id="bodyContainer">
 												<div class="row">
 													<div class="col-md-1"> </div>
@@ -69,11 +69,11 @@
 															<div class="col-md-8" id="infoBox">
 																<h2>Report a Transaction</h2>
 																<fieldset>
-																	<form id="PayForm" method="post" action="/share/add_payform/">
+																<form id="PayForm" method="post" action="/share/add_payform/">
 																	{% csrf_token %}
-																	{{ PayForm.as_p }}											
+																	{{ PayForm.as_p }}
 																	<input type="hidden" name="group" value="{{ paygroup.name }}">
-																	<input type="submit" name="Pay" value="Pay"/> 
+																	<input type="submit" name="Pay" value="Submit Pay Request"/> 
 																</form>
 																</fieldset>
 															</div>
