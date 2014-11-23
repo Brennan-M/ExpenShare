@@ -10,21 +10,19 @@ import time
 class PaymentLog(models.Model):
 	#Django should create unique primary key already
 	amount = models.IntegerField(default=0)
-	description = models.CharField(max_length=400, default="")
+	description = models.CharField(max_length=140, default="")
 	date = models.DateField(default=time.strftime("%Y-%m-%d"))
 	user = models.ForeignKey(User)
 	contested = models.BooleanField(default=False)
 	contestedMessage = models.CharField(max_length=140, default="")
 
-	#For other features may need...
-	# contested : boolean, contestedMessage : CharField
 	def __unicode__(self):
 		return self.description
 
 class PayGroup(models.Model):
 	#Django should create unique primary key already
 	name = models.CharField(max_length=20, default="")
-	description = models.CharField(max_length=400, default="")
+	description = models.CharField(max_length=140, default="")
 	members = models.ManyToManyField(User)
 	passcode = models.CharField(max_length=16, default="") #This may need to be hashed
 	paymentLogs = models.ManyToManyField(PaymentLog)
