@@ -43,7 +43,9 @@
 									<form id="userForm" method="post" action="/share/register/" enctype="multipart/form-data">
 										{% csrf_token %}
 										{{ userForm.as_p }}
-										<input type="submit" name="Register" value="Register"/> 
+										<div class="col-md-4">
+										<button type="submit" value="submit" class="btn btn-default btn-lg btn-block">Register</button>	
+										</div>					
 									</form>
 								{% endif %}
 							</div>

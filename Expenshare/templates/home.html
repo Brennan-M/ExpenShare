@@ -84,17 +84,25 @@
 													<div class="col-md-1"></div>
 												</div>	
 												</div>
-											</div>		
+											</div>	
+											<div class="col-md-3">
+											<form id="LeaveGroupForm" method="post" action="/share/leavegroup/">
+												{% csrf_token %}
+												<input type="hidden" name="group" value="{{ paygroup.name }}">
+												<input type="submit" id="leaveButton" class="btn btn-default" name="Leave" value="Leave Group">
+											</form>		
+											</div>
+
+											<div class="col-md-3">
 											<form id="goToHistory" method="post" action="/share/history/">
 												{% csrf_token %}
 												<input type="hidden" name="group" value="{{ paygroup.name }}">
 												<input type="submit" class="btn btn-default" name="historyButton" value="Payment Logs">
  											</form>	
-											<form id="LeaveGroupForm" method="post" action="/share/leavegroup/">
-												{% csrf_token %}
-												<input type="hidden" name="group" value="{{ paygroup.name }}">
-												<input type="submit" class="btn btn-default" name="Leave" value="Leave Group">
-											</form>		
+ 											</div>
+ 											
+ 												
+										
 										</div>
 										</div>
 		

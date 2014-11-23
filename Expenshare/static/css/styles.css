@@ -8,6 +8,11 @@ body{
 	padding-left: 1em;
 }
 
+#leaveButton{
+	background-color: #E81919;
+	color: #FFFFFF;
+}
+
 #mainBoxOuter{
 	margin-top: 7em;
 	background-color: #AFD867;
@@ -22,7 +27,11 @@ body{
 	border: solid black 1px;
 }
 #buttons{
-	
+	width: 40em;
+}
+
+#report{
+	margin-right: 2em;
 }
 
 #infoBox{
