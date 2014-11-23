@@ -24,20 +24,16 @@ def index(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('login.html', context_dict, context)
 @login_required
-def home(request):
-    # Request the context of the request.                                                            
-    # The context contains information such as the client's machine details, for example.            
+def home(request):           
     context = RequestContext(request)
 
-    # Construct a dictionary to pass to the template engine as its context.                          
-    # Note the key boldmessage is the same as {{ boldmessage }} in the template!                     
-    paygroup_list = PayGroup.objects.order_by('name')
+    #Find the current PayUser
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    paygroup_list = currPayUser.payGroups.all()
     payform = PayForm()
     groupform = MakeGroupForm()
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
-
-    # Return a rendered response to send to the client.                                              
-    # We make use of the shortcut function to make our lives easier.                                     # Note that the first parameter is the template we wish to use.                                   
+                                  
     return render_to_response('home.html', context_dict, context)
 
 @login_required
@@ -94,6 +90,11 @@ def register(request):
 @login_required
 def add_groupform(request):
     context = RequestContext(request)
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    paygroup_list = currPayUser.payGroups.all()
+    payform = PayForm()
+    groupform = MakeGroupForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform} 
 
     if (request.method=='POST'):
         groupform = MakeGroupForm(request.POST)
@@ -101,15 +102,14 @@ def add_groupform(request):
         if (groupform.is_valid()):
             group = groupform.save()   
             group.save()
+            currPayUser = PayUser.objects.get(userKey=request.user)
+            currPayUser.payGroups.add(group)
+            group.members.add(request.user)
 
-            return render_to_response('home.html')   #After submitting the form, redirects the user back to the homepage
+            return render_to_response('home.html', context_dict, context)  #After submitting the form, redirects the user back to the homepage
         else:
             print ("Error making this Group")
-    else:
-        groupform = MakeGroupForm()
 
-    paygroup_list = PayGroup.objects.order_by('name')
-    payform = PayForm()
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
     return render_to_response('home.html', context_dict, context)
 
@@ -133,7 +133,8 @@ def add_payform(request):
     else:
         payform = PayForm()
 
-    paygroup_list = PayGroup.objects.order_by('name')
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    paygroup_list = currPayUser.payGroups.all()
     groupform = MakeGroupForm()
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
