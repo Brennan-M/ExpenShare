@@ -29,5 +29,7 @@ class MakeGroupForm(forms.ModelForm):
 		model = models.PayGroup
 		fields = ('name', 'description', 'passcode')
 
+		
+
 
 	

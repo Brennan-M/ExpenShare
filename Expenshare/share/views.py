@@ -138,6 +138,32 @@ def add_payform(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
 
+@login_required
+def joingroup_form(request):
+    context = RequestContext(request)
+    print request.POST
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    if (request.method == 'POST'):
+        try:
+            group = PayGroup.objects.get(name=request.POST['group'])
+            passcode = request.POST['passcode']
+            realcode = group.passcode
+            if passcode==realcode:
+                group.members.add(request.user)
+                currPayUser.payGroups.add(group)
+            else:
+                print("Wrong Passcode")
+        except:
+            print ("Error joining Group.")
+
+
+    paygroup_list = PayGroup.objects.order_by('name')
+    groupform = MakeGroupForm()
+    payform = PayForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+    return render_to_response('home.html', context_dict, context)
+
+
 
 def userLogin(request):
 	context = RequestContext(request)

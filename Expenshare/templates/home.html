@@ -38,6 +38,7 @@
 									<!--Temporary content -->
 									<h1>{{ user.username }}</h1>
 									<body>
+									<!--
 									{% if paygroups %}
 									        <ul>
 										    {% for paygroup in paygroups %}
@@ -45,9 +46,11 @@
 										    {% endfor %}
 										</ul>
 									{% endif %}
+									-->
 									</body>
 									<hr>
 									{% for paygroup in paygroups %}
+									
 									<div class="row">
 										<div class="col-md-8">
 											<h3>{{ paygroup.name }}<h3>
@@ -95,6 +98,7 @@
 											</ul>	
 										</div>
 									</div>
+									
 									{% endfor %}
 									<hr>
 									</hr>
@@ -104,37 +108,39 @@
 							<div class="col-md-3" id="infoBox">
 								<h3>Join Existing Group</h3>
 								  	<!-- Large modal -->
-									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupBox">
-										  Find a Group
-										</button>
+									<button type="button" id="create_group" class="btn btn-default" data-toggle="modal" data-target="#myModal3">Find a Group</button>
+											<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											  <div class="container" id="bodyContainer">
+												<div class="row">
+													<div class="col-md-1"> </div>
+													<div class="container" id="bodyContent">
+														<div class="row">
+															<div class="col-md-2"></div>
+															<div class="col-md-8" id="infoBox">
+																<h2>Find a Group</h2>
+																<fieldset>
+																<form id="JoinGroupForm" method="post" action="/share/joingroup_form/">
+																	{% csrf_token %}
+																	
+																	<label for="group">Group Name</label>
+												    				<input type="text" class="form-control" name="group" placeholder="Group Name"/>
 
-										<!-- Modal -->
-										<div class="modal fade" id="groupBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										  <div class="modal-dialog">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-										        <h4 class="modal-title" id="myModalLabel">Join a Group</h4>
-										      </div>
-										      <div class="modal-body">
-										      <form role="form">
-												  <div class="form-group">
-												    <label for="loginEmail">Group Name</label>
-												    <input type="email" class="form-control" id="groupname" placeholder="Group Name">
-												  </div>
-												  <div class="form-group">
-												    <label for="loginEmail">Group Password</label>
-												    <input type="email" class="form-control" id="grouppass" placeholder="Group Password">
-												  </div>											  
-											  </form>
-											  </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-default" data-dismiss="modal">Join Group</button>
-										        <button type="button" id="report" class="btn btn-default"><a href="/share/home/">Exit</a></button>
-										      </div>
-										    </div>
-										  </div>
-										</div>
+												    				<label for="passcode">Group Passcode</label>
+												    				<input type="text" class="form-control" name="passcode" placeholder="Passcode"/>														
+
+																	<input type="submit" name="Join" value="Join"/> 
+																</form>
+																</fieldset>
+																
+															</div>
+															<div class="col-md-1"> </div>
+															<div class="col-md-1"></div>
+														</div>
+													</div>
+													<div class="col-md-1"></div>
+												</div>	
+											</div>
+											</div>
 								<h3>Create New Group</h3>
 								  	<!-- Large modal -->
 								  	<button type="button" id="create_group" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Make a Group</button>
