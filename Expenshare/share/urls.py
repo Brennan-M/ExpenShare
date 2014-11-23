@@ -12,4 +12,3 @@ urlpatterns = patterns(' ',
 	url(r'^leavegroup_form/$', views.leavegroup_form, name='leavegroup_form'),
 	url(r'^login/$', views.userLogin, name='login'),
 	url(r'^logout/$', views.userLogout, name='logout'))
-

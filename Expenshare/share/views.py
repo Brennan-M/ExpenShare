@@ -217,4 +217,3 @@ def userLogin(request):
 def userLogout(request):
 	logout(request)
 	return HttpResponseRedirect('/share/')
-

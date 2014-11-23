@@ -104,3 +104,6 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
+
+# Login redirect
+LOGIN_URL = '/share/login/'
