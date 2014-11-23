@@ -64,24 +64,15 @@
 															<div class="col-md-2"></div>
 															<div class="col-md-8" id="infoBox">
 																<h2>Report a Transaction</h2>
-																<form role="form">
-																  <div class="form-group">
-																    <label for="Cost">Transaction Cost</label>
-																    <input type="price" class="form-control" id="costInput" placeholder="Enter Dollar Amount">
-																  </div>
-																  <div class="form-group">
-																    <label for="comment">Description</label>
-																    <input type="comment" class="form-control" id="descriptionInput" placeholder="Enter Item Description">
-																  </div>
+																<fieldset>
+																	<form id="PayForm" method="post" action="/share/add_payform/">
+																	{% csrf_token %}
+																	
+																	{{ PayForm.as_p }}													
+
+																	<input type="submit" name="Pay" value="Pay"/> 
 																</form>
-																<div class="row">
-																  <div class="col-md-6">
-																  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Submit Transaction</a></button>
-																  </div>
-																  <div class="col-md-6">
-																  	<button type="button" class="btn btn-default btn-lg btn-block"><a href="/share/home"> Cancel </a></button>
-																  </div>
-																</div>
+																</fieldset>
 															</div>
 															<div class="col-md-1"> </div>
 															<div class="col-md-1"></div>

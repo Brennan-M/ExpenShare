@@ -23,7 +23,7 @@ def index(request):
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     return render_to_response('login.html', context_dict, context)
-
+@login_required
 def home(request):
     # Request the context of the request.                                                            
     # The context contains information such as the client's machine details, for example.            
@@ -32,7 +32,9 @@ def home(request):
     # Construct a dictionary to pass to the template engine as its context.                          
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!                     
     paygroup_list = PayGroup.objects.order_by('name')
-    context_dict = {'paygroups': paygroup_list}
+    payform = PayForm()
+    groupform = MakeGroupForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
 
     # Return a rendered response to send to the client.                                              
     # We make use of the shortcut function to make our lives easier.                                     # Note that the first parameter is the template we wish to use.                                   
@@ -106,7 +108,9 @@ def add_groupform(request):
     else:
         groupform = MakeGroupForm()
 
-    context_dict={'MakeGroupForm' : groupform} 
+    paygroup_list = PayGroup.objects.order_by('name')
+    payform = PayForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
     return render_to_response('home.html', context_dict, context)
 
 
@@ -129,7 +133,9 @@ def add_payform(request):
     else:
         payform = PayForm()
 
-    context_dict={'PayForm' : payform}    
+    paygroup_list = PayGroup.objects.order_by('name')
+    groupform = MakeGroupForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
 
 
