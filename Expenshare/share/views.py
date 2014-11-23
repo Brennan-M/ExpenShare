@@ -167,7 +167,6 @@ def joingroup_form(request):
 @login_required
 def leavegroup_form(request):
     context = RequestContext(request)
-    print request.POST
     currPayUser = PayUser.objects.get(userKey=request.user)
     if (request.method == 'POST'):
         try:
