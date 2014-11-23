@@ -113,7 +113,8 @@ def add_groupform(request):
 @login_required
 def add_payform(request):
     context = RequestContext(request)
-
+    print("Your Post was: ", request.POST)
+    clickedGroup = PayGroup.objects.get(name=request.POST['group'])
     if (request.method=='POST'):
         payform = PayForm(request.POST)
         
@@ -121,8 +122,8 @@ def add_payform(request):
             cost = payform.save(commit=False)   
             cost.user = request.user
             cost.save()
-            clickedGroup = PayGroup.objects.get(name=request.POST['group'])
             clickedGroup.paymentLogs.add(cost)
+            print(clickedGroup)
             payLogs = clickedGroup.paymentLogs.order_by('date')
 
             return render_to_response('ExpenseLog.html', {'paylog' : payLogs})   #After submitting the form, redirects the user back to the homepage
