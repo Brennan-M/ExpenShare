@@ -68,12 +68,11 @@ def register(request):
             payUser = PayUser(userKey=user)
             payUser.save()
 
-
             registered = True
 
         else:
-            print("There was an error with registering your account.")
-    
+            pass
+        
     #Else it was not HTTP POST so have a blank form 
     else:
         userForm = UserForm()
@@ -151,7 +150,8 @@ def joingroup_form(request):
                 group.members.add(request.user)
                 currPayUser.payGroups.add(group)
             else:
-                print("Wrong Passcode")
+                #print("Wrong Passcode")
+                return render_to_response('home.html', {'joingroup_error1' : True}, context)
         except:
             print ("Error joining Group.")
 
