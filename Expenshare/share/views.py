@@ -164,6 +164,25 @@ def joingroup_form(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
 
+@login_required
+def leavegroup_form(request):
+    context = RequestContext(request)
+    print request.POST
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    if (request.method == 'POST'):
+        try:
+            group = PayGroup.objects.get(name=request.POST['group'])
+            group.members.remove(request.user)
+            currPayUser.payGroups.remove(group)
+        except:
+            print ("Error joining Group.")
+
+
+    paygroup_list = currPayUser.payGroups.all()
+    groupform = MakeGroupForm()
+    payform = PayForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+    return render_to_response('home.html', context_dict, context)
 
 
 def userLogin(request):
