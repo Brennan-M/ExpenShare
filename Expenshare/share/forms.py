@@ -11,6 +11,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('email', 'username', 'password')
 
+
 class PayForm(forms.ModelForm):
 	amount = forms.IntegerField(label = 'Amount')
 	description = forms.CharField(max_length=200, label = 'Description')
@@ -18,5 +19,15 @@ class PayForm(forms.ModelForm):
 	class Meta:
 		model = models.PaymentLog
 		fields = ('amount', 'description')
+
+class MakeGroupForm(forms.ModelForm):
+	name = forms.CharField(max_length=20, label = 'Group Name')
+	description = forms.CharField(max_length=140, label = 'Group Description')
+	passcode = forms.CharField(max_length=16, label = 'Group Passcode')
+
+	class Meta:
+		model = models.PayGroup
+		fields = ('name', 'description', 'passcode')
+
 
 	

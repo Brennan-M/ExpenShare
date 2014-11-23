@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from share.models import PayGroup, PaymentLog
-from share.forms import UserForm, PayForm
+from share.models import User, PayGroup, PaymentLog
+from share.forms import UserForm, PayForm, MakeGroupForm
 from share.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -88,19 +88,38 @@ def register(request):
 
     return render_to_response('register.html', contextDict, context)
 
-
-# Alter this for add_payform
-#@login_required
-def add_payform(request):
+@login_required
+def add_groupform(request):
     context = RequestContext(request)
-    
-    #user = User.objects.get(username=request.user)
 
     if (request.method=='POST'):
-        payform = PayForm(data=request.POST)
+        groupform = MakeGroupForm(request.POST)
+        
+        if (groupform.is_valid()):
+            group = groupform.save()   
+            group.save()
 
+            return render_to_response('home.html')   #After submitting the form, redirects the user back to the homepage
+        else:
+            print ("Error making this Group")
+    else:
+        groupform = MakeGroupForm()
+
+    context_dict={'MakeGroupForm' : groupform} 
+    return render_to_response('home.html', context_dict, context)
+
+
+# Alter this for add_payform
+@login_required
+def add_payform(request):
+    context = RequestContext(request)
+
+    if (request.method=='POST'):
+        payform = PayForm(request.POST)
+        
         if (payform.is_valid()):
-            cost = payform.save()           
+            cost = payform.save(commit=False)   
+            cost.user = request.user
             cost.save()
 
             return render_to_response('ExpenseLog.html')   #After submitting the form, redirects the user back to the homepage

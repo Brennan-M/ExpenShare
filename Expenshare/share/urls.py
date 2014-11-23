@@ -7,6 +7,7 @@ urlpatterns = patterns(' ',
 	url(r'^history/$', views.history, name='history'),
 	url(r'^register/$', views.register, name='register'),
 	url(r'^add_payform/$', views.add_payform, name='add_payform'),
+	url(r'^add_groupform/$', views.add_groupform, name='add_groupform'),
 	url(r'^login/$', views.userLogin, name='login'),
 	url(r'^logout/$', views.userLogout, name='logout'))
 

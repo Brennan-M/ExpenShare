@@ -111,39 +111,8 @@
 										</div>
 									</div>
 									<hr>
-																		<hr>
-									<!--
-									<div class="row">
-										<div class="col-md-8">
-											<h3>Group 2 </h3>
-											<p>Short description of group 2 here</p>
-										</div>
-										<div class='col-md-4'>
-											<h4>Groupmates</h4>
-											<ul>
-												<li>Groupmate1</li>
-												<li>Groupmate2</li>
-												<li>Groupmate3</li>
-											</ul>
-										</div>
-									</div>
-									<hr>
-																		<hr>
-									<div class="row">
-										<div class="col-md-8">
-											<h3>Group 3 </h3>
-											<p>Short description of group 3 here</p>
-										</div>
-										<div class='col-md-4'>
-											<h4>Groupmates</h4>
-											<ul>
-												<li>Groupmate1</li>
-												<li>Groupmate2</li>
-												<li>Groupmate3</li>
-											</ul>
-										</div>
-									</div>
-									<hr> -->
+									</hr>
+									
 								</div>
 							</div>
 							<div class="col-md-3" id="infoBox">
@@ -182,50 +151,38 @@
 										</div>
 								<h3>Create New Group</h3>
 								  	<!-- Large modal -->
-									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupBox">
-										  Make a Group
-										</button>
+								  	<button type="button" id="create_group" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Make a Group</button>
+											<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											  <div class="container" id="bodyContainer">
+												<div class="row">
+													<div class="col-md-1"> </div>
+													<div class="container" id="bodyContent">
+														<div class="row">
+															<div class="col-md-2"></div>
+															<div class="col-md-8" id="infoBox">
+																<h2>Create a Group</h2>
+																<fieldset>
+																<form id="MakeGroupForm" method="post" action="/share/add_groupform/">
+																	{% csrf_token %}
+																	
+																	{{ MakeGroupForm.as_p }}													
 
-										<!-- Modal -->
-										<div class="modal fade" id="groupBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										  <div class="modal-dialog">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-										        <h4 class="modal-title" id="myModalLabel">Create a Group</h4>
-										      </div>
-										      <div class="modal-body">
-										      <form role="form">
-												  <div class="form-group">
-												    <label for="loginEmail">Create Group Name</label>
-												    <input type="email" class="form-control" id="groupname" placeholder="Group Name">
-												  </div>
-												  <div class="form-group">
-												    <label for="loginEmail">Create Group Password</label>
-												    <input type="email" class="form-control" id="grouppass" placeholder="Group Password">
-												  </div>											  
-											  </form>
-											  </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-default" data-dismiss="modal">Join Group</button>
-										        <button type="button" id="report" class="btn btn-default"><a href="/share/home/">Exit</a></button>
-										      </div>
-										    </div>
-										  </div>
-										</div>
+																	<input type="submit" name="Create" value="Create"/> 
+																</form>
+																</fieldset>
+																
+															</div>
+															<div class="col-md-1"> </div>
+															<div class="col-md-1"></div>
+														</div>
+													</div>
+													<div class="col-md-1"></div>
+												</div>	
+											</div>
+											</div>
 
-							</div>
-							<!--
-								<h3>Start New Group</h3>
-									<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Create a Group</button>
-
-									<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-									  <div class="modal-dialog modal-lg">
-									    <div class="modal-content">
-									      Create a Group
-									    </div>
-									  </div>
-									</div>-->
+							</div> 
+						
 							
 							<div class="col-md-1"></div>
 						</div>
