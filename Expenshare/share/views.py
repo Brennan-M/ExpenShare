@@ -174,8 +174,13 @@ def leavegroup_form(request):
             group = PayGroup.objects.get(name=request.POST['group'])
             group.members.remove(request.user)
             currPayUser.payGroups.remove(group)
+            if group.members.exists():
+                print("There are still existing members in this group.")
+            else:
+                group.delete()
+                print("You were the last member! Group deleted.")
         except:
-            print ("Error joining Group.")
+            print ("Error leaving Group.")
 
 
     paygroup_list = currPayUser.payGroups.all()
