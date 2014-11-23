@@ -46,7 +46,7 @@ def history(request):
 
     # Construct a dictionary to pass to the template engine as its context.                          
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!                     
-    paylog_list = PaymentLog.objects.order_by('group')
+    paylog_list = PaymentLog.objects.all()
     context_dict = {'paylog': paylog_list}
 
     # Return a rendered response to send to the client.                                              
