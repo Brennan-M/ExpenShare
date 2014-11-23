@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from share.models import PayGroup, PaymentLog
+from share.models import PayGroup, PaymentLog, PayUser
 from share.forms import UserForm, PayForm
 from share.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
@@ -68,10 +68,13 @@ def register(request):
         if(userForm.is_valid()):
             #Save to database
             user = userForm.save()
-
             #This hashes the users password for safe storage
             user.set_password(user.password)
             user.save()
+            #Make a new PayUser account
+            payUser = PayUser(userKey=user)
+            payUser.save()
+
 
             registered = True
 
@@ -88,7 +91,7 @@ def register(request):
 
 
 # Alter this for add_payform
-#@login_required
+@login_required
 def add_payform(request):
     context = RequestContext(request)
     

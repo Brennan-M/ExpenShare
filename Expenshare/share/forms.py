@@ -11,6 +11,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('email', 'username', 'password')
 
+
 class PayForm(forms.ModelForm):
 	amount = forms.IntegerField(label = 'Amount')
 	description = forms.CharField(max_length=200, label = 'Description')
