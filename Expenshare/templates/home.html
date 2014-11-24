@@ -21,7 +21,6 @@
 		                <div class="col-md-10">
 		                  <a class="navbar-brand" href="/share/home"> Expenshare</a>
 		                  <ul class="nav navbar-nav">
-		                  	<li><a href="">Help</a></li>
 		                  	<li><a href="/share/logout"> Logout </a></li>
 		                  </ul>
 		                </div>
@@ -37,6 +36,9 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
+									{% if not paygroups %}
+										<h3> Start sharing expenses by making or joining a group! </h3>
+									{% else %}
 									<h2>Groups</h2>
 									<body>
 									<!--
@@ -73,7 +75,8 @@
 																	{% csrf_token %}
 																	{{ PayForm.as_p }}
 																	<input type="hidden" name="group" value="{{ paygroup.name }}">
-																	<input type="submit" name="Pay" value="Submit Pay Request"/> 
+																	<div class="col-md-4">
+																	<button type="submit" name="Pay" value="submit" class="btn btn-default btn-lg btn-block">Submit Transaction</button> </div>
 																</form>
 																</fieldset>
 															</div>
@@ -88,6 +91,7 @@
 											<div class="col-md-3">
 											<form id="LeaveGroupForm" method="post" action="/share/leavegroup/">
 												{% csrf_token %}
+
 												<input type="hidden" name="group" value="{{ paygroup.name }}">
 												<input type="submit" id="leaveButton" class="btn btn-default" name="Leave" value="Leave Group">
 											</form>		
@@ -97,7 +101,7 @@
 											<form id="goToHistory" method="post" action="/share/history/">
 												{% csrf_token %}
 												<input type="hidden" name="group" value="{{ paygroup.name }}">
-												<input type="submit" class="btn btn-default" name="historyButton" value="Payment Logs">
+												<input type="submit" class="btn btn-default" name="historyButton" value="Expense History">
  											</form>	
  											</div>
  											
@@ -115,13 +119,14 @@
 											</ul>	
 										</div>
 									</div>
-									
-									{% endfor %}
 									<hr>
-									</hr>
+									{% endfor %}
 									
+									{% endif %}
 								</div>
+								
 							</div>
+							
 							<div class="col-md-3" id="infoBox">
 								<h3>Join Existing Group</h3>
 								  	<!-- Large modal -->
@@ -146,9 +151,11 @@
 												    				<input type="text" class="form-control" name="group" placeholder="Group Name"/>
 
 												    				<label for="passcode">Group Passcode</label>
-												    				<input type="text" class="form-control" name="passcode" placeholder="Passcode"/>														
-
-																	<input type="submit" name="Join" value="Join"/> 
+												    				<input type="text" class="form-control" name="passcode" placeholder="Passcode"/>							
+												    				<br>	
+												    				<div class="col-md-4">
+																	<button type="submit" name="Join" value="Join" class="btn btn-default btn-lg btn-block">Join</button> </div>
+																	 
 																</form>
 																</fieldset>
 																
@@ -178,8 +185,9 @@
 																	{% csrf_token %}
 																	
 																	{{ MakeGroupForm.as_p }}													
-
-																	<input type="submit" name="Create" value="Create"/> 
+																	<div class="col-md-4">
+																	<button type="submit" name="Create" value="Create" class="btn btn-default btn-lg btn-block">Create</button> </div>
+																	
 																</form>
 																</fieldset>
 																

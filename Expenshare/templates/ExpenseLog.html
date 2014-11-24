@@ -20,7 +20,7 @@
 		            <div class="container-fluid">
 		              <div class="row-fluid">
 		                <div class="col-md-10">
-		                  <a class="navbar-brand" id="navName" href="/share/home">User Home</a>
+		                  <a class="navbar-brand" id="navName" href="/share/home">Expenshare</a>
 			                 <ul class="nav navbar-nav">
 			                  	<!--Put links to different parts of the site here-->
 			                 </ul>
@@ -36,6 +36,11 @@
 							<div class="col-md-1"></div>
 							<div class="col-md-10" id="reportBox">
 								<h2>Transaction History</h2>
+								<h3> {{ group.name }}</h3>
+								<hr>
+								{% if not paylog %}
+									<h3>No Previous Expenses</h3>
+								{% else %}
 								       <div class="CSSTableGenerator" >
 						                <table >
 						                    <tr>
@@ -54,6 +59,7 @@
 								       {% endfor %}
 						                </table>
 						            </div>
+						           {% endif %}
             
 						</div>
 					</div>

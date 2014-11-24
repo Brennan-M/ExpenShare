@@ -41,9 +41,10 @@ def history(request):
     context = RequestContext(request)
 
     print(request.POST['group'])
-    paylog_list = PayGroup.objects.get(name=request.POST['group']).paymentLogs.order_by('-date')
+    currGroup = PayGroup.objects.get(name=request.POST['group'])
+    paylog_list = currGroup.paymentLogs.order_by('-date')
     print(paylog_list)
-    context_dict = {'paylog': paylog_list}
+    context_dict = {'paylog': paylog_list, 'group': currGroup}
     return render_to_response('ExpenseLog.html', context_dict, context)
 
 #View for registering new users
@@ -125,7 +126,7 @@ def add_payform(request):
             print(clickedGroup)
             payLogs = clickedGroup.paymentLogs.order_by('date')
 
-            return render_to_response('ExpenseLog.html', {'paylog' : payLogs})   #After submitting the form, redirects the user back to the homepage
+            return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup})   #After submitting the form, redirects the user back to the homepage
         else:
             print ("Error Processing your Payment")
     else:
@@ -154,7 +155,7 @@ def joingroup_form(request):
                 #print("Wrong Passcode")
                 return render_to_response('home.html', {'joingroup_error1' : True}, context)
         except:
-            print ("Error joining Group.")
+            print ("This Group Does Not Exist.")
 
 
     paygroup_list = currPayUser.payGroups.all()
