@@ -36,6 +36,12 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
+									{% if history_error1 %}
+									<h4><font color="red">This group no longer exists!</font></h4>					
+									{% endif %}
+									{% if history_error2 %}
+									<h4><font color="red">You are no longer part of this group!</font></h4>					
+									{% endif %}
 									{% if payform_error2 %}
 									<h4><font color="red">This group no longer exists!</font></h4>					
 									{% endif %}
@@ -56,6 +62,9 @@
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
 									{% else %}
+									{% if deleted_group %}
+									<h4><font color="red">You just deleted a group</font><h4>
+									{% endif %}
 									<br>
 									<h4>Balance across all groups: </h4>
 									<body>
@@ -70,9 +79,6 @@
 									-->
 									</body>
 									<hr>
-									{% if deleted_group %}
-									<h3><font color="red">You just deleted a group</font><h3>
-									{% endif %}
 									{% for paygroup in paygroups %}
 									
 									<div class="row">

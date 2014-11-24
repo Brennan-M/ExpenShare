@@ -40,24 +40,24 @@ def home(request):
 def history(request):            
     context = RequestContext(request)
 
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    paygroup_list = currPayUser.payGroups.all()
+    payform = PayForm()
+    groupform = MakeGroupForm()
+
     try:
         currGroup = PayGroup.objects.get(name=request.POST['group'])
         partOf = False
     except:
-        print("You are no longer a Part of this group, which also no longer exists!")
-        paylog_list = currGroup.paymentLogs.order_by('-date')
-        context_dict = {'paylog': paylog_list, 'group': currGroup, 'history_error1' : True}
-        return render_to_response('ExpenseLog.html', context_dict, context)
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'history_error1' : True} 
+        return render_to_response('home.html', context_dict, context)
 
-    currPayUser = PayUser.objects.get(userKey=request.user)
     if currGroup in currPayUser.payGroups.all():
         partOf = True
 
     if (partOf == False):
-        print("You are no longer a Part of this group!")        
-        paylog_list = currGroup.paymentLogs.order_by('-date')
-        context_dict = {'paylog': paylog_list, 'group': currGroup, 'history_error2' : True}
-        return render_to_response('ExpenseLog.html', context_dict, context)
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'history_error2' : True} 
+        return render_to_response('home.html', context_dict, context)
 
     print(request.POST['group'])
 
