@@ -49,35 +49,27 @@
 									<h4><font color="red">You are no longer part of this group!</font></h4>
 									{% endif %}
 									{% if joingroup_error1 %}
-									<h4><font color="red">Incorrect groupname or passcode</font></h4>
+									<h4><font color="red">Incorrect groupname or passcode!</font></h4>
 									{% endif %}
-					
+									{% if leavegroup_error1 %}
+									<h4><font color="red">You cannot leave this group until all your debts have been paid!</font></h4>					
+									{% endif %}
 									{% if joingroup_error2 %}
 									<h4><font color="red">Unfortunately that group does not exist!</font></h4>
 									{% endif %}
 									
 									{% if creategroup_error1 %}
 									<h4><font color="red">Oh no! An error occured with creating that group!</font></h4>
-                                                                        {% endif %}
+                                    {% endif %}
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
 									{% else %}
 									{% if deleted_group %}
-									<h4><font color="red">You just deleted a group</font><h4>
+									<h4><font color="red">You were the last member in that group. Group deleted.</font><h4>
 									{% endif %}
 									<br>
 									<h4>Balance across all groups: </h4>
-									<body>
-									<!--
-									{% if paygroups %}
-									        <ul>
-										    {% for paygroup in paygroups %}
-										    <li>{{ paygroup.name }}</li>
-										    {% endfor %}
-										</ul>
-									{% endif %}
-									-->
-									</body>
+								
 									<hr>
 									{% for paygroup in paygroups %}
 									

@@ -288,7 +288,8 @@ def leavegroup(request):
                     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
                     return render_to_response('home.html', context_dict, context)
             else:
-                return HttpResponse("Sorry you cannot leave the group until all you debts have been cleared")
+                context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'leavegroup_error1' : True}
+                return render_to_response('home.html', context_dict, context)
         except:
             print ("Error leaving Group.")
 
