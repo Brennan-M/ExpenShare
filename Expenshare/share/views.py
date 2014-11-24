@@ -185,16 +185,20 @@ def joingroup_form(request):
                 group.members.add(request.user)
                 currPayUser.payGroups.add(group)
             else:
-                #print("Wrong Passcode")
-                return render_to_response('home.html', {'joingroup_error1' : True, 'joingroup_error2' : True}, context)
-        except:
-            return HttpResponseRedirect('/share/home/')
+                return render_to_response('home.html', {'joingroup_error1' : True} , context)
 
+            paygroup_list = currPayUser.payGroups.all()
+            groupform = MakeGroupForm()
+            payform = PayForm()
+            context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+            return render_to_response('home.html', context_dict, context)
+        except:
+            pass
 
     paygroup_list = currPayUser.payGroups.all()
     groupform = MakeGroupForm()
     payform = PayForm()
-    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'joingroup_error2' : True}
     return render_to_response('home.html', context_dict, context)
 
 @login_required

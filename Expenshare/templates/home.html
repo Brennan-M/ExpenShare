@@ -36,6 +36,9 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
+									{% if joingroup_error2 %}
+									<h4><font color="red">Unfortunately that group does not exist!</font></h4>
+									{% endif %}
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
 									{% else %}
