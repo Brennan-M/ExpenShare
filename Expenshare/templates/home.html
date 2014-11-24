@@ -55,6 +55,7 @@
 									<div class="row">
 										<div class="col-md-8">
 											<h3>{{ paygroup.name }}</h3>
+											<h5>About this Group: {{ paygroup.description }}</h5>
 											<h5>Current Balance: $ </h5>
 											<div class="row" id="buttons">
 											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#{{ paygroup.id }}ID">
@@ -136,7 +137,7 @@
 															<div class="col-md-8" id="infoBox">
 																<h2>Find a Group</h2>
 																{% if joingroup_error1 %}
-																<h4><font color="red">Oh no, that's the wrong passcode!</font></h4>
+																<h4><font color="red">Incorrect groupname or passcode</font></h4>
 																{% endif %}
 																<fieldset>
 																<form id="JoinGroupForm" method="post" action="/share/joingroup_form/">
