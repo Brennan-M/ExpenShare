@@ -154,9 +154,9 @@ def joingroup_form(request):
                 currPayUser.payGroups.add(group)
             else:
                 #print("Wrong Passcode")
-                return render_to_response('home.html', {'joingroup_error1' : True}, context)
+                return render_to_response('home.html', {'joingroup_error1' : True, 'joingroup_error2' : True}, context)
         except:
-            print ("This Group Does Not Exist.")
+            return HttpResponseRedirect('/share/home/')
 
 
     paygroup_list = currPayUser.payGroups.all()
