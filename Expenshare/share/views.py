@@ -129,6 +129,8 @@ def add_groupform(request):
 def add_payform(request):
 
     context = RequestContext(request)
+    
+    currPayUser = PayUser.objects.get(userKey=request.user)
 
     print("Your Post was: ", request.POST)
 
@@ -137,9 +139,10 @@ def add_payform(request):
         partOf = False
     except:
         print("You are no longer a Part of this group, which also no longer exists!")
-        return HttpResponseRedirect('/share/home')
-
-    currPayUser = PayUser.objects.get(userKey=request.user)
+        paygroup_list = currPayUser.payGroups.all()
+        groupform = MakeGroupForm()
+        context_dict={'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}
+        return render_to_response('home.html', context_dict, context)
 
     if clickedGroup in currPayUser.payGroups.all():
         partOf = True
@@ -165,7 +168,6 @@ def add_payform(request):
             return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup, 'payform_error1' : True}, context)
     else:
         payform = PayForm()
-
     
     paygroup_list = currPayUser.payGroups.all()
     groupform = MakeGroupForm()
@@ -186,7 +188,11 @@ def joingroup_form(request):
                 group.members.add(request.user)
                 currPayUser.payGroups.add(group)
             else:
-                return render_to_response('home.html', {'joingroup_error1' : True} , context)
+                paygroup_list = currPayUser.payGroups.all()
+                groupform = MakeGroupForm()
+                payform = PayForm()
+                context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'joingroup_error1' : True}
+                return render_to_response('home.html', context_dict, context)
 
             paygroup_list = currPayUser.payGroups.all()
             groupform = MakeGroupForm()
