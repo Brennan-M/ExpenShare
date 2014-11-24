@@ -271,6 +271,11 @@ def leavegroup(request):
             if canLeave:
                 for fel in memV.fellows.all():
                 	fel.delete()
+            	for mem in group.memberViews.all():
+            		if mem != memV:
+            			for fel in mem.fellows.all():
+            				if fel.user == memV.user:
+            					fel.delete()
             	memV.delete()
                 group.members.remove(request.user)
                 currPayUser.payGroups.remove(group)
@@ -286,7 +291,8 @@ def leavegroup(request):
                     paygroup_list = currPayUser.payGroups.all()
                     groupform = MakeGroupForm()
                     payform = PayForm()
-                    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+                    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}
+                    group.save()    
                     return render_to_response('home.html', context_dict, context)
             else:
                 context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'leavegroup_error1' : True}
