@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from share.models import PayUser, PayGroup, PaymentLog
+from share.models import PayUser, PayGroup, PaymentLog, MemberView, FellowUser
 from share.forms import UserForm, PayForm, MakeGroupForm
 from share.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import F
+from decimal import *
 
 # Create your views here.
 def index(request):
@@ -100,6 +101,9 @@ def add_groupform(request):
             currPayUser = PayUser.objects.get(userKey=request.user)
             currPayUser.payGroups.add(group)
             group.members.add(request.user)
+            memV = MemberView(user=request.user)
+            memV.save()
+            group.memberViews.add(memV)
 
             return render_to_response('home.html', context_dict, context)  #After submitting the form, redirects the user back to the homepage
         else:
@@ -122,10 +126,26 @@ def add_payform(request):
             cost = payform.save(commit=False)   
             cost.user = request.user
             cost.save()
+
+            #Load the playlogs 
             clickedGroup.paymentLogs.add(cost)
-            print(clickedGroup)
             payLogs = clickedGroup.paymentLogs.order_by('date')
 
+            #Calculate new cost of the group
+            for memV in clickedGroup.memberViews.all():
+            	if memV.user.id == request.user.id:
+                    memV.netOwed = ((Decimal(memV.netOwed) - (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
+                    for fels in memV.fellows.all():
+                        fels.owed = ((Decimal(fels.owed) - (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
+                        fels.save()
+                else:
+                    memV.netOwed = ((Decimal(memV.netOwed) + (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
+                    for fels in memV.fellows.all():
+                        if fels.user.id == request.user.id:
+                            fels.owed = ((Decimal(fels.owed) + (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
+                            fels.save()
+                memV.save()
+				
             return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup})   #After submitting the form, redirects the user back to the homepage
         else:
             print ("Error Processing your Payment")
@@ -149,8 +169,21 @@ def joingroup_form(request):
             passcode = request.POST['passcode']
             realcode = group.passcode
             if passcode==realcode:
+                for memV in group.memberViews.all():
+                	fellMem = FellowUser(user=request.user)
+                	fellMem.save()
+                	memV.fellows.add(fellMem)
+            	newMemV = MemberView(user=request.user)
+            	newMemV.save()
+            	group.memberViews.add(newMemV)
+            	for mems in group.members.all():
+            		fellMem = FellowUser(user=mems)
+            		fellMem.save()
+            		newMemV.fellows.add(fellMem)
                 group.members.add(request.user)
                 currPayUser.payGroups.add(group)
+                group.groupSize += 1
+                group.save()
             else:
                 #print("Wrong Passcode")
                 return render_to_response('home.html', {'joingroup_error1' : True}, context)
@@ -171,13 +204,29 @@ def leavegroup(request):
     if (request.method == 'POST'):
         try:
             group = PayGroup.objects.get(name=request.POST['group'])
-            group.members.remove(request.user)
-            currPayUser.payGroups.remove(group)
-            if group.members.exists():
-                print("There are still existing members in this group.")
+            
+            #Determine if the user can leave or not
+            canLeave = True
+            memV = group.memberViews.get(user=request.user)
+            if memV.netOwed != 0:
+            	canLeave = False
             else:
-                group.delete()
-                print("You were the last member! Group deleted.")
+                for fel in memV.fellows.all():
+                    if fel.owed != 0:
+                        canLeave = False
+                        break 
+
+            #Remove the user from the group
+            if canLeave:
+                group.members.remove(request.user)
+                currPayUser.payGroups.remove(group)
+                group.groupSize -= 1
+                if not group.members.exists():
+                    group.delete()
+                else:
+                    group.save()
+            else:
+                return HttpResponse("Sorry you cannot leave the group until all you debts have been cleared")
         except:
             print ("Error leaving Group.")
 

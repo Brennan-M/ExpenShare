@@ -38,9 +38,9 @@ def populate():
 	andy.save()
 	gregg.save()
 
-	pg1 = PayGroup(name="Group 1", description="Group for all users", passcode="group1")
-	pg2 = PayGroup(name="Group 2", description="Group for Ian, Brennan, Taylor", passcode="group2")
-	pg3 = PayGroup(name="Group 3", description="Group for Andy and Old Gregg", passcode="group3")
+	pg1 = PayGroup(name="Group 1", description="Group for all users", passcode="group1", groupSize=5)
+	pg2 = PayGroup(name="Group 2", description="Group for Ian, Brennan, Taylor", passcode="group2", groupSize=3)
+	pg3 = PayGroup(name="Group 3", description="Group for Andy and Old Gregg", passcode="group3", groupSize=2)
 	pg1.save()
 	pg2.save()
 	pg3.save()

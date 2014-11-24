@@ -13,7 +13,7 @@ class UserForm(forms.ModelForm):
 
 
 class PayForm(forms.ModelForm):
-	amount = forms.IntegerField(label = 'Amount')
+	amount = forms.DecimalField(max_digits=11, decimal_places=2, label = 'Amount')
 	description = forms.CharField(max_length=50, label = 'Description')
 	
 	class Meta:
@@ -22,7 +22,7 @@ class PayForm(forms.ModelForm):
 
 class MakeGroupForm(forms.ModelForm):
 	name = forms.CharField(max_length=20, label = 'Group Name')
-        description = forms.CharField(max_length=50, label = 'Group Description', widget=forms.TextInput(attrs={'size':'37'}))
+	description = forms.CharField(max_length=50, label = 'Group Description', widget=forms.TextInput(attrs={'size':'37'}))
 	passcode = forms.CharField(max_length=16, label = 'Group Passcode',widget=forms.PasswordInput())
 
 	class Meta:
