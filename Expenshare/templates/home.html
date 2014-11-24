@@ -84,7 +84,16 @@
 									<div class="row">
 										<div class="col-md-8">
 											<h3>{{ paygroup.name }} - <em style="font-size: 65%">{{ paygroup.description }}</em></h3>
-											<h5>Current Balance: $ </h5>
+											{% for memV in paygroup.memberViews.all %}
+												{% if memV.user == user %}
+													{% if memV.netOwed <= 0 %}
+														<style> #netOwed{{ paygroup.id }}ID{color:#008798; display:inline;}</style>
+													{% else %}
+														<style> #netOwed{{ paygroup.id }}ID{color:red; display:inline;}</style>
+													{% endif %}
+													<h5 display="inline">Net Owed: $ <p id="netOwed{{ paygroup.id }}ID">{{ memV.netOwed }}</p></h5>
+												{% endif %}
+											{% endfor %}
 											<div class="row" id="buttons">
 											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#{{ paygroup.id }}ID">
 											Report Expense</button>
@@ -140,8 +149,17 @@
 										<div class='col-md-4'>
 											<h4>Group Members</h4>
 											<ul>
-											  {% for member in paygroup.members.all %}
-												<li>{{ member }}</li>
+											  {% for memV in paygroup.memberViews.all %}
+												{% if memV.user == user %}
+													{% for fellow in memV.fellows.all %}
+														{% if fellow.owed <= 0 %}
+														<style> #owed{{ fellow.id }}ID{color:#008798; display:inline;}</style>
+														{% else %}
+															<style> #owed{{ fellow.id }}ID{color:red; display:inline;}</style>
+														{% endif %}
+														<li> {{ fellow }}: $ <p id="owed{{ fellow.id }}ID">{{ fellow.owed }}</p></li>
+													{% endfor %}
+												{% endif %}
 											  {% endfor %}
 											</ul>	
 										</div>
