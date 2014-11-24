@@ -36,6 +36,12 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
+									{% if payform_error2 %}
+									<h4><font color="red">This group no longer exists!</font></h4>					
+									{% endif %}
+									{% if payform_error3 %}
+									<h4><font color="red">You are no longer part of this group!</font></h4>
+									{% endif %}
 									{% if joingroup_error1 %}
 									<h4><font color="red">Incorrect groupname or passcode</font></h4>
 									{% endif %}

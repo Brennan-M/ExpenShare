@@ -45,15 +45,20 @@ def history(request):
         partOf = False
     except:
         print("You are no longer a Part of this group, which also no longer exists!")
-        return HttpResponseRedirect('/share/home')
+        paylog_list = currGroup.paymentLogs.order_by('-date')
+        context_dict = {'paylog': paylog_list, 'group': currGroup, 'history_error1' : True}
+        return render_to_response('ExpenseLog.html', context_dict, context)
 
     currPayUser = PayUser.objects.get(userKey=request.user)
     if currGroup in currPayUser.payGroups.all():
         partOf = True
 
     if (partOf == False):
-        print("You are no longer a Part of this group!")
-        return HttpResponseRedirect('/share/home')
+        print("You are no longer a Part of this group!")        
+        paylog_list = currGroup.paymentLogs.order_by('-date')
+        context_dict = {'paylog': paylog_list, 'group': currGroup, 'history_error2' : True}
+        return render_to_response('ExpenseLog.html', context_dict, context)
+
     print(request.POST['group'])
 
     paylog_list = currGroup.paymentLogs.order_by('-date')
@@ -138,18 +143,19 @@ def add_payform(request):
         clickedGroup = PayGroup.objects.get(name=request.POST['group'])
         partOf = False
     except:
-        print("You are no longer a Part of this group, which also no longer exists!")
         paygroup_list = currPayUser.payGroups.all()
         groupform = MakeGroupForm()
-        context_dict={'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}
+        context_dict={'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'payform_error2' : True}
         return render_to_response('home.html', context_dict, context)
 
     if clickedGroup in currPayUser.payGroups.all():
         partOf = True
 
     if partOf == False:
-        print("You are no longer a Part of this group!")
-        return HttpResponseRedirect('/share/home')
+        paygroup_list = currPayUser.payGroups.all()
+        groupform = MakeGroupForm()
+        context_dict={'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'payform_error3' : True}
+        return render_to_response('home.html', context_dict, context)
 
     if (request.method=='POST'):
         payform = PayForm(request.POST)
