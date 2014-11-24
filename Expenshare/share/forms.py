@@ -22,7 +22,7 @@ class PayForm(forms.ModelForm):
 
 class MakeGroupForm(forms.ModelForm):
 	name = forms.CharField(max_length=20, label = 'Group Name')
-        description = forms.CharField(max_length=50, label = 'Group Description', widget=forms.TextInput(attrs={'size':'37'}))
+        description = forms.CharField(max_length=45, label = 'Group Description', widget=forms.TextInput(attrs={'size':'37'}))
 	passcode = forms.CharField(max_length=16, label = 'Group Passcode',widget=forms.PasswordInput())
 
 	class Meta:

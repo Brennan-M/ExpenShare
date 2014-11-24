@@ -128,7 +128,8 @@ def add_payform(request):
 
             return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup})   #After submitting the form, redirects the user back to the homepage
         else:
-            print ("Error Processing your Payment")
+            payLogs = clickedGroup.paymentLogs.order_by('date')
+            return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup, 'payform_error1' : True}, context)
     else:
         payform = PayForm()
 
