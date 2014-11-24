@@ -36,11 +36,18 @@
 							<div class="col-md-1"></div>
 							<div class="col-md-10" id="reportBox">
 								<h2>Transaction History</h2>
-								
+						
 								<h3> {{ group.name }}</h3>
+								
+								
 								{% if payform_error1 %}
-                                                                        <h4><font color="red">The last payment you atempted to enter failed, please try again!</font></h4>
-                                                                {% endif %}
+                                <h4><font color="red">The last expense you reported failed. Please try again!</font></h4>
+                                {% endif %}
+                                <div class="col-md-1">
+                                <input type="submit" class="btn btn-default" onClick="window.location.href='/share/home/'" name="historyButton" value="Home">
+								
+								</div>
+								<br>
 								<hr>
 								{% if not paylog %}
 									<h3>No Previous Expenses</h3>
