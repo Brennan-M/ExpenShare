@@ -36,7 +36,11 @@
 							<div class="col-md-1"></div>
 							<div class="col-md-10" id="reportBox">
 								<h2>Transaction History</h2>
+								
 								<h3> {{ group.name }}</h3>
+								{% if payform_error1 %}
+                                                                        <h4><font color="red">The last payment you atempted to enter failed, please try again!</font></h4>
+                                                                {% endif %}
 								<hr>
 								{% if not paylog %}
 									<h3>No Previous Expenses</h3>

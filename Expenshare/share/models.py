@@ -22,7 +22,7 @@ class PaymentLog(models.Model):
 class PayGroup(models.Model):
 	#Django should create unique primary key already
 	name = models.CharField(max_length=20, default="", unique=True)
-	description = models.CharField(max_length=140, default="")
+	description = models.CharField(max_length=45, default="")
 	members = models.ManyToManyField(User)
 	passcode = models.CharField(max_length=16, default="") #This may need to be hashed
 	paymentLogs = models.ManyToManyField(PaymentLog)
