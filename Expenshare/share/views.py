@@ -40,8 +40,22 @@ def home(request):
 def history(request):            
     context = RequestContext(request)
 
+    try:
+        currGroup = PayGroup.objects.get(name=request.POST['group'])
+        partOf = False
+    except:
+        print("You are no longer a Part of this group, which also no longer exists!")
+        return HttpResponseRedirect('/share/home')
+
+    currPayUser = PayUser.objects.get(userKey=request.user)
+    if currGroup in currPayUser.payGroups.all():
+        partOf = True
+
+    if (partOf == False):
+        print("You are no longer a Part of this group!")
+        return HttpResponseRedirect('/share/home')
     print(request.POST['group'])
-    currGroup = PayGroup.objects.get(name=request.POST['group'])
+
     paylog_list = currGroup.paymentLogs.order_by('-date')
     print(paylog_list)
     context_dict = {'paylog': paylog_list, 'group': currGroup}
@@ -112,9 +126,27 @@ def add_groupform(request):
 # Alter this for add_payform
 @login_required
 def add_payform(request):
+
     context = RequestContext(request)
+
     print("Your Post was: ", request.POST)
-    clickedGroup = PayGroup.objects.get(name=request.POST['group'])
+
+    try:
+        clickedGroup = PayGroup.objects.get(name=request.POST['group'])
+        partOf = False
+    except:
+        print("You are no longer a Part of this group, which also no longer exists!")
+        return HttpResponseRedirect('/share/home')
+
+    currPayUser = PayUser.objects.get(userKey=request.user)
+
+    if clickedGroup in currPayUser.payGroups.all():
+        partOf = True
+
+    if partOf == False:
+        print("You are no longer a Part of this group!")
+        return HttpResponseRedirect('/share/home')
+
     if (request.method=='POST'):
         payform = PayForm(request.POST)
         
@@ -132,7 +164,7 @@ def add_payform(request):
     else:
         payform = PayForm()
 
-    currPayUser = PayUser.objects.get(userKey=request.user)
+    
     paygroup_list = currPayUser.payGroups.all()
     groupform = MakeGroupForm()
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
