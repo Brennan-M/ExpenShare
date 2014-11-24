@@ -4,7 +4,10 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Expenshare.settings')
 import django
 django.setup()
-import share.models
+from share.models import User
+from share.models import PayGroup
+from share.models import PaymentLog
+from share.models import PayUser
 import time
 import share.forms
 import share.views
@@ -15,12 +18,13 @@ from subprocess import call
 class TestExpenShare(unittest.TestCase):
 
     def setUp(self):
-        self.ian = User(username="Ian")
+		call(["python", "manage.py", "flush"])
+		self.ian = User(username="Ian")
 		self.bren = User(username="Brennan")
 		self.ian.save()
 		self.bren.save()
-		self.ianP = PayUser(userKey=ian)
-		self.brenP = PayUser(userKey=bren)
+		self.ianP = PayUser(userKey=self.ian)
+		self.brenP = PayUser(userKey=self.bren)
 		self.ian.save()
 		self.bren.save()
 		self.pg1 = PayGroup(name="Group 1", description="Group for all users", passcode="1234")
@@ -29,25 +33,26 @@ class TestExpenShare(unittest.TestCase):
 		self.pg1.save()
 		self.pg2.save()
 		self.pg3.save()
-		self.pg1.members.add(ianP.userKey)
-		self.pg1.members.add(brenP.userKey)
-		self.pg2.members.add(ianP.userKey)
-		self.pg2.members.add(brenP.userKey)
-		self.ian.payGroups.add(pg1)
-		self.ian.payGroups.add(pg2)
-		self.bren.payGroups.add(pg1)
-		self.bren.payGroups.add(pg2)
-		self.pl1 = PaymentLog(amount=10, description="Bought some eggs", user=ianP.userKey)
-		self.pl2 = PaymentLog(amount=20, description="Bought gas", user=brenP.userKey)
+		self.pg1.members.add(self.ianP.userKey)
+		self.pg1.members.add(self.brenP.userKey)
+		self.pg2.members.add(self.ianP.userKey)
+		self.pg2.members.add(self.brenP.userKey)
+		self.ianP.payGroups.add(self.pg1)
+		self.ianP.payGroups.add(self.pg2)
+		self.brenP.payGroups.add(self.pg1)
+		self.brenP.payGroups.add(self.pg2)
+		self.pl1 = PaymentLog(amount=10, description="Bought some eggs", user=self.ianP.userKey)
+		self.pl2 = PaymentLog(amount=20, description="Bought gas", user=self.brenP.userKey)
 		self.pl1.save()
 		self.pl2.save()
 
     def tearDown(self):
-    	call(["python manage.py", "flush"])
+    	pass
 
-    def checkUsers(self):
+    def test_db(self):
+    	self.assertEqual(self.pg1 in self.brenP.payGroups.all(), True)
 
 
 
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()
