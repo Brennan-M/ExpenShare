@@ -24,6 +24,7 @@ def index(request):
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     return render_to_response('login.html', context_dict, context)
+    
 @login_required
 def home(request):           
     context = RequestContext(request)
@@ -176,7 +177,7 @@ def add_payform(request):
             #Calculate new cost of the group
             for memV in clickedGroup.memberViews.all():
             	if memV.user.id == request.user.id:
-                    memV.netOwed = ((Decimal(memV.netOwed) - (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
+                    memV.netOwed = ((Decimal(memV.netOwed) - Decimal(clickedGroup.groupSize - 1) * (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
                     for fels in memV.fellows.all():
                         fels.owed = ((Decimal(fels.owed) - (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
                         fels.save()
@@ -270,6 +271,11 @@ def leavegroup(request):
             if canLeave:
                 for fel in memV.fellows.all():
                 	fel.delete()
+            	for mem in group.memberViews.all():
+            		if mem != memV:
+            			for fel in mem.fellows.all():
+            				if fel.user == memV.user:
+            					fel.delete()
             	memV.delete()
                 group.members.remove(request.user)
                 currPayUser.payGroups.remove(group)
@@ -285,7 +291,8 @@ def leavegroup(request):
                     paygroup_list = currPayUser.payGroups.all()
                     groupform = MakeGroupForm()
                     payform = PayForm()
-                    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+                    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}
+                    group.save()    
                     return render_to_response('home.html', context_dict, context)
             else:
                 context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'leavegroup_error1' : True}
