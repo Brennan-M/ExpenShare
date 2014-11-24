@@ -36,12 +36,35 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
+									{% if history_error1 %}
+									<h4><font color="red">This group no longer exists!</font></h4>					
+									{% endif %}
+									{% if history_error2 %}
+									<h4><font color="red">You are no longer part of this group!</font></h4>					
+									{% endif %}
+									{% if payform_error2 %}
+									<h4><font color="red">This group no longer exists!</font></h4>					
+									{% endif %}
+									{% if payform_error3 %}
+									<h4><font color="red">You are no longer part of this group!</font></h4>
+									{% endif %}
+									{% if joingroup_error1 %}
+									<h4><font color="red">Incorrect groupname or passcode</font></h4>
+									{% endif %}
+					
 									{% if joingroup_error2 %}
 									<h4><font color="red">Unfortunately that group does not exist!</font></h4>
 									{% endif %}
+									
+									{% if creategroup_error1 %}
+									<h4><font color="red">Oh no! An error occured with creating that group!</font></h4>
+                                                                        {% endif %}
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
 									{% else %}
+									{% if deleted_group %}
+									<h4><font color="red">You just deleted a group</font><h4>
+									{% endif %}
 									<br>
 									<h4>Balance across all groups: </h4>
 									<body>
@@ -144,9 +167,6 @@
 															<div class="col-md-2"></div>
 															<div class="col-md-8" id="infoBox">
 																<h2>Find a Group</h2>
-																{% if joingroup_error1 %}
-																<h4><font color="red">Incorrect groupname or passcode</font></h4>
-																{% endif %}
 																<fieldset>
 																<form id="JoinGroupForm" method="post" action="/share/joingroup_form/">
 																	{% csrf_token %}
