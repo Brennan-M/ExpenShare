@@ -40,6 +40,7 @@ class PayGroup(models.Model):
 	passcode = models.CharField(max_length=16, default="") #This may need to be hashed
 	paymentLogs = models.ManyToManyField(PaymentLog)
 	memberViews = models.ManyToManyField(MemberView)
+	groupSize = models.IntegerField(default=0)
 	#Should find out how to do owners later
 
 	def __unicode__(self):
