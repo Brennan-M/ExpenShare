@@ -117,7 +117,8 @@ def add_groupform(request):
 
             return render_to_response('home.html', context_dict, context)  #After submitting the form, redirects the user back to the homepage
         else:
-            print ("Error making this Group")
+            context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'creategroup_error1' : True}
+            return render_to_response('home.html', context_dict, context)
 
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
     return render_to_response('home.html', context_dict, context)
@@ -211,20 +212,28 @@ def leavegroup(request):
             group.members.remove(request.user)
             currPayUser.payGroups.remove(group)
             if group.members.exists():
-                print("There are still existing members in this group.")
+                paygroup_list = currPayUser.payGroups.all()
+                groupform = MakeGroupForm()
+                payform = PayForm()
+                context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+                return render_to_response('home.html', context_dict, context)
+
             else:
                 group.delete()
-                print("You were the last member! Group deleted.")
+                paygroup_list = currPayUser.payGroups.all()
+                groupform = MakeGroupForm()
+                payform = PayForm()
+                context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'deleted_group' : True}    
+                return render_to_response('home.html', context_dict, context)
+
         except:
             print ("Error leaving Group.")
-
 
     paygroup_list = currPayUser.payGroups.all()
     groupform = MakeGroupForm()
     payform = PayForm()
-    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'leavegroup_error1' : True}    
     return render_to_response('home.html', context_dict, context)
-
 
 def userLogin(request):
 	context = RequestContext(request)

@@ -39,6 +39,10 @@
 									{% if joingroup_error2 %}
 									<h4><font color="red">Unfortunately that group does not exist!</font></h4>
 									{% endif %}
+									
+									{% if creategroup_error1 %}
+									<h4><font color="red">Oh no! An error occured with creating that group!</font></h4>
+                                                                        {% endif %}
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
 									{% else %}
@@ -56,6 +60,9 @@
 									-->
 									</body>
 									<hr>
+									{% if deleted_group %}
+									<h3><font color="red">You just deleted a group</font><h3>
+									{% endif %}
 									{% for paygroup in paygroups %}
 									
 									<div class="row">
