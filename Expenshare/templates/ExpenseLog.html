@@ -8,6 +8,7 @@
 	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	    <script src="{% static 'js/home.js' %}"></script>
 	    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     	
 	</head>
@@ -43,9 +44,11 @@
 								{% if payform_error1 %}
                                 <h4><font color="red">The last expense you reported failed. Please try again!</font></h4>
                                 {% endif %}
+                                {% if removePFError2 %}
+                                <h4><font color="red">Could not delete that expense. Error!</font></h4>
+                                {% endif %}
                                 <div class="col-md-1">
                                 <input type="submit" class="btn btn-default" onClick="window.location.href='/share/home/'" name="historyButton" value="Home">
-								
 								</div>
 								<br>
 								<hr>
@@ -70,6 +73,64 @@
 								       {% endfor %}
 						                </table>
 						            </div>
+						            <br>
+						            <div class="col-md-12">
+						            <!--
+									<form id="removePayForm" method="post" action="/share/removePayForm/">
+										{% csrf_token %}
+
+										<input type="hidden" name="group" value="{{ group.name }}">
+										<input type="submit" id="leaveButton" class="btn btn-default" name="delete" value="Delete Expense">
+									</form>		
+									-->
+
+									<div class="btn-group" role="group" id="buttons">
+									
+									<button type="button" id="leaveButton" class="btn btn-default" data-toggle="modal" data-target="#myModal3">Delete Expense</button>
+											<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">											  
+												<div class="col-md-8" id="infoBox">
+													<h2>Delete an accidental or unnecessary expense.</h2>
+													<fieldset>
+													<form id="removePayForm" method="post" action="/share/removePayForm/">
+														{% csrf_token %}
+														<input type="hidden" name="group" value="{{ group.name }}">
+														<label for="description">Description</label>
+									    				<input type="text" class="form-control" name="description" placeholder="Description"/>
+
+									    				<label for="cost">Amount</label>
+									    				<input type="text" class="form-control" name="cost" placeholder="Cost"/>						
+									    				<br>	
+									    				<div class="col-md-4">
+														<button type="submit" name="Join" value="Join" class="btn btn-default btn-lg btn-block">Remove</button> </div>
+														<div class="col-md-4">
+															<button data-dismiss="modal" class="btn btn-default btn-lg btn-block" >Cancel</button>
+														</div>
+														 
+													</form>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									</div>
 						           {% endif %}
             
 						</div>

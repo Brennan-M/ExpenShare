@@ -377,3 +377,35 @@ def confirmPayment(request):
     payform = PayForm()
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
+
+@login_required
+def removePayForm(request):
+
+    context = RequestContext(request)
+    currPayUser = PayUser.objects.get(userKey=request.user)
+
+    if (request.method=='POST'):
+        try:
+            group = PayGroup.objects.get(name=request.POST['group'])
+            desc = request.POST['description']
+            cost = request.POST['cost']
+
+            if PayGroup.paymentLogs.get(amount=cost, description=desc):
+                return render_to_response('home.html')
+            else:
+                paygroup_list = currPayUser.payGroups.all()
+                groupform = MakeGroupForm()
+                payform = PayForm()
+                context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'removePFError2' : True}
+                return render_to_response('ExpenseLog.html', context_dict, context)      
+        except:
+            pass
+
+    paygroup_list = currPayUser.payGroups.all()
+    groupform = MakeGroupForm()
+    payform = PayForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'removePFError2' : True}
+    return render_to_response('ExpenseLog.html', context_dict, context)
+
+# check if the expense belongs to that user, make sure the expense is in the paymentlogs of the paygroup
+#identify the expense by.... name and amount
