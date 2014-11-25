@@ -11,4 +11,5 @@ urlpatterns = patterns(' ',
 	url(r'^joingroup_form/$', views.joingroup_form, name='joingroup_form'),
 	url(r'^leavegroup/$', views.leavegroup, name='leavegroup'),
 	url(r'^login/$', views.userLogin, name='login'),
-	url(r'^logout/$', views.userLogout, name='logout'))
+	url(r'^logout/$', views.userLogout, name='logout'),
+	url(r'^confirmPayment/$', views.confirmPayment, name='confirmPayment'))

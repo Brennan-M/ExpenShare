@@ -8,6 +8,7 @@
 	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	    <script src="{% static 'js/home.js' %}"></script>
 	    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 	</head>
 
@@ -67,8 +68,9 @@
 									{% if deleted_group %}
 									<h4><font color="red">You were the last member in that group. Group deleted.</font><h4>
 									{% endif %}
-									<br>
-									<h4>Balance across all groups: </h4>
+									{% if confirmPayError %}
+									<h4><font color="red">Your payment confirmation was invalid. Please enter a valid payment amount.</font><h4>
+									{% endif %}
 								
 									<hr>
 									{% for paygroup in paygroups %}
@@ -87,33 +89,52 @@
 												{% endif %}
 											{% endfor %}
 											<div class="row" id="buttons">
-											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#{{ paygroup.id }}ID">
+											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#expense{{ paygroup.id }}ID">
 											Report Expense</button>
-											<div class="modal fade" id="{{ paygroup.id }}ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-											  <div class="container" id="bodyContainer">
-												<div class="row">
-													<div class="col-md-1"> </div>
-													<div class="container" id="bodyContent">
-														<div class="row">
-															<div class="col-md-2"></div>
-															<div class="col-md-8" id="infoBox">
-																<h2>Report a Transaction</h2>
-																<fieldset>
-																<form id="PayForm" method="post" action="/share/add_payform/">
-																	{% csrf_token %}
-																	{{ PayForm.as_p }}
-																	<input type="hidden" name="group" value="{{ paygroup.name }}">
-																	<div class="col-md-4">
-																	<button type="submit" name="Pay" value="submit" class="btn btn-default btn-lg btn-block">Submit Transaction</button> </div>
-																</form>
-																</fieldset>
-															</div>
-															<div class="col-md-1"> </div>
-															<div class="col-md-1"></div>
-														</div>
-													</div>
-													<div class="col-md-1"></div>
-												</div>	
+											<div class="modal fade" id="expense{{ paygroup.id }}ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="col-md-8" id="infoBox">
+													<h2>Report an Expense</h2>
+													<h4>Let your groupmates know how much you have paid so they can pay you back. </h4>
+													<fieldset>
+													<form id="PayForm" method="post" action="/share/add_payform/">
+														{% csrf_token %}
+														{{ PayForm.as_p }}
+														<input type="hidden" name="group" value="{{ paygroup.name }}">
+														<div class="col-md-4">
+														<button type="submit" name="Pay" value="submit" class="btn btn-default btn-lg btn-block">Submit Expense</button> </div>
+													</form>
+													</fieldset>
+												</div>
+											</div>
+											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#payment{{ paygroup.id }}ID">
+											Confirm Payment</button>
+											<div class="modal fade" id="payment{{ paygroup.id }}ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="col-md-8" id="infoBox">
+													<h2>Confirm a Payment</h2>
+													<h4>Write off a groupmate's debt to you.</h4>
+													<fieldset>
+													<form id="PayForm{{ paygroup.id }}" method="post" action="/share/confirmPayment/">
+														{% csrf_token %}
+														<div class="col-lg-6">
+														    <div class="input-group">
+														      <div class="input-group-btn">
+														        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="selectGroup{{ paygroup.id }}">Select Groupmate<span class="caret"></span></button>
+														        <ul class="dropdown-menu" role="menu">
+														          {% for mem in paygroup.members.all %}
+														          	 {% if mem != user %}
+														          	 	<li> <a href="#" onclick='groupMemberClick("{{ mem }}", {{ paygroup.id }})'>{{ mem }}</a><li>
+														          	 {% endif %}
+														          {% endfor %}
+														        </ul>
+														      </div>
+														      <input type="text" class="form-control" name="payAmount" placeholder="Amount Paid">
+														    </div>
+														  </div>
+														<input type="hidden" name="group" value="{{ paygroup.name }}">
+														<div class="col-md-4">
+														<button type="submit" name="Pay" value="submit" class="btn btn-default btn-lg btn-block">Submit Payment</button> </div>
+													</form>
+													</fieldset>
 												</div>
 											</div>	
 											<div class="col-md-3">
