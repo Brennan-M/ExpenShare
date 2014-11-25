@@ -37,6 +37,12 @@
 								<div id="mainBoxInner">
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
+									{% if confirmPayError1 %}
+									<h4><font color="red">Your payment confirmation was invalid. Please enter a valid payment amount.</font></h4>
+									{% endif %}
+									{% if confirmPayError2 %}
+									<h4><font color="red">Error confirming payment, please try again.</font></h4>
+									{% endif %}
 									{% if history_error1 %}
 									<h4><font color="red">This group no longer exists!</font></h4>					
 									{% endif %}
@@ -62,15 +68,13 @@
 									{% if creategroup_error1 %}
 									<h4><font color="red">Oh no! An error occured with creating that group!</font></h4>
                                     {% endif %}
+                                    {% if deleted_group %}
+									<h4><font color="red">You were the last member in that group. Group deleted.</font><h4>
+									{% endif %}
+		
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
 									{% else %}
-									{% if deleted_group %}
-									<h4><font color="red">You were the last member in that group. Group deleted.</font><h4>
-									{% endif %}
-									{% if confirmPayError %}
-									<h4><font color="red">Your payment confirmation was invalid. Please enter a valid payment amount.</font><h4>
-									{% endif %}
 								
 									<hr>
 									{% for paygroup in paygroups %}
