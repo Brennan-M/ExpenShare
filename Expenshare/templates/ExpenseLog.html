@@ -73,7 +73,7 @@
 												<td class="col-md-1">
 													<form id="removePayForm" method="post" action="/share/removePayForm/">
 														{% csrf_token %}
-														<input type ="hidden" name="log" value="{{ log.id }}">
+														<input type="hidden" name="log" value="{{ log.id }}">
 														<input type="hidden" name="group" value="{{ group.name }}">
 														<input type="submit" id="deleteExpense" class="btn btn-sm" name="remove" value="X">
 													</form>

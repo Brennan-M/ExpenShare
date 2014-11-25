@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import F
 from decimal import *
+from django.views.decorators.csrf import csrf_protect
+from django.template.defaulttags import csrf_token
 
 # Create your views here.
 def index(request):
@@ -134,8 +136,6 @@ def add_groupform(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
     return render_to_response('home.html', context_dict, context)
 
-
-# Alter this for add_payform
 @login_required
 def add_payform(request):
 
@@ -189,7 +189,6 @@ def add_payform(request):
                             fels.owed = ((Decimal(fels.owed) + (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
                             fels.save()
                 memV.save()
-				
             return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup})   #After submitting the form, redirects the user back to the homepage
         else:
             payLogs = clickedGroup.paymentLogs.order_by('date')
@@ -388,17 +387,16 @@ def confirmPayment(request):
 @login_required
 def removePayForm(request):
     context = RequestContext(request)
-    currPayUser = PayUser.objects.get(userKey=request.user)
+    context_dict = {}
     user = request.user
-    
 
     if (request.method=='POST'):
         try:
             group = PayGroup.objects.get(name=request.POST['group'])
             paylog = PaymentLog.objects.get(id=request.POST['log'])
-            print("I obtained the info")
             Exists=False
             Owner=False
+
             if paylog in group.paymentLogs.all():
                 Exists=True
             if paylog.user == user:
@@ -415,19 +413,15 @@ def removePayForm(request):
                 #Ian: Implement math for recalculating balances here
             else:
                 paylog_list = group.paymentLogs.order_by('-date')
-                groupform = MakeGroupForm()
                 context_dict = {'paylog': paylog_list, 'group': group, 'deletePFError1' : True}
                 return render_to_response('ExpenseLog.html', context_dict, context)
-
-            return render_to_response('ExpenseLog.html', context_dict, context)
-         
+        
         except:
-            pass
+            paylog_list = group.paymentLogs.order_by('-date')
+            context_dict = {'paylog': paylog_list, 'group': group, 'deletePFError1' : True}
+            return render_to_response('ExpenseLog.html', context_dict, context)
 
     paylog_list = group.paymentLogs.order_by('-date')
     groupform = MakeGroupForm()
     context_dict = {'paylog': paylog_list, 'group': group}
     return render_to_response('ExpenseLog.html', context_dict, context)
-
-# check if the expense belongs to that user, make sure the expense is in the paymentlogs of the paygroup
-#identify the expense by.... name and amount
