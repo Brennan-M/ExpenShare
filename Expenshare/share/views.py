@@ -189,7 +189,8 @@ def add_payform(request):
                             fels.owed = ((Decimal(fels.owed) + (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
                             fels.save()
                 memV.save()
-            return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup})   #After submitting the form, redirects the user back to the homepage
+            return history(request)
+    
         else:
             payLogs = clickedGroup.paymentLogs.order_by('date')
             return render_to_response('ExpenseLog.html', {'paylog' : payLogs, 'group' : clickedGroup, 'payform_error1' : True}, context)
