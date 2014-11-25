@@ -1,5 +1,5 @@
 body{
-	background-color: #008798;
+	background-color: #FFFFFF;
 }
 
 #mainBoxInner{
@@ -15,7 +15,7 @@ body{
 
 #mainBoxOuter{
 	margin-top: 7em;
-	background-color: #AFD867;
+	background-color: #EDDFFB;
 	margin-bottom: 7em;
 	border: solid black 5px;
 	padding: 1em;
@@ -23,8 +23,9 @@ body{
 	margin-left: 3em;
 }
 #bodyContent{
-	background-color: #00C3A9;
+	background-color: #892EE4;
 	border: solid black 1px;
+	padding-bottom: 0em;
 }
 #buttons{
 	width: 44em;
@@ -36,7 +37,7 @@ body{
 
 #infoBox{
 	margin-top: 7em;
-	background-color: #AFD867;
+	background-color: #EDDFFB;
 	margin-bottom: 7em;
 	border: solid black 5px;
 	padding-bottom: 3em;
@@ -44,7 +45,7 @@ body{
 #reportBox{
 	text-align: center;
 	margin-top: 7em;
-	background-color: #AFD867;
+	background-color: #EDDFFB;
 	margin-bottom: 7em;
 	border: solid black 5px;
 	padding-bottom: 3em;
