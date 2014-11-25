@@ -11,6 +11,9 @@ body{
 #leaveButton{
 	background-color: #E81919;
 	color: #FFFFFF;
+	margin-top: 1em;
+	margin-left: -1em;
+
 }
 
 #mainBoxOuter{
@@ -26,9 +29,6 @@ body{
 	background-color: #892EE4;
 	border: solid black 1px;
 	padding-bottom: 0em;
-}
-#buttons{
-	width: 44em;
 }
 
 #report{

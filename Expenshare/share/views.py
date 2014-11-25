@@ -7,6 +7,7 @@ from share.forms import UserForm, PayForm, MakeGroupForm
 from share.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import F
 from decimal import *
 
@@ -310,26 +311,61 @@ def userLogin(request):
 	context = RequestContext(request)
 
 	if(request.method == 'POST'):
-		username = request.POST['username']
-		password = request.POST['password']
+            username = request.POST['username']
+            password = request.POST['password']
 
-		user = authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password)
 
-		#Check to see if a user with the submitted credentials was found
-		if(user):
-			#Check to see if the user account is active
-			if(user.is_active):
-				login(request, user)
-				return HttpResponseRedirect('/share/home')
-			else:
-                            return render_to_response('login.html', {'login_error2' : True}, context)
-		else:
-			return render_to_response('login.html', {'login_error1' : True}, context)
+            #Check to see if a user with the submitted credentials was found
+            if(user):
+                #Check to see if the user account is active
+                if(user.is_active):
+                    login(request, user)
+                    return HttpResponseRedirect('/share/home')
+                else:
+                    return render_to_response('login.html', {'login_error2' : True}, context)
+            else:
+                return render_to_response('login.html', {'login_error1' : True}, context)
 	#Blank form
 	else:
-		return render_to_response('login.html', {}, context)
+            return render_to_response('login.html', {}, context)
 
 @login_required
 def userLogout(request):
 	logout(request)
 	return HttpResponseRedirect('/share/')
+
+@login_required
+def confirmPayment(request):
+    context = RequestContext(request)
+	
+    group = PayGroup.objects.get(name=request.POST['group'])
+    memV = group.memberViews.get(user=request.user)
+    targetUser = User.objects.get(username=request.POST['targetMember'])
+    targetMem = group.memberViews.get(user=targetUser)
+    myFellow = targetMem.fellows.get(user=request.user)
+    targetFellow = memV.fellows.get(user=targetUser)
+    currPayUser = PayUser.objects.get(userKey=request.user) 
+    try:
+        amount = Decimal(request.POST['payAmount'])
+    except:  
+        paygroup_list = currPayUser.payGroups.all()
+        groupform = MakeGroupForm()
+        payform = PayForm()
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError' : True}    
+        return render_to_response('home.html', context_dict, context)
+
+    targetFellow.owed += amount
+    targetFellow.save()
+    memV.netOwed += amount
+    memV.save()
+    targetMem.netOwed -= amount
+    targetMem.save()
+    myFellow.owed -= amount
+    myFellow.save()
+
+    paygroup_list = currPayUser.payGroups.all()
+    groupform = MakeGroupForm()
+    payform = PayForm()
+    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+    return render_to_response('home.html', context_dict, context)
