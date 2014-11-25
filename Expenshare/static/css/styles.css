@@ -17,9 +17,9 @@ body{
 }
 
 #mainBoxOuter{
-	margin-top: 7em;
+	margin-top: 5em;
 	background-color: #EDDFFB;
-	margin-bottom: 7em;
+	margin-bottom: 2em;
 	border: solid black 5px;
 	padding: 1em;
 	margin-right: 1em;
@@ -50,6 +50,11 @@ body{
 	border: solid black 5px;
 	padding-bottom: 3em;
 }
+
+.historyButton{
+	margin-left: -1em;
+}
+
 footer{
 	text-align: center;
 	color: #FFFFFF;
