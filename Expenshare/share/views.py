@@ -340,19 +340,27 @@ def confirmPayment(request):
     context = RequestContext(request)
 	
     group = PayGroup.objects.get(name=request.POST['group'])
-    memV = group.memberViews.get(user=request.user)
-    targetUser = User.objects.get(username=request.POST['targetMember'])
-    targetMem = group.memberViews.get(user=targetUser)
-    myFellow = targetMem.fellows.get(user=request.user)
-    targetFellow = memV.fellows.get(user=targetUser)
     currPayUser = PayUser.objects.get(userKey=request.user) 
+    try:
+        memV = group.memberViews.get(user=request.user)
+        targetUser = User.objects.get(username=request.POST['targetMember'])
+        targetMem = group.memberViews.get(user=targetUser)
+        myFellow = targetMem.fellows.get(user=request.user)
+        targetFellow = memV.fellows.get(user=targetUser)
+    except:
+        paygroup_list = currPayUser.payGroups.all()
+        groupform = MakeGroupForm()
+        payform = PayForm()
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError2' : True}    
+        return render_to_response('home.html', context_dict, context)
+
     try:
         amount = Decimal(request.POST['payAmount'])
     except:  
         paygroup_list = currPayUser.payGroups.all()
         groupform = MakeGroupForm()
         payform = PayForm()
-        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError' : True}    
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError1' : True}    
         return render_to_response('home.html', context_dict, context)
 
     targetFellow.owed += amount
