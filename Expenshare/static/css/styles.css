@@ -1,5 +1,21 @@
 body{
 	background-color: #AEA4A2;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+#logo{
+	font-family: 'Changa One', cursive;
+	position: center;
+	margin-left: 3.75em;
+	font-size: 6em;
+	color: #5B9428;
+	margin-bottom: -0.5em;
+	padding-bottom: 0em;
+}
+
+#goBack{
+	width: 10em;
+	margin-left: -11em;
 }
 
 #mainBoxInner{
@@ -29,6 +45,12 @@ body{
 	background-color: #BFB2A3;
 	border: solid black 1px;
 	padding-bottom: 0em;
+}
+
+#bodyContent2{
+	border: solid #AEA4A2 1px;
+	padding-bottom: 0em;
+	margin-top: 0em;
 }
 
 #report{
