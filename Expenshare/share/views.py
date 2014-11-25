@@ -363,6 +363,13 @@ def confirmPayment(request):
         context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError1' : True}    
         return render_to_response('home.html', context_dict, context)
 
+    if amount > (Decimal(-1) * targetFellow.owed) or amount <= Decimal(0):
+    	paygroup_list = currPayUser.payGroups.all()
+        groupform = MakeGroupForm()
+        payform = PayForm()
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError1' : True}    
+        return render_to_response('home.html', context_dict, context)
+
     targetFellow.owed += amount
     targetFellow.save()
     memV.netOwed += amount
@@ -380,31 +387,46 @@ def confirmPayment(request):
 
 @login_required
 def removePayForm(request):
-
     context = RequestContext(request)
     currPayUser = PayUser.objects.get(userKey=request.user)
+    user = request.user
+    
 
     if (request.method=='POST'):
         try:
             group = PayGroup.objects.get(name=request.POST['group'])
-            desc = request.POST['description']
-            cost = request.POST['cost']
-
-            if PayGroup.paymentLogs.get(amount=cost, description=desc):
-                return render_to_response('home.html')
+            paylog = PaymentLog.objects.get(id=request.POST['log'])
+            print("I obtained the info")
+            Exists=False
+            Owner=False
+            if paylog in group.paymentLogs.all():
+                Exists=True
+            if paylog.user == user:
+                Owner=True
             else:
-                paygroup_list = currPayUser.payGroups.all()
+                paylog_list = group.paymentLogs.order_by('-date')
                 groupform = MakeGroupForm()
-                payform = PayForm()
-                context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'removePFError2' : True}
-                return render_to_response('ExpenseLog.html', context_dict, context)      
+                context_dict = {'paylog': paylog_list, 'group': group, 'deletePFError2' : True}
+                return render_to_response('ExpenseLog.html', context_dict, context)
+
+            if Exists==True and Owner==True:
+                group.paymentLogs.remove(paylog)
+                paylog.delete()
+                #Ian: Implement math for recalculating balances here
+            else:
+                paylog_list = group.paymentLogs.order_by('-date')
+                groupform = MakeGroupForm()
+                context_dict = {'paylog': paylog_list, 'group': group, 'deletePFError1' : True}
+                return render_to_response('ExpenseLog.html', context_dict, context)
+
+            return render_to_response('ExpenseLog.html', context_dict, context)
+         
         except:
             pass
 
-    paygroup_list = currPayUser.payGroups.all()
+    paylog_list = group.paymentLogs.order_by('-date')
     groupform = MakeGroupForm()
-    payform = PayForm()
-    context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'removePFError2' : True}
+    context_dict = {'paylog': paylog_list, 'group': group}
     return render_to_response('ExpenseLog.html', context_dict, context)
 
 # check if the expense belongs to that user, make sure the expense is in the paymentlogs of the paygroup

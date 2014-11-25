@@ -1,5 +1,21 @@
 body{
-	background-color: #FFFFFF;
+	background-color: #AEA4A2;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+#logo{
+	font-family: 'Changa One', cursive;
+	position: center;
+	margin-left: 3.75em;
+	font-size: 6em;
+	color: #5B9428;
+	margin-bottom: -0.5em;
+	padding-bottom: 0em;
+}
+
+#goBack{
+	width: 10em;
+	margin-left: -11em;
 }
 
 #mainBoxInner{
@@ -8,6 +24,10 @@ body{
 	padding-left: 1em;
 }
 
+#deleteExpense{
+	background-color: #E81919;
+	color: #FFFFFF;
+}
 #leaveButton{
 	background-color: #E81919;
 	color: #FFFFFF;
@@ -17,18 +37,24 @@ body{
 }
 
 #mainBoxOuter{
-	margin-top: 7em;
-	background-color: #EDDFFB;
-	margin-bottom: 7em;
+	margin-top: 5em;
+	background-color: #5B9428;
+	margin-bottom: 2em;
 	border: solid black 5px;
 	padding: 1em;
 	margin-right: 1em;
 	margin-left: 3em;
 }
 #bodyContent{
-	background-color: #892EE4;
+	background-color: #BFB2A3;
 	border: solid black 1px;
 	padding-bottom: 0em;
+}
+
+#bodyContent2{
+	border: solid #AEA4A2 1px;
+	padding-bottom: 0em;
+	margin-top: 0em;
 }
 
 #report{
@@ -37,22 +63,27 @@ body{
 
 #infoBox{
 	margin-top: 7em;
-	background-color: #EDDFFB;
+	background-color: #BCC8CF;
 	margin-bottom: 7em;
 	border: solid black 5px;
 	padding-bottom: 3em;
 }
 #reportBox{
 	text-align: center;
-	margin-top: 7em;
-	background-color: #EDDFFB;
-	margin-bottom: 7em;
+	margin-top: 5em;
+	background-color: #BCC8CF;
+	margin-bottom: 2em;
 	border: solid black 5px;
 	padding-bottom: 3em;
 }
+
+.historyButton{
+	margin-left: -1em;
+}
+
 footer{
 	text-align: center;
-	color: #FFFFFF;
+	color: #000000;
 }
 nav{
 	border: solid black 5px;

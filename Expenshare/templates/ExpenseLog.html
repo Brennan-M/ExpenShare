@@ -23,8 +23,8 @@
 		                <div class="col-md-10">
 		                  <a class="navbar-brand" id="navName" href="/share/home">Expenshare</a>
 			                 <ul class="nav navbar-nav">
-			                  	<!--Put links to different parts of the site here-->
-			                 </ul>
+		                  		<li><a href="/share/logout"> Logout </a></li>
+		                  	</ul>
 		                </div>
 		            </div>
 	          	</nav>
@@ -44,8 +44,11 @@
 								{% if payform_error1 %}
                                 <h4><font color="red">The last expense you reported failed. Please try again!</font></h4>
                                 {% endif %}
-                                {% if removePFError2 %}
+                                {% if deletePFError1 %}
                                 <h4><font color="red">Could not delete that expense. Error!</font></h4>
+                                {% endif %}
+                                {% if deletePFError2 %}
+                                <h4><font color="red">That expense is not yours to delete!</font></h4>
                                 {% endif %}
                                 <div class="col-md-1">
                                 <input type="submit" class="btn btn-default" onClick="window.location.href='/share/home/'" name="historyButton" value="Home">
@@ -58,6 +61,7 @@
 								       <div class="CSSTableGenerator" >
 						                <table >
 						                    <tr>
+						                    	<td>Delete</td>
 						                        <td>User</td>
 						                        <td>Description</td>
 						                        <td>Cost</td>
@@ -65,6 +69,15 @@
 						                    </tr>
 						                    <tr>
 						                        {% for log in paylog %}
+
+												<td class="col-md-1">
+													<form id="removePayForm" method="post" action="/share/removePayForm/">
+														{% csrf_token %}
+														<input type ="hidden" name="log" value="{{ log.id }}">
+														<input type="hidden" name="group" value="{{ group.name }}">
+														<input type="submit" id="deleteExpense" class="btn btn-sm" name="remove" value="X">
+													</form>
+												</td>
                                                 <td>{{ log.user }}</td>
 						                        <td>{{ log.description }}</td>
 						                        <td>${{ log.amount }}</td>
@@ -75,43 +88,7 @@
 						            </div>
 						            <br>
 						            <div class="col-md-12">
-						            <!--
-									<form id="removePayForm" method="post" action="/share/removePayForm/">
-										{% csrf_token %}
-
-										<input type="hidden" name="group" value="{{ group.name }}">
-										<input type="submit" id="leaveButton" class="btn btn-default" name="delete" value="Delete Expense">
-									</form>		
-									-->
-
-									<div class="btn-group" role="group" id="buttons">
-									
-									<button type="button" id="leaveButton" class="btn btn-default" data-toggle="modal" data-target="#myModal3">Delete Expense</button>
-											<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">											  
-												<div class="col-md-8" id="infoBox">
-													<h2>Delete an accidental or unnecessary expense.</h2>
-													<fieldset>
-													<form id="removePayForm" method="post" action="/share/removePayForm/">
-														{% csrf_token %}
-														<input type="hidden" name="group" value="{{ group.name }}">
-														<label for="description">Description</label>
-									    				<input type="text" class="form-control" name="description" placeholder="Description"/>
-
-									    				<label for="cost">Amount</label>
-									    				<input type="text" class="form-control" name="cost" placeholder="Cost"/>						
-									    				<br>	
-									    				<div class="col-md-4">
-														<button type="submit" name="Join" value="Join" class="btn btn-default btn-lg btn-block">Remove</button> </div>
-														<div class="col-md-4">
-															<button data-dismiss="modal" class="btn btn-default btn-lg btn-block" >Cancel</button>
-														</div>
-														 
-													</form>
-													</fieldset>
-												</div>
-											</div>
-										</div>
-
+						  
 
 
 
