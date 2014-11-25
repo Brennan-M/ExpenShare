@@ -69,6 +69,18 @@ th, td {
     text-align: left;
 }
 
+.modal{
+	margin-left: 25em;
+}
+
+.confirmPayment{
+	display: center;
+}
+
+.amountPaid{
+	width: 10em;
+}
+
 .CSSTableGenerator {
 	margin:0px;padding:0px;
 	width:100%;
