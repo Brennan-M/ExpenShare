@@ -88,7 +88,7 @@
 													<h5 display="inline">Net Owed: $ <p id="netOwed{{ paygroup.id }}ID">{{ memV.netOwed }}</p></h5>
 												{% endif %}
 											{% endfor %}
-											<div class="row" id="buttons">
+											<div class="btn-group" role="group" id="buttons">
 											<button type="button" id="report" class="btn btn-default" data-toggle="modal" data-target="#expense{{ paygroup.id }}ID">
 											Report Expense</button>
 											<div class="modal fade" id="expense{{ paygroup.id }}ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -137,14 +137,7 @@
 													</fieldset>
 												</div>
 											</div>	
-											<div class="col-md-3">
-											<form id="LeaveGroupForm" method="post" action="/share/leavegroup/">
-												{% csrf_token %}
 
-												<input type="hidden" name="group" value="{{ paygroup.name }}">
-												<input type="submit" id="leaveButton" class="btn btn-default" name="Leave" value="Leave Group">
-											</form>		
-											</div>
 
 											<div class="col-md-3">
 											<form id="goToHistory" method="post" action="/share/history/">
@@ -157,6 +150,14 @@
  												
 										
 										</div>
+											<div class="col-md-3">
+											<form id="LeaveGroupForm" method="post" action="/share/leavegroup/">
+												{% csrf_token %}
+
+												<input type="hidden" name="group" value="{{ paygroup.name }}">
+												<input type="submit" id="leaveButton" class="btn btn-default" name="Leave" value="Leave Group">
+											</form>		
+											</div>
 										</div>
 		
 										<div class='col-md-4'>
