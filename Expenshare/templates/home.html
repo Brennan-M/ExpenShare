@@ -38,7 +38,7 @@
 									<!--Temporary content -->
 									<h1>Welcome {{ user.username }}</h1>
 									{% if confirmPayError1 %}
-									<h4><font color="red">Your payment confirmation was invalid. Please enter a valid payment amount.</font></h4>
+									<h4><font color="red">The payment amount entered was either more than the amount owed, non-positive, or not a number. Please enter a valid payment amount.</font></h4>
 									{% endif %}
 									{% if confirmPayError2 %}
 									<h4><font color="red">Error confirming payment, please try again.</font></h4>
@@ -61,6 +61,7 @@
 									{% if leavegroup_error1 %}
 									<h4><font color="red">You cannot leave this group until all your debts have been paid!</font></h4>					
 									{% endif %}
+
 									{% if joingroup_error2 %}
 									<h4><font color="red">Unfortunately that group does not exist!</font></h4>
 									{% endif %}
@@ -71,6 +72,8 @@
                                     {% if deleted_group %}
 									<h4><font color="red">You were the last member in that group. Group deleted.</font><h4>
 									{% endif %}
+
+
 		
 									{% if not paygroups %}
 										<h3> Start sharing expenses by making or joining a group! </h3>
@@ -129,9 +132,13 @@
 														      <div class="input-group-btn">
 														        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="selectGroup{{ paygroup.id }}">Select Groupmate<span class="caret"></span></button>
 														        <ul class="dropdown-menu" role="menu">
-														          {% for mem in paygroup.members.all %}
-														          	 {% if mem != user %}
-														          	 	<li> <a href="#" onclick='groupMemberClick("{{ mem }}", {{ paygroup.id }})'>{{ mem }}</a><li>
+														          {% for mem in paygroup.memberViews.all %}
+														          	 {% if mem.user == user %}
+														          	 	{% for fel in mem.fellows.all %}
+														          	 		{% if fel.owed < 0 %}
+														          	 			<li> <a href="#" onclick='groupMemberClick("{{ fel }}", {{ paygroup.id }})'>{{ fel }}</a><li>
+														          	 		{% endif %}
+														          	 	{% endfor %}
 														          	 {% endif %}
 														          {% endfor %}
 														        </ul>

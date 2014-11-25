@@ -363,6 +363,13 @@ def confirmPayment(request):
         context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError1' : True}    
         return render_to_response('home.html', context_dict, context)
 
+    if amount > (Decimal(-1) * targetFellow.owed) or amount <= Decimal(0):
+    	paygroup_list = currPayUser.payGroups.all()
+        groupform = MakeGroupForm()
+        payform = PayForm()
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError1' : True}    
+        return render_to_response('home.html', context_dict, context)
+
     targetFellow.owed += amount
     targetFellow.save()
     memV.netOwed += amount
