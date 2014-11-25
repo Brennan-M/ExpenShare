@@ -352,7 +352,7 @@ def confirmPayment(request):
         paygroup_list = currPayUser.payGroups.all()
         groupform = MakeGroupForm()
         payform = PayForm()
-        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
+        context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'confirmPayError' : True}    
         return render_to_response('home.html', context_dict, context)
 
     targetFellow.owed += amount
