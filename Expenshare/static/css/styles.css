@@ -1,5 +1,5 @@
 body{
-	background-color: #FFFFFF;
+	background-color: #AEA4A2;
 }
 
 #mainBoxInner{
@@ -18,7 +18,7 @@ body{
 
 #mainBoxOuter{
 	margin-top: 5em;
-	background-color: #EDDFFB;
+	background-color: #5B9428;
 	margin-bottom: 2em;
 	border: solid black 5px;
 	padding: 1em;
@@ -26,7 +26,7 @@ body{
 	margin-left: 3em;
 }
 #bodyContent{
-	background-color: #892EE4;
+	background-color: #BFB2A3;
 	border: solid black 1px;
 	padding-bottom: 0em;
 }
@@ -37,16 +37,16 @@ body{
 
 #infoBox{
 	margin-top: 7em;
-	background-color: #EDDFFB;
+	background-color: #BCC8CF;
 	margin-bottom: 7em;
 	border: solid black 5px;
 	padding-bottom: 3em;
 }
 #reportBox{
 	text-align: center;
-	margin-top: 7em;
-	background-color: #EDDFFB;
-	margin-bottom: 7em;
+	margin-top: 5em;
+	background-color: #BCC8CF;
+	margin-bottom: 2em;
 	border: solid black 5px;
 	padding-bottom: 3em;
 }
@@ -57,7 +57,7 @@ body{
 
 footer{
 	text-align: center;
-	color: #FFFFFF;
+	color: #000000;
 }
 nav{
 	border: solid black 5px;
