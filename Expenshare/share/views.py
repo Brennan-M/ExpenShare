@@ -409,9 +409,21 @@ def removePayForm(request):
                 return render_to_response('ExpenseLog.html', context_dict, context)
 
             if Exists==True and Owner==True:
+                for memV in group.memberViews.all():
+                    if memV.user.id == request.user.id:
+                    	memV.netOwed = ((Decimal(memV.netOwed) + Decimal(group.groupSize - 1) * (Decimal(paylog.amount) / Decimal(group.groupSize))))
+                        for fels in memV.fellows.all():
+                            fels.owed = ((Decimal(fels.owed) + (Decimal(paylog.amount) / Decimal(group.groupSize))))
+                            fels.save()
+                    else:
+                        memV.netOwed = ((Decimal(memV.netOwed) - (Decimal(paylog.amount) / Decimal(group.groupSize))))
+                        for fels in memV.fellows.all():
+                            if fels.user.id == request.user.id:
+                                fels.owed = ((Decimal(fels.owed) - (Decimal(paylog.amount) / Decimal(group.groupSize))))
+                                fels.save()
+                    memV.save()
                 group.paymentLogs.remove(paylog)
                 paylog.delete()
-                #Ian: Implement math for recalculating balances here
             else:
                 paylog_list = group.paymentLogs.order_by('-date')
                 context_dict = {'paylog': paylog_list, 'group': group, 'deletePFError1' : True}
