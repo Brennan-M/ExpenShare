@@ -1,3 +1,10 @@
+##
+# @file views.py
+# @brief each view handles various http requests
+# @authors Taylor Andrews, Ian Char, Brennan McConnell
+# @date 11/26/2014
+#
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -13,7 +20,11 @@ from decimal import *
 from django.views.decorators.csrf import csrf_protect
 from django.template.defaulttags import csrf_token
 
-# Create your views here.
+##
+# @brief default ExpenShare page
+# @param request an http request from ExpenShare
+# @return redirects to login
+#
 def index(request):
     # Request the context of the request.
     # The context contains information such as the client's machine details, for example.
@@ -28,6 +39,11 @@ def index(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('login.html', context_dict, context)
     
+##
+# @brief home page of ExpenShare
+# @param request an http request from ExpenShare
+# @return redirects to home page
+#
 @login_required
 def home(request):           
     context = RequestContext(request)
@@ -41,6 +57,11 @@ def home(request):
                                   
     return render_to_response('home.html', context_dict, context)
 
+##
+# @brief history of expenses
+# @param request an http request from ExpenShare
+# @return directs to expense history unless user cannot acces that group
+#
 @login_required
 def history(request):            
     context = RequestContext(request)
@@ -71,7 +92,11 @@ def history(request):
     context_dict = {'paylog': paylog_list, 'group': currGroup}
     return render_to_response('ExpenseLog.html', context_dict, context)
 
-#View for registering new users
+##
+# @brief view for registering new users
+# @param request an http request from ExpenShare
+# @return redirects to next step in registration unless an error occured
+#
 def register(request):
     context = RequestContext(request)
 
@@ -106,6 +131,11 @@ def register(request):
 
     return render_to_response('register.html', contextDict, context)
 
+##
+# @brief creates a group
+# @param request an http request from ExpenShare
+# @return redirects home, passes an error if one occured
+#
 @login_required
 def add_groupform(request):
     context = RequestContext(request)
@@ -136,6 +166,11 @@ def add_groupform(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}  
     return render_to_response('home.html', context_dict, context)
 
+##
+# @brief adds a payment
+# @param request an http request from ExpenShare
+# @return redirects to expense history, if an error occured redirects home
+#
 @login_required
 def add_payform(request):
 
@@ -202,6 +237,11 @@ def add_payform(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
 
+##
+# @brief form for user to join a group
+# @param request an http request from ExpenShare
+# @return redirects user back to their homepage with the group joined or passes an error
+#
 @login_required
 def joingroup_form(request):
     context = RequestContext(request)
@@ -249,6 +289,11 @@ def joingroup_form(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'joingroup_error2' : True}
     return render_to_response('home.html', context_dict, context)
 
+##
+# @brief leaves a group
+# @param request an http request from ExpenShare
+# @return directs user to their homepage with group removed, passes an error if one occured
+#
 @login_required
 def leavegroup(request):
     context = RequestContext(request)
@@ -307,6 +352,12 @@ def leavegroup(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform, 'leavegroup_error1' : True}    
     return render_to_response('home.html', context_dict, context)
 
+##
+# @brief logs an user in 
+# @param request an http request from ExpenShare
+# @return redirects user to their homepage, passes an error if one occured
+# @details errors include logging into an account that is no longer active
+#
 def userLogin(request):
 	context = RequestContext(request)
 
@@ -330,11 +381,21 @@ def userLogin(request):
 	else:
             return render_to_response('login.html', {}, context)
 
+##
+# @brief handles user logout
+# @param request an http request from ExpenShare
+# @return http redirect to the homepage
+#
 @login_required
 def userLogout(request):
 	logout(request)
 	return HttpResponseRedirect('/share/')
 
+##
+# @brief comfirms payment made by an user
+# @param request an http request from ExpenShare
+# @return redirects user to their homepage, will pass an error if one occured
+#
 @login_required
 def confirmPayment(request):
     context = RequestContext(request)
@@ -385,6 +446,12 @@ def confirmPayment(request):
     context_dict={'PayForm' : payform, 'paygroups' : paygroup_list, 'MakeGroupForm' : groupform}    
     return render_to_response('home.html', context_dict, context)
 
+##
+# @brief removes a payment
+# @param request an http request from ExpenShare
+# @return redirect user to the expense history, passes an error if one occured
+# @details errors include trying to delete someone else's payment or a payment that doesn't exist
+#
 @login_required
 def removePayForm(request):
     context = RequestContext(request)
