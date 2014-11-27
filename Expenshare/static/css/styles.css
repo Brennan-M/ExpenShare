@@ -1,5 +1,5 @@
 body{
-	background-color: #1B0140;
+	background-color: #2D2D2D;
 	font-family: 'Noto Sans', sans-serif;
 }
 
@@ -8,7 +8,7 @@ body{
 	position: center;
 	margin-left: 3.75em;
 	font-size: 6em;
-	color: #5B9428;
+	color: #3BC3F1;
 	margin-bottom: -0.5em;
 	padding-bottom: 0em;
 }
@@ -20,7 +20,7 @@ body{
 
 #mainBoxInner{
 	border: solid black 3px;
-	background-color: #D9D4CC;
+	background-color: #FFFFFF;
 	padding-left: 1em;
 }
 
@@ -38,21 +38,21 @@ body{
 
 #mainBoxOuter{
 	margin-top: 5em;
-	background-color: #5B9428;
+	background-color: #6E3ADD;
 	margin-bottom: 2em;
-	border: solid #5B9428 5px;
+	border: solid #000000 5px;
 	padding: 1em;
 	margin-right: 1em;
 	margin-left: 3em;
 }
 #bodyContent{
-	background-color: #260259;
+	background-color: #D9D4CC;
 	border: solid black 1px;
 	padding-bottom: 0em;
 }
 
 #bodyContent2{
-	border: solid #5B9428 1px;
+	border: solid #3BC3F1 1px;
 	padding-bottom: 0em;
 	margin-top: 0em;
 }
@@ -63,17 +63,17 @@ body{
 
 #infoBox{
 	margin-top: 7em;
-	background-color: #D9D4CC;
+	background-color: #FFFFFF;
 	margin-bottom: 7em;
-	border: solid #5B9428 5px;
+	border: solid #6E3ADD 5px;
 	padding-bottom: 3em;
 }
 #reportBox{
 	text-align: center;
 	margin-top: 5em;
-	background-color: #D9D4CC;
+	background-color: #FFFFFF;
 	margin-bottom: 2em;
-	border: solid #5B9428 5px;
+	border: solid #6E3ADD 5px;
 	padding-bottom: 3em;
 }
 
