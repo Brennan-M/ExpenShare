@@ -1,6 +1,6 @@
 ##
 # @file views.py
-# @brief Each view handles various http requests and returns appropriate responses
+# @brief Contains the functions which implement all the logic behind ExpenShare. Each view handles various http requests and returns appropriate responses.
 # @authors Taylor Andrews, Ian Char, Brennan McConnell
 # @date 11/26/2014
 #
@@ -21,7 +21,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.template.defaulttags import csrf_token
 
 ##
-# @brief Default ExpenShare page
+# @brief Returns the default ExpenShare page.
 # @param request An http request from ExpenShare
 # @return Redirects to login
 #
@@ -40,8 +40,8 @@ def index(request):
     return render_to_response('login.html', context_dict, context)
     
 ##
-# @brief Displays the home page for the current PayUser
-# @details Home displays any paygroups an user is in. It allows them to make payments and groups. 
+# @brief Displays the home page for the current User.
+# @details Home displays any paygroups an user is in. It allows a user to report new expenses and create new groups. 
 # @param request An http request from ExpenShare
 # @return Redirects to home page
 #
@@ -59,7 +59,7 @@ def home(request):
     return render_to_response('home.html', context_dict, context)
 
 ##
-# @brief History of expenses between users in a specific paygroup
+# @brief Displays the history webpage which shows all previous expenses for a specific group.
 # @details The page checks the current group the user has chosen and shows the expense history of that group. This is on the ExpenseLog.html page. 
 # @param request An http request from ExpenShare
 # @return Directs to expense history unless user cannot acces that group
@@ -95,7 +95,7 @@ def history(request):
     return render_to_response('ExpenseLog.html', context_dict, context)
 
 ##
-# @brief View for registering new users
+# @brief This function is used for registering new users.
 # @details This function is used to register a new user to the expenshare site. It creates a User Model for an individual when they sign up on the register.html page.
 # @param request An http request from ExpenShare
 # @return Redirects to next step in registration unless an error occured
@@ -135,8 +135,8 @@ def register(request):
     return render_to_response('register.html', contextDict, context)
 
 ##
-# @brief Allows an user to create a new group
-# @details If the group is created correctly it will automatically add the user to the group. The function uses the MakeGroupForm form. 
+# @brief This function creates a new PayGroup.
+# @details This function creates a new PayGroup and adds the user who created it to it. 
 # @param request An http request from ExpenShare
 # @return Redirects home, passes an error if one occured
 #
@@ -171,8 +171,8 @@ def add_groupform(request):
     return render_to_response('home.html', context_dict, context)
 
 ##
-# @brief Adds a payment into a paygroup
-# @details Ensures the user is actually in the group specified. The function updates the amount owed amongst the group members as the payment is added. 
+# @brief Adds an expense to a group.
+# @details Function implements adds a new paymentLog to a PayGroup. The function updates the amount owed amongst the group members as the payment is added. 
 # @param request An http request from ExpenShare
 # @return Redirects to expense history, if an error occured redirects home
 #
@@ -243,8 +243,8 @@ def add_payform(request):
     return render_to_response('home.html', context_dict, context)
 
 ##
-# @brief Loads a page for the user to join a group
-# @details If the user correctly inputs the group name and passcode that group is immediately added to their homepage. 
+# @brief Function which allows a User to join an existing PayGroup.
+# @details If the user correctly inputs the group name and passcode, the user is added to the PayGroup requested. 
 # @param request An http request from ExpenShare
 # @return Redirects user back to their homepage with the group joined or passes an error
 #
@@ -296,8 +296,8 @@ def joingroup_form(request):
     return render_to_response('home.html', context_dict, context)
 
 ##
-# @brief Allows the user to leave a group
-# @details The function first determines if the user is even eligible to leave the group. If they are it deletes them from the group. If they are the last member of a group that group is removed. 
+# @brief Function which makes a user leave a PayGroup upon request.
+# @details Pending eligibility, allows a PayUser to leave a Paygroup. If the PayGroup no longer has any members, it is deleted. 
 # @param request An http request from ExpenShare
 # @return Directs user to their homepage with group removed, passes an error if one occured
 #
@@ -360,8 +360,8 @@ def leavegroup(request):
     return render_to_response('home.html', context_dict, context)
 
 ##
-# @brief Logs an user in 
-# @details Errors include logging into an account that is no longer active.
+# @brief Logs a user into their ExpenShare profile.
+# @details Allows an existing ExpenShare user to access their profile.
 # @param request An http request from ExpenShare
 # @return Redirects user to their homepage, passes an error if one occured
 #
@@ -389,7 +389,7 @@ def userLogin(request):
             return render_to_response('login.html', {}, context)
 
 ##
-# @brief Handles user logout
+# @brief Logs a User out.
 # @param request An http request from ExpenShare
 # @return Http redirect to the homepage
 #
@@ -399,8 +399,8 @@ def userLogout(request):
 	return HttpResponseRedirect('/share/')
 
 ##
-# @brief Comfirms payment made by an user
-# @details Allows user to specify which member of the group they are reporting as having paid them back. Updates the amount owed between users and the group immediately. 
+# @brief Confirms that a PayUser has received payment for existing expenses by a fellow member of the group.
+# @details Allows user to specify which member of the group they are reporting as having paid them back. Updates the amount owed between users and the group. 
 # @param request An http request from ExpenShare
 # @return Redirects user to their homepage, will pass an error if one occured
 #
@@ -455,8 +455,8 @@ def confirmPayment(request):
     return render_to_response('home.html', context_dict, context)
 
 ##
-# @brief Removes a payment from a group
-# @details Errors include trying to delete someone else's payment or a payment that doesn't exist.
+# @brief Removes a payment from a group.
+# @details Removes an expense from a PayGroup and removes it from the expense history log. Then recalculates the balances owed between group members.
 # @param request An http request from ExpenShare
 # @return Redirect user to the expense history, passes an error if one occured
 #

@@ -1,6 +1,6 @@
 ##
 # @file models.py
-# @brief Django models for ExpenShare
+# @brief Contains the database models implemented by ExpenShare.
 # @authors Taylor Andrews, Ian Char, Brennan McConnell
 # @date 11/26/2014
 # @note The __unicode__ function allows the models to communicate with Django admin.
@@ -13,8 +13,8 @@ import time
 
 ##
 # @class FellowUser
-# @brief Django model for determining which users share groups
-# @details Django model fellow user interacts with memberview to represent the memberviews balances which they owe their fellow group members.
+# @brief Model designed to represent a fellow group member for a single particular MemberView.
+# @details FellowUser models interact with a MemberView model in order to represent the MemberView's balances which they owe their fellow group members.
 #
 class FellowUser(models.Model):
 	user = models.ForeignKey(User)
@@ -29,8 +29,10 @@ class FellowUser(models.Model):
 
 ##
 # @class MemberView
-# @brief Django model for viewing the members in a group
-# @details MemberView uses FellowUser to determine who else is in a particular group. 
+# @brief The MemberView model is designed to represent a single group member's view of the expense balances.
+# @details MemberView represents a particular viewpoint of the expenses. Many FellowUsers are associated with
+# a single Memberview. The MemberView then represents how much the particular member owes his or her fellow
+# group members. It is a look at the current balance owed to all members from the viewpoint of a particular group member.
 #
 class MemberView(models.Model):
 	user = models.ForeignKey(User)
@@ -46,8 +48,8 @@ class MemberView(models.Model):
 
 ##
 # @class PaymentLog
-# @brief Django model for the payment log as entered by an user
-# @details PaymentLog relies on an User to record payment information. Allows for contesting payment ammounts.
+# @brief Model designed to represent a transaction.
+# @details The PaymentLog model is used by a PayUser when he or she wants to report an Expense.
 #
 class PaymentLog(models.Model):
 	#Django should create unique primary key already
@@ -67,8 +69,10 @@ class PaymentLog(models.Model):
 
 ##
 # @class PayGroup
-# @brief Django model for a paygroup of users
-# @details PayGroup interacts with both PaymentLog and MemberView to determin what payments are owed between which users. 
+# @brief Model for an ExpenShare group.
+# @details PayGroup is a model designed to represent one expense sharing group. It 
+# is associated with multiple members and contains a MemberView model per member which
+# represents a members particular view point of the expenses incurred.
 #
 class PayGroup(models.Model):
 	#Django should create unique primary key already
@@ -89,8 +93,8 @@ class PayGroup(models.Model):
 
 ##
 # @class PayUser
-# @brief A django model for an user which is a member of paygroups
-# @details A PayUser corresponds to both an User and a PayGroup, it links them together. 
+# @brief A model for a user of ExpenShare. A PayUser can join PayGroups and make PaymentLogs.
+# @details A PayUser corresponds to both a User and a PayGroup and links them together. 
 #
 class PayUser(models.Model):
 	userKey = models.ForeignKey(User)

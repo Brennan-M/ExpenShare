@@ -10,7 +10,7 @@ from django.conf.urls import patterns, url
 from share import views
 
 ##
-# Contains all the url tuples for the ExpenShare webpage
+# Contains all the url tuples for the ExpenShare website.
 #
 urlpatterns = patterns(' ',
 	url(r'^$', views.index, name='index'),

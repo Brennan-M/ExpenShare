@@ -13,8 +13,8 @@ import time
 
 ##
 # @class UserForm
-# @brief A form for creating a user
-# @details UserForm requires a password and username.
+# @brief A form for creating a brand new ExpenShare User.
+# @details UserForm requires a password, username, and email.
 #
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -28,7 +28,7 @@ class UserForm(forms.ModelForm):
 
 ##
 # @class PayForm
-# @brief A form for entering a payment amount and description
+# @brief A form for entering an expense amount and description.
 #
 class PayForm(forms.ModelForm):
 	amount = forms.DecimalField(max_digits=11, decimal_places=2, label = 'Amount')
@@ -43,7 +43,7 @@ class PayForm(forms.ModelForm):
 
 ##
 # @class MakeGroupForm
-# @brief A form for creating a group
+# @brief A form for creating a new ExpenShare group.
 # @details MakeGroupForm requires a group name, description, and passcode.
 #
 class MakeGroupForm(forms.ModelForm):
