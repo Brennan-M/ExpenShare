@@ -1,0 +1,34 @@
+\hypertarget{namespaceurls}{\section{urls Namespace Reference}
+\label{namespaceurls}\index{urls@{urls}}
+}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{namespaceurls_afac1d3e926b49b028ca292abd72d38a3}{urlpatterns}
+\begin{DoxyCompactList}\small\item\em Contains all the url tuples for the Expen\-Share website. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceurls_afac1d3e926b49b028ca292abd72d38a3}{\index{urls@{urls}!urlpatterns@{urlpatterns}}
+\index{urlpatterns@{urlpatterns}!urls@{urls}}
+\subsubsection[{urlpatterns}]{\setlength{\rightskip}{0pt plus 5cm}tuple urls.\-urlpatterns}}\label{namespaceurls_afac1d3e926b49b028ca292abd72d38a3}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+1 = patterns(\textcolor{stringliteral}{' '},
+2     url(\textcolor{stringliteral}{r'^$'}, views.index, name=\textcolor{stringliteral}{'index'}),
+3     url(\textcolor{stringliteral}{r'^home/$'}, views.home, name=\textcolor{stringliteral}{'home'}),
+4     url(\textcolor{stringliteral}{r'^history/$'}, views.history, name=\textcolor{stringliteral}{'history'}),
+5     url(\textcolor{stringliteral}{r'^register/$'}, views.register, name=\textcolor{stringliteral}{'register'}),
+6     url(\textcolor{stringliteral}{r'^add\_payform/$'}, views.add\_payform, name=\textcolor{stringliteral}{'add\_payform'}),
+7     url(\textcolor{stringliteral}{r'^add\_groupform/$'}, views.add\_groupform, name=\textcolor{stringliteral}{'add\_groupform'}),
+8     url(\textcolor{stringliteral}{r'^joingroup\_form/$'}, views.joingroup\_form, name=\textcolor{stringliteral}{'joingroup\_form'}),
+9     url(\textcolor{stringliteral}{r'^removePayForm/$'}, views.removePayForm, name=\textcolor{stringliteral}{'removePayForm'}),
+10     url(\textcolor{stringliteral}{r'^leavegroup/$'}, views.leavegroup, name=\textcolor{stringliteral}{'leavegroup'}),
+11     url(\textcolor{stringliteral}{r'^login/$'}, views.userLogin, name=\textcolor{stringliteral}{'login'}),
+12     url(\textcolor{stringliteral}{r'^logout/$'}, views.userLogout, name=\textcolor{stringliteral}{'logout'}),
+13     url(\textcolor{stringliteral}{r'^confirmPayment/$'}, views.confirmPayment, name=\textcolor{stringliteral}{'confirmPayment'}))
+\end{DoxyCode}
+
+
+Contains all the url tuples for the Expen\-Share website. 
+

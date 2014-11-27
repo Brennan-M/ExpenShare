@@ -1,0 +1,82 @@
+\hypertarget{classmodels_1_1_payment_log}{\section{models.\-Payment\-Log Class Reference}
+\label{classmodels_1_1_payment_log}\index{models.\-Payment\-Log@{models.\-Payment\-Log}}
+}
+
+
+Model designed to represent a transaction.  
+
+
+Inheritance diagram for models.\-Payment\-Log\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmodels_1_1_payment_log}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodels_1_1_payment_log_acd2b7422303a0ecade965a291e2a638e}{\-\_\-\-\_\-unicode\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Gets model's information in unicode string format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{classmodels_1_1_payment_log_a2e40f261b4736e670761066b1de0d081}{amount} = models.\-Decimal\-Field(max\-\_\-digits=11, decimal\-\_\-places=2, default=0)
+\item 
+tuple \hyperlink{classmodels_1_1_payment_log_ae48129a7de427884354b091e16520e94}{description} = models.\-Char\-Field(max\-\_\-length=50, default=\char`\"{}\char`\"{})
+\item 
+tuple \hyperlink{classmodels_1_1_payment_log_a52dc6a407079f77462f4be684cf17749}{date} = models.\-Date\-Field(default=time.\-strftime(\char`\"{}\%Y-\/\%m-\/\%d\char`\"{}))
+\item 
+tuple \hyperlink{classmodels_1_1_payment_log_ac72c158a814c97350349db0a8a091c12}{user} = models.\-Foreign\-Key(User)
+\item 
+tuple \hyperlink{classmodels_1_1_payment_log_aaeb60280530dfbff5f6f4c17bed6395c}{contested} = models.\-Boolean\-Field(default=False)
+\item 
+tuple \hyperlink{classmodels_1_1_payment_log_ac1849b45a261444fd1ff697e9e982594}{contested\-Message} = models.\-Char\-Field(max\-\_\-length=140, default=\char`\"{}\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Model designed to represent a transaction. 
+
+The \hyperlink{classmodels_1_1_payment_log}{Payment\-Log} model is used by a \hyperlink{classmodels_1_1_pay_user}{Pay\-User} when he or she wants to report an Expense. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classmodels_1_1_payment_log_acd2b7422303a0ecade965a291e2a638e}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{\-\_\-\-\_\-unicode\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def models.\-Payment\-Log.\-\_\-\-\_\-unicode\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classmodels_1_1_payment_log_acd2b7422303a0ecade965a291e2a638e}
+
+
+Gets model's information in unicode string format. 
+
+\begin{DoxyReturn}{Returns}
+Description of the payment log 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmodels_1_1_payment_log_a2e40f261b4736e670761066b1de0d081}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!amount@{amount}}
+\index{amount@{amount}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{amount}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Payment\-Log.\-amount = models.\-Decimal\-Field(max\-\_\-digits=11, decimal\-\_\-places=2, default=0)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_payment_log_a2e40f261b4736e670761066b1de0d081}
+\hypertarget{classmodels_1_1_payment_log_aaeb60280530dfbff5f6f4c17bed6395c}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!contested@{contested}}
+\index{contested@{contested}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{contested}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Payment\-Log.\-contested = models.\-Boolean\-Field(default=False)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_payment_log_aaeb60280530dfbff5f6f4c17bed6395c}
+\hypertarget{classmodels_1_1_payment_log_ac1849b45a261444fd1ff697e9e982594}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!contested\-Message@{contested\-Message}}
+\index{contested\-Message@{contested\-Message}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{contested\-Message}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Payment\-Log.\-contested\-Message = models.\-Char\-Field(max\-\_\-length=140, default=\char`\"{}\char`\"{})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_payment_log_ac1849b45a261444fd1ff697e9e982594}
+\hypertarget{classmodels_1_1_payment_log_a52dc6a407079f77462f4be684cf17749}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!date@{date}}
+\index{date@{date}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{date}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Payment\-Log.\-date = models.\-Date\-Field(default=time.\-strftime(\char`\"{}\%Y-\/\%m-\/\%d\char`\"{}))\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_payment_log_a52dc6a407079f77462f4be684cf17749}
+\hypertarget{classmodels_1_1_payment_log_ae48129a7de427884354b091e16520e94}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!description@{description}}
+\index{description@{description}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{description}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Payment\-Log.\-description = models.\-Char\-Field(max\-\_\-length=50, default=\char`\"{}\char`\"{})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_payment_log_ae48129a7de427884354b091e16520e94}
+\hypertarget{classmodels_1_1_payment_log_ac72c158a814c97350349db0a8a091c12}{\index{models\-::\-Payment\-Log@{models\-::\-Payment\-Log}!user@{user}}
+\index{user@{user}!models::PaymentLog@{models\-::\-Payment\-Log}}
+\subsubsection[{user}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Payment\-Log.\-user = models.\-Foreign\-Key(User)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_payment_log_ac72c158a814c97350349db0a8a091c12}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{models_8py}{models.\-py}\end{DoxyCompactItemize}

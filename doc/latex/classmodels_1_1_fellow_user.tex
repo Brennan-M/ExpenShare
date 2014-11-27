@@ -1,0 +1,62 @@
+\hypertarget{classmodels_1_1_fellow_user}{\section{models.\-Fellow\-User Class Reference}
+\label{classmodels_1_1_fellow_user}\index{models.\-Fellow\-User@{models.\-Fellow\-User}}
+}
+
+
+Model designed to represent a fellow group member for a single particular \hyperlink{classmodels_1_1_member_view}{Member\-View}.  
+
+
+Inheritance diagram for models.\-Fellow\-User\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmodels_1_1_fellow_user}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodels_1_1_fellow_user_ab0b97932b9e3f239b9c65a9878e35381}{\-\_\-\-\_\-unicode\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Gets model's information in unicode string format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{classmodels_1_1_fellow_user_a5e7120d242fc32956e2b7a0f146d0c86}{user} = models.\-Foreign\-Key(User)
+\item 
+tuple \hyperlink{classmodels_1_1_fellow_user_aa990390ffe2a4131de17ee9be0afa73b}{owed} = models.\-Decimal\-Field(max\-\_\-digits=11, decimal\-\_\-places=2, default=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Model designed to represent a fellow group member for a single particular \hyperlink{classmodels_1_1_member_view}{Member\-View}. 
+
+\hyperlink{classmodels_1_1_fellow_user}{Fellow\-User} models interact with a \hyperlink{classmodels_1_1_member_view}{Member\-View} model in order to represent the \hyperlink{classmodels_1_1_member_view}{Member\-View}'s balances which they owe their fellow group members. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classmodels_1_1_fellow_user_ab0b97932b9e3f239b9c65a9878e35381}{\index{models\-::\-Fellow\-User@{models\-::\-Fellow\-User}!\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}!models::FellowUser@{models\-::\-Fellow\-User}}
+\subsubsection[{\-\_\-\-\_\-unicode\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def models.\-Fellow\-User.\-\_\-\-\_\-unicode\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classmodels_1_1_fellow_user_ab0b97932b9e3f239b9c65a9878e35381}
+
+
+Gets model's information in unicode string format. 
+
+\begin{DoxyReturn}{Returns}
+The fellow user's username 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmodels_1_1_fellow_user_aa990390ffe2a4131de17ee9be0afa73b}{\index{models\-::\-Fellow\-User@{models\-::\-Fellow\-User}!owed@{owed}}
+\index{owed@{owed}!models::FellowUser@{models\-::\-Fellow\-User}}
+\subsubsection[{owed}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Fellow\-User.\-owed = models.\-Decimal\-Field(max\-\_\-digits=11, decimal\-\_\-places=2, default=0)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_fellow_user_aa990390ffe2a4131de17ee9be0afa73b}
+\hypertarget{classmodels_1_1_fellow_user_a5e7120d242fc32956e2b7a0f146d0c86}{\index{models\-::\-Fellow\-User@{models\-::\-Fellow\-User}!user@{user}}
+\index{user@{user}!models::FellowUser@{models\-::\-Fellow\-User}}
+\subsubsection[{user}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Fellow\-User.\-user = models.\-Foreign\-Key(User)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_fellow_user_a5e7120d242fc32956e2b7a0f146d0c86}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{models_8py}{models.\-py}\end{DoxyCompactItemize}

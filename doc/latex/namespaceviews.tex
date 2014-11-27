@@ -1,0 +1,261 @@
+\hypertarget{namespaceviews}{\section{views Namespace Reference}
+\label{namespaceviews}\index{views@{views}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceviews_a4902ce68e5b3dd24deea4b61101a31a1}{index}
+\begin{DoxyCompactList}\small\item\em Returns the default Expen\-Share page. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_a7e4ef811f9b937ce756922e9eb33812f}{home}
+\begin{DoxyCompactList}\small\item\em Displays the home page for the current User. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_a17e3163834c27d86c2907512a2b97ca5}{history}
+\begin{DoxyCompactList}\small\item\em Displays the history webpage which shows all previous expenses for a specific group. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_ae6f1a0d94a661eadd45f528456e0f009}{register}
+\begin{DoxyCompactList}\small\item\em This function is used for registering new users. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_ae0bc2db6e6831d38b770b4ecc563737e}{add\-\_\-groupform}
+\begin{DoxyCompactList}\small\item\em This function creates a new Pay\-Group. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_ae9e7e1e965ecb6fb94b0305f1e353df2}{add\-\_\-payform}
+\begin{DoxyCompactList}\small\item\em Adds an expense to a group. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_ac9c9cf0e867f3416d4e954fd6e5d1d77}{joingroup\-\_\-form}
+\begin{DoxyCompactList}\small\item\em Function which allows a User to join an existing Pay\-Group. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_a9655dd106f6221c5137d56d511baa503}{leavegroup}
+\begin{DoxyCompactList}\small\item\em Function which makes a user leave a Pay\-Group upon request. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_af3df50cbc414500e9838fa25460ad6c1}{user\-Login}
+\begin{DoxyCompactList}\small\item\em Logs a user into their Expen\-Share profile. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_af6cfaa4efecee07d037a392fda9ad9cb}{user\-Logout}
+\begin{DoxyCompactList}\small\item\em Logs a User out. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_a3e50b5fb508a7d6941b2b8e08a8db21a}{confirm\-Payment}
+\begin{DoxyCompactList}\small\item\em Confirms that a Pay\-User has received payment for existing expenses by a fellow member of the group. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceviews_a40ea0e0c6757f628edf4b50461caed99}{remove\-Pay\-Form}
+\begin{DoxyCompactList}\small\item\em Removes a payment from a group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceviews_ae0bc2db6e6831d38b770b4ecc563737e}{\index{views@{views}!add\-\_\-groupform@{add\-\_\-groupform}}
+\index{add\-\_\-groupform@{add\-\_\-groupform}!views@{views}}
+\subsubsection[{add\-\_\-groupform}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-add\-\_\-groupform (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_ae0bc2db6e6831d38b770b4ecc563737e}
+
+
+This function creates a new Pay\-Group. 
+
+This function creates a new Pay\-Group and adds the user who created it to it. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects home, passes an error if one occured 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_ae9e7e1e965ecb6fb94b0305f1e353df2}{\index{views@{views}!add\-\_\-payform@{add\-\_\-payform}}
+\index{add\-\_\-payform@{add\-\_\-payform}!views@{views}}
+\subsubsection[{add\-\_\-payform}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-add\-\_\-payform (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_ae9e7e1e965ecb6fb94b0305f1e353df2}
+
+
+Adds an expense to a group. 
+
+Function implements adds a new payment\-Log to a Pay\-Group. The function updates the amount owed amongst the group members as the payment is added. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects to expense history, if an error occured redirects home 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_a3e50b5fb508a7d6941b2b8e08a8db21a}{\index{views@{views}!confirm\-Payment@{confirm\-Payment}}
+\index{confirm\-Payment@{confirm\-Payment}!views@{views}}
+\subsubsection[{confirm\-Payment}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-confirm\-Payment (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_a3e50b5fb508a7d6941b2b8e08a8db21a}
+
+
+Confirms that a Pay\-User has received payment for existing expenses by a fellow member of the group. 
+
+Allows user to specify which member of the group they are reporting as having paid them back. Updates the amount owed between users and the group. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects user to their homepage, will pass an error if one occured 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_a17e3163834c27d86c2907512a2b97ca5}{\index{views@{views}!history@{history}}
+\index{history@{history}!views@{views}}
+\subsubsection[{history}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-history (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_a17e3163834c27d86c2907512a2b97ca5}
+
+
+Displays the history webpage which shows all previous expenses for a specific group. 
+
+The page checks the current group the user has chosen and shows the expense history of that group. This is on the Expense\-Log.\-html page. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Directs to expense history unless user cannot acces that group 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_a7e4ef811f9b937ce756922e9eb33812f}{\index{views@{views}!home@{home}}
+\index{home@{home}!views@{views}}
+\subsubsection[{home}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-home (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_a7e4ef811f9b937ce756922e9eb33812f}
+
+
+Displays the home page for the current User. 
+
+Home displays any paygroups an user is in. It allows a user to report new expenses and create new groups. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects to home page 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_a4902ce68e5b3dd24deea4b61101a31a1}{\index{views@{views}!index@{index}}
+\index{index@{index}!views@{views}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-index (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_a4902ce68e5b3dd24deea4b61101a31a1}
+
+
+Returns the default Expen\-Share page. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects to login 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_ac9c9cf0e867f3416d4e954fd6e5d1d77}{\index{views@{views}!joingroup\-\_\-form@{joingroup\-\_\-form}}
+\index{joingroup\-\_\-form@{joingroup\-\_\-form}!views@{views}}
+\subsubsection[{joingroup\-\_\-form}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-joingroup\-\_\-form (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_ac9c9cf0e867f3416d4e954fd6e5d1d77}
+
+
+Function which allows a User to join an existing Pay\-Group. 
+
+If the user correctly inputs the group name and passcode, the user is added to the Pay\-Group requested. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects user back to their homepage with the group joined or passes an error 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_a9655dd106f6221c5137d56d511baa503}{\index{views@{views}!leavegroup@{leavegroup}}
+\index{leavegroup@{leavegroup}!views@{views}}
+\subsubsection[{leavegroup}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-leavegroup (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_a9655dd106f6221c5137d56d511baa503}
+
+
+Function which makes a user leave a Pay\-Group upon request. 
+
+Pending eligibility, allows a Pay\-User to leave a Paygroup. If the Pay\-Group no longer has any members, it is deleted. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Directs user to their homepage with group removed, passes an error if one occured 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_ae6f1a0d94a661eadd45f528456e0f009}{\index{views@{views}!register@{register}}
+\index{register@{register}!views@{views}}
+\subsubsection[{register}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-register (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_ae6f1a0d94a661eadd45f528456e0f009}
+
+
+This function is used for registering new users. 
+
+This function is used to register a new user to the expenshare site. It creates a User Model for an individual when they sign up on the register.\-html page. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects to next step in registration unless an error occured 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_a40ea0e0c6757f628edf4b50461caed99}{\index{views@{views}!remove\-Pay\-Form@{remove\-Pay\-Form}}
+\index{remove\-Pay\-Form@{remove\-Pay\-Form}!views@{views}}
+\subsubsection[{remove\-Pay\-Form}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-remove\-Pay\-Form (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_a40ea0e0c6757f628edf4b50461caed99}
+
+
+Removes a payment from a group. 
+
+Removes an expense from a Pay\-Group and removes it from the expense history log. Then recalculates the balances owed between group members. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirect user to the expense history, passes an error if one occured 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_af3df50cbc414500e9838fa25460ad6c1}{\index{views@{views}!user\-Login@{user\-Login}}
+\index{user\-Login@{user\-Login}!views@{views}}
+\subsubsection[{user\-Login}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-user\-Login (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_af3df50cbc414500e9838fa25460ad6c1}
+
+
+Logs a user into their Expen\-Share profile. 
+
+Allows an existing Expen\-Share user to access their profile. 
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Redirects user to their homepage, passes an error if one occured 
+\end{DoxyReturn}
+\hypertarget{namespaceviews_af6cfaa4efecee07d037a392fda9ad9cb}{\index{views@{views}!user\-Logout@{user\-Logout}}
+\index{user\-Logout@{user\-Logout}!views@{views}}
+\subsubsection[{user\-Logout}]{\setlength{\rightskip}{0pt plus 5cm}def views.\-user\-Logout (
+\begin{DoxyParamCaption}
+\item[{}]{request}
+\end{DoxyParamCaption}
+)}}\label{namespaceviews_af6cfaa4efecee07d037a392fda9ad9cb}
+
+
+Logs a User out. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & An http request from Expen\-Share \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Http redirect to the homepage 
+\end{DoxyReturn}

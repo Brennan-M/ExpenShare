@@ -1,0 +1,64 @@
+\hypertarget{classmodels_1_1_pay_user}{\section{models.\-Pay\-User Class Reference}
+\label{classmodels_1_1_pay_user}\index{models.\-Pay\-User@{models.\-Pay\-User}}
+}
+
+
+A model for a user of Expen\-Share.  
+
+
+Inheritance diagram for models.\-Pay\-User\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmodels_1_1_pay_user}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodels_1_1_pay_user_ac491f89a0df97a08ac1f83d1f34e4dfe}{\-\_\-\-\_\-unicode\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Gets model's information in unicode string format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{classmodels_1_1_pay_user_aa76f651fc85e89f9f366dec5aa0387da}{user\-Key} = models.\-Foreign\-Key(User)
+\item 
+tuple \hyperlink{classmodels_1_1_pay_user_a719a310f020d573098ebecca7497ba2d}{pay\-Groups} = models.\-Many\-To\-Many\-Field(\hyperlink{classmodels_1_1_pay_group}{Pay\-Group})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A model for a user of Expen\-Share. 
+
+A \hyperlink{classmodels_1_1_pay_user}{Pay\-User} can join Pay\-Groups and make Payment\-Logs.
+
+A \hyperlink{classmodels_1_1_pay_user}{Pay\-User} corresponds to both a User and a \hyperlink{classmodels_1_1_pay_group}{Pay\-Group} and links them together. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classmodels_1_1_pay_user_ac491f89a0df97a08ac1f83d1f34e4dfe}{\index{models\-::\-Pay\-User@{models\-::\-Pay\-User}!\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}!models::PayUser@{models\-::\-Pay\-User}}
+\subsubsection[{\-\_\-\-\_\-unicode\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def models.\-Pay\-User.\-\_\-\-\_\-unicode\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classmodels_1_1_pay_user_ac491f89a0df97a08ac1f83d1f34e4dfe}
+
+
+Gets model's information in unicode string format. 
+
+\begin{DoxyReturn}{Returns}
+The user's key 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmodels_1_1_pay_user_a719a310f020d573098ebecca7497ba2d}{\index{models\-::\-Pay\-User@{models\-::\-Pay\-User}!pay\-Groups@{pay\-Groups}}
+\index{pay\-Groups@{pay\-Groups}!models::PayUser@{models\-::\-Pay\-User}}
+\subsubsection[{pay\-Groups}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-User.\-pay\-Groups = models.\-Many\-To\-Many\-Field({\bf Pay\-Group})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_user_a719a310f020d573098ebecca7497ba2d}
+\hypertarget{classmodels_1_1_pay_user_aa76f651fc85e89f9f366dec5aa0387da}{\index{models\-::\-Pay\-User@{models\-::\-Pay\-User}!user\-Key@{user\-Key}}
+\index{user\-Key@{user\-Key}!models::PayUser@{models\-::\-Pay\-User}}
+\subsubsection[{user\-Key}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-User.\-user\-Key = models.\-Foreign\-Key(User)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_user_aa76f651fc85e89f9f366dec5aa0387da}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{models_8py}{models.\-py}\end{DoxyCompactItemize}

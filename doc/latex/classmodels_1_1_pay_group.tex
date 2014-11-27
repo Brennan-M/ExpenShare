@@ -1,0 +1,87 @@
+\hypertarget{classmodels_1_1_pay_group}{\section{models.\-Pay\-Group Class Reference}
+\label{classmodels_1_1_pay_group}\index{models.\-Pay\-Group@{models.\-Pay\-Group}}
+}
+
+
+Model for an Expen\-Share group.  
+
+
+Inheritance diagram for models.\-Pay\-Group\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmodels_1_1_pay_group}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodels_1_1_pay_group_afbeee453535c8f38576fe70759a2e90b}{\-\_\-\-\_\-unicode\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Gets model's information in unicode string format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_a497a5404b56ea78ec8ac675985519c25}{name} = models.\-Char\-Field(max\-\_\-length=20, default=\char`\"{}\char`\"{}, unique=True)
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_ae8d4cfe4930ebc6b511f82691026a7d7}{description} = models.\-Char\-Field(max\-\_\-length=50, default=\char`\"{}\char`\"{})
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_a22c5aadb801b4f26a4c5f675c628cd64}{members} = models.\-Many\-To\-Many\-Field(User)
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_a757bf14853860015be63c29d9f4a4b76}{passcode} = models.\-Char\-Field(max\-\_\-length=16, default=\char`\"{}\char`\"{})
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_acbb50cbe600d3e3f492a99b948bf38a8}{payment\-Logs} = models.\-Many\-To\-Many\-Field(\hyperlink{classmodels_1_1_payment_log}{Payment\-Log})
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_ae13451dcaaa8c881df92549d1e2a3417}{member\-Views} = models.\-Many\-To\-Many\-Field(\hyperlink{classmodels_1_1_member_view}{Member\-View})
+\item 
+tuple \hyperlink{classmodels_1_1_pay_group_a2ffd41ff089917ffe7350eeae498c356}{group\-Size} = models.\-Integer\-Field(default=1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Model for an Expen\-Share group. 
+
+\hyperlink{classmodels_1_1_pay_group}{Pay\-Group} is a model designed to represent one expense sharing group. It is associated with multiple members and contains a \hyperlink{classmodels_1_1_member_view}{Member\-View} model per member which represents a members particular view point of the expenses incurred. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classmodels_1_1_pay_group_afbeee453535c8f38576fe70759a2e90b}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{\-\_\-\-\_\-unicode\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def models.\-Pay\-Group.\-\_\-\-\_\-unicode\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classmodels_1_1_pay_group_afbeee453535c8f38576fe70759a2e90b}
+
+
+Gets model's information in unicode string format. 
+
+\begin{DoxyReturn}{Returns}
+The name of the paygroup 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmodels_1_1_pay_group_ae8d4cfe4930ebc6b511f82691026a7d7}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!description@{description}}
+\index{description@{description}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{description}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-description = models.\-Char\-Field(max\-\_\-length=50, default=\char`\"{}\char`\"{})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_ae8d4cfe4930ebc6b511f82691026a7d7}
+\hypertarget{classmodels_1_1_pay_group_a2ffd41ff089917ffe7350eeae498c356}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!group\-Size@{group\-Size}}
+\index{group\-Size@{group\-Size}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{group\-Size}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-group\-Size = models.\-Integer\-Field(default=1)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_a2ffd41ff089917ffe7350eeae498c356}
+\hypertarget{classmodels_1_1_pay_group_a22c5aadb801b4f26a4c5f675c628cd64}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!members@{members}}
+\index{members@{members}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{members}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-members = models.\-Many\-To\-Many\-Field(User)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_a22c5aadb801b4f26a4c5f675c628cd64}
+\hypertarget{classmodels_1_1_pay_group_ae13451dcaaa8c881df92549d1e2a3417}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!member\-Views@{member\-Views}}
+\index{member\-Views@{member\-Views}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{member\-Views}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-member\-Views = models.\-Many\-To\-Many\-Field({\bf Member\-View})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_ae13451dcaaa8c881df92549d1e2a3417}
+\hypertarget{classmodels_1_1_pay_group_a497a5404b56ea78ec8ac675985519c25}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!name@{name}}
+\index{name@{name}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-name = models.\-Char\-Field(max\-\_\-length=20, default=\char`\"{}\char`\"{}, unique=True)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_a497a5404b56ea78ec8ac675985519c25}
+\hypertarget{classmodels_1_1_pay_group_a757bf14853860015be63c29d9f4a4b76}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!passcode@{passcode}}
+\index{passcode@{passcode}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{passcode}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-passcode = models.\-Char\-Field(max\-\_\-length=16, default=\char`\"{}\char`\"{})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_a757bf14853860015be63c29d9f4a4b76}
+\hypertarget{classmodels_1_1_pay_group_acbb50cbe600d3e3f492a99b948bf38a8}{\index{models\-::\-Pay\-Group@{models\-::\-Pay\-Group}!payment\-Logs@{payment\-Logs}}
+\index{payment\-Logs@{payment\-Logs}!models::PayGroup@{models\-::\-Pay\-Group}}
+\subsubsection[{payment\-Logs}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Pay\-Group.\-payment\-Logs = models.\-Many\-To\-Many\-Field({\bf Payment\-Log})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_pay_group_acbb50cbe600d3e3f492a99b948bf38a8}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{models_8py}{models.\-py}\end{DoxyCompactItemize}

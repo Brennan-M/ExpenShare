@@ -1,0 +1,67 @@
+\hypertarget{classmodels_1_1_member_view}{\section{models.\-Member\-View Class Reference}
+\label{classmodels_1_1_member_view}\index{models.\-Member\-View@{models.\-Member\-View}}
+}
+
+
+The \hyperlink{classmodels_1_1_member_view}{Member\-View} model is designed to represent a single group member's view of the expense balances.  
+
+
+Inheritance diagram for models.\-Member\-View\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmodels_1_1_member_view}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodels_1_1_member_view_a362c56c6f6e39dfb3beafd1dd6b9896e}{\-\_\-\-\_\-unicode\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Gets model's information in unicode string format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{classmodels_1_1_member_view_abb93f3b6aa9cac36c799e0efa49783ff}{user} = models.\-Foreign\-Key(User)
+\item 
+tuple \hyperlink{classmodels_1_1_member_view_ad008581ab482be3c68ab8b40abfd0fb4}{net\-Owed} = models.\-Decimal\-Field(max\-\_\-digits=11, decimal\-\_\-places=2, default=0)
+\item 
+tuple \hyperlink{classmodels_1_1_member_view_a021cf8a6e0c3a9fe4d7595fecf7d9d6d}{fellows} = models.\-Many\-To\-Many\-Field(\hyperlink{classmodels_1_1_fellow_user}{Fellow\-User})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classmodels_1_1_member_view}{Member\-View} model is designed to represent a single group member's view of the expense balances. 
+
+\hyperlink{classmodels_1_1_member_view}{Member\-View} represents a particular viewpoint of the expenses. Many Fellow\-Users are associated with a single Memberview. The \hyperlink{classmodels_1_1_member_view}{Member\-View} then represents how much the particular member owes his or her fellow group members. It is a look at the current balance owed to all members from the viewpoint of a particular group member. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classmodels_1_1_member_view_a362c56c6f6e39dfb3beafd1dd6b9896e}{\index{models\-::\-Member\-View@{models\-::\-Member\-View}!\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-unicode\-\_\-\-\_\-@{\-\_\-\-\_\-unicode\-\_\-\-\_\-}!models::MemberView@{models\-::\-Member\-View}}
+\subsubsection[{\-\_\-\-\_\-unicode\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def models.\-Member\-View.\-\_\-\-\_\-unicode\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classmodels_1_1_member_view_a362c56c6f6e39dfb3beafd1dd6b9896e}
+
+
+Gets model's information in unicode string format. 
+
+\begin{DoxyReturn}{Returns}
+The member's username 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmodels_1_1_member_view_a021cf8a6e0c3a9fe4d7595fecf7d9d6d}{\index{models\-::\-Member\-View@{models\-::\-Member\-View}!fellows@{fellows}}
+\index{fellows@{fellows}!models::MemberView@{models\-::\-Member\-View}}
+\subsubsection[{fellows}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Member\-View.\-fellows = models.\-Many\-To\-Many\-Field({\bf Fellow\-User})\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_member_view_a021cf8a6e0c3a9fe4d7595fecf7d9d6d}
+\hypertarget{classmodels_1_1_member_view_ad008581ab482be3c68ab8b40abfd0fb4}{\index{models\-::\-Member\-View@{models\-::\-Member\-View}!net\-Owed@{net\-Owed}}
+\index{net\-Owed@{net\-Owed}!models::MemberView@{models\-::\-Member\-View}}
+\subsubsection[{net\-Owed}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Member\-View.\-net\-Owed = models.\-Decimal\-Field(max\-\_\-digits=11, decimal\-\_\-places=2, default=0)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_member_view_ad008581ab482be3c68ab8b40abfd0fb4}
+\hypertarget{classmodels_1_1_member_view_abb93f3b6aa9cac36c799e0efa49783ff}{\index{models\-::\-Member\-View@{models\-::\-Member\-View}!user@{user}}
+\index{user@{user}!models::MemberView@{models\-::\-Member\-View}}
+\subsubsection[{user}]{\setlength{\rightskip}{0pt plus 5cm}tuple models.\-Member\-View.\-user = models.\-Foreign\-Key(User)\hspace{0.3cm}{\ttfamily [static]}}}\label{classmodels_1_1_member_view_abb93f3b6aa9cac36c799e0efa49783ff}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{models_8py}{models.\-py}\end{DoxyCompactItemize}
