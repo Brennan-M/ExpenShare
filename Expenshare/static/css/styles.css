@@ -1,5 +1,5 @@
 body{
-	background-color: #AEA4A2;
+	background-color: #1B0140;
 	font-family: 'Noto Sans', sans-serif;
 }
 
@@ -20,7 +20,7 @@ body{
 
 #mainBoxInner{
 	border: solid black 3px;
-	background-color: #FFFFFF;
+	background-color: #D9D4CC;
 	padding-left: 1em;
 }
 
@@ -40,19 +40,19 @@ body{
 	margin-top: 5em;
 	background-color: #5B9428;
 	margin-bottom: 2em;
-	border: solid black 5px;
+	border: solid #5B9428 5px;
 	padding: 1em;
 	margin-right: 1em;
 	margin-left: 3em;
 }
 #bodyContent{
-	background-color: #BFB2A3;
+	background-color: #260259;
 	border: solid black 1px;
 	padding-bottom: 0em;
 }
 
 #bodyContent2{
-	border: solid #AEA4A2 1px;
+	border: solid #5B9428 1px;
 	padding-bottom: 0em;
 	margin-top: 0em;
 }
@@ -63,17 +63,17 @@ body{
 
 #infoBox{
 	margin-top: 7em;
-	background-color: #BCC8CF;
+	background-color: #D9D4CC;
 	margin-bottom: 7em;
-	border: solid black 5px;
+	border: solid #5B9428 5px;
 	padding-bottom: 3em;
 }
 #reportBox{
 	text-align: center;
 	margin-top: 5em;
-	background-color: #BCC8CF;
+	background-color: #D9D4CC;
 	margin-bottom: 2em;
-	border: solid black 5px;
+	border: solid #5B9428 5px;
 	padding-bottom: 3em;
 }
 
@@ -83,7 +83,7 @@ body{
 
 footer{
 	text-align: center;
-	color: #000000;
+	color: #FFFFFF;
 }
 nav{
 	border: solid black 5px;

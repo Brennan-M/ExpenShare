@@ -1,16 +1,16 @@
 ##
 # @file urls.py
-# @brief url map for ExpenShare
+# @brief URL map for ExpenShare
 # @authors Taylor Andrews, Ian Char, Brennan McConnell
 # @date 11/25/2014
-# @details urlpatterns uses regular expressions to match urls and pass them to views
+# @details The urlpatterns uses regular expressions to match urls and pass them to views.
 #
 
 from django.conf.urls import patterns, url
 from share import views
 
 ##
-# contains all the url tuples for the ExpenShare webpage
+# Contains all the url tuples for the ExpenShare webpage
 #
 urlpatterns = patterns(' ',
 	url(r'^$', views.index, name='index'),
