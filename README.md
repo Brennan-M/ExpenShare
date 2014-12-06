@@ -34,11 +34,23 @@ Brennan McConnell
 ```
 
 ##Files
-Important files:
 | File                    | Details                                  |
 | ----------------------- | ---------------------------------------- |
 | ExpenshareERDiagram.pdf | ER diagram for ExpenShare database       |
-| refman.pdf              | latex generated output for documentation |
+| refman.pdf              | Latex generated output for documentation |
+| manage.py               | Launches the ExpenShare websie           | 
+| populate.py             | Populates the ExpenShare database        |
+| settings.py             | Overall settings for the website         |
+| forms.py                | Implementation of Django forms           |
+| models.py               | Implementation of Django models          |
+| views.py                | Implementation of Django views           |
+| urls.py                 | Determines format of website urls        |
+| home.html               | Expenshare user homepage                 |
+| login.html              | Login page for users                     |
+| ExpenseLog.html         | Log of expenses for a particular group   |
+| register.html           | Registration page for new users          |
+
+**Note:** More files are contained in the project, only the critical ones are listed above. 
 
 ##Documentation
 
