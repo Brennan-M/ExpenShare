@@ -1,16 +1,15 @@
 #ExpenShare 
-Software Engineering Methods and Tools 2014
+**Software Engineering Methods and Tools 2014**
 
 ExpenShare is an online application designed to help people split costs and share expenses. You can now create one or more group(s) with your friends and log your transactions, then let ExpenShare do the work and calculate how much each group member owes each other. This application can be used for roommates to split living expenses, friends to split travel costs, or any other necessary use!
 
-Visit our website:
+Check out the [finished product](http:www.google.com)!
 
 ##Contributors
-Taylor Andrews
+Taylor Andrews, Ian Char, and Brennan McConnell
 
-Ian Char
-
-Brennan McConnell
+##Dependencies
+ * [django](https://www.djangoproject.com/)
 
 ##Folders
 ```
@@ -53,9 +52,34 @@ Brennan McConnell
 **Note:** More files are contained in the project, only the critical ones are listed above. 
 
 ##Documentation
+Create documentation using latex:
+```
+cd doc/latex
+make
+```
 
 ##Usage
 
+#### 1. Install dependencies
+```
+git clone https://github.com/django/django.git
+```
+
+#### 2. Run manage.py
+```
+cd Expenshare
+python manage.py runserver
+```
+
+#### 3. Open localhost in browser
+
+##Tests
+Run tests using: 
+
+```
+cd Expenshare
+python manage.py test
+```
 
 
 
