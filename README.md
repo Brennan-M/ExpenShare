@@ -7,32 +7,53 @@ Visit our website:
 
 ##Contributors
 Taylor Andrews
+
 Ian Char
+
 Brennan McConnell
 
 ##Folders
 ```
 └── Expenshare
-    └── doc			 # Folder containing the documentation.
-    |	├── html		 # Documentation in html format.
+    └── doc               # Folder containing the documentation.
+    |	├── html          # Documentation in html format.
     |   |   └── search
-    |   └── latex		 # Documentation in latex format.
-    ├── Expenshare		 # Contains the ExpenShare project.
-    |	├── Expenshare		 # Contains python that determines overall settings of the project.
-    |	├── share		 # Contains Django framework models, views, and forms. 
+    |   └── latex         # Documentation in latex format.
+    ├── Expenshare        # Contains the ExpenShare project.
+    |	├── Expenshare    # Contains files that determine overall ExpenShare settings.
+    |	├── share         # Contains Django framework models, views, and forms. 
     |   |   └── migrations
-    |	├── static		 # Static tools used in conjunction with Django. 
-    |   |   ├── bootstrap	 # Contains bootstrap for ExpenShare.
+    |	├── static        # Static tools used in conjunction with Django. 
+    |   |   ├── bootstrap # Contains bootstrap for ExpenShare.
     |   |   |   ├── css
     |   |   |   ├── fonts
     |   |   |   └── js
-    |   |   ├── css		 # Contains css file for ExpenShare.
-    |   |   └── js		 # Contains js file for ExpenShare.
-    |   └── templates		 # Html for the ExpenShare website.
+    |   |   ├── css       # Contains css file for ExpenShare.
+    |   |   └── js        # Contains js file for ExpenShare.
+    |   └── templates     # Html for the ExpenShare website.
 ```
 
-##Important Files
+##Files
+Important files:
+| File                    | Details                                  |
+| ----------------------- | ---------------------------------------- |
+| ExpenshareERDiagram.pdf | ER diagram for ExpenShare database       |
+| refman.pdf              | latex generated output for documentation |
 
 ##Documentation
 
 ##Usage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
