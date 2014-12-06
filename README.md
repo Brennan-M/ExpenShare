@@ -14,10 +14,7 @@ Taylor Andrews, Ian Char, and Brennan McConnell
 ##Folders
 ```
 └── Expenshare
-    └── doc               # Folder containing the documentation.
-    |	├── html          # Documentation in html format.
-    |   |   └── search
-    |   └── latex         # Documentation in latex format.
+    ├── ERDiagrams        # Folder containing the ER diagrams for database.
     ├── Expenshare        # Contains the ExpenShare project.
     |	├── Expenshare    # Contains files that determine overall ExpenShare settings.
     |	├── share         # Contains Django framework models, views, and forms. 
@@ -30,12 +27,16 @@ Taylor Andrews, Ian Char, and Brennan McConnell
     |   |   ├── css       # Contains css file for ExpenShare.
     |   |   └── js        # Contains js file for ExpenShare.
     |   └── templates     # Html for the ExpenShare website.
+    ├── doc               # Folder containing the documentation.
+    |	├── html          # Documentation in html format.
+    |   |   └── search
+    |   └── latex         # Documentation in latex format.
 ```
 
 ##Files
 | File                    | Details                                  |
 | ----------------------- | ---------------------------------------- |
-| ExpenshareERDiagram.pdf | ER diagram for ExpenShare database       |
+| ExpenshareER.pdf        | ER diagram for ExpenShare database       |
 | refman.pdf              | Latex generated output for documentation |
 | manage.py               | Launches the ExpenShare websie           | 
 | populate.py             | Populates the ExpenShare database        |
