@@ -11,26 +11,40 @@ Taylor Andrews, Ian Char, and Brennan McConnell
 ##Dependencies
  * [django](https://www.djangoproject.com/)
 
-##Folders
+##Repository Organization
 ```
 └── Expenshare
-    ├── ERDiagrams        # Folder containing the ER diagrams for database.
-    ├── Expenshare        # Contains the ExpenShare project.
-    |	├── Expenshare    # Contains files that determine overall ExpenShare settings.
-    |	├── share         # Contains Django framework models, views, and forms. 
-    |   |   └── migrations
-    |	├── static        # Static tools used in conjunction with Django. 
-    |   |   ├── bootstrap # Contains bootstrap for ExpenShare.
+    ├── ERDiagrams              # Folder containing the ER diagrams for ExpenShares database.
+    |   └── ExpenshareER.pdf
+    ├── Expenshare              # Contains the ExpenShare project.
+    |	├── Expenshare          # Contains files that determine overall ExpenShare settings.
+    |	├── share               # Contains main Source Code.
+    |   |   ├── migrations
+    |   |   ├── admin.py
+    |   |   ├── urls.py
+    |   |   ├── forms.py        
+    |   |   ├── models.py       # Contains the models used in Expenshare's database.
+    |   |   ├── views.py        # Contains bulk of source code, and functions used in ExpenShare.
+    |	├── static              # Static tools used in conjunction with Django. 
+    |   |   ├── bootstrap       # Contains bootstrap for ExpenShare.
     |   |   |   ├── css
     |   |   |   ├── fonts
     |   |   |   └── js
-    |   |   ├── css       # Contains css file for ExpenShare.
-    |   |   └── js        # Contains js file for ExpenShare.
-    |   └── templates     # Html for the ExpenShare website.
-    ├── doc               # Folder containing the documentation.
-    |	├── html          # Documentation in html format.
-    |   |   └── search
-    |   └── latex         # Documentation in latex format.
+    |   |   ├── css             # Contains css file for ExpenShare.
+    |   |   |   └── styles.css  # CSS file for ExpenShare webpages.
+    |   |   └── js              # Contains js file for ExpenShare.
+    |   ├── templates           # Html for the ExpenShare website.
+    |   |   ├── Expenselog.html
+    |   |   ├── home.html
+    |   |   ├── login.html
+    |   |   └── register.html
+    |   ├── manage.py
+    |   ├── populate.py
+    |   └── tests.py            # Automated test cases for testing ExpenShare. Uses Pythons Unittest Module.
+    ├── doc                     # Folder containing the documentation.
+    |	├── html                # Contains doxygen generated HTML files for online browsable documentation.
+    |   ├── latex               # Documentation in latex format.
+    |   └── refman.pdf          # Generated documentation pdf file.
 ```
 
 ##Files
@@ -58,9 +72,11 @@ Create documentation using latex:
 cd doc/latex
 make
 ```
+Find documentation under ExpenShare/doc
+-- Refer to the html folder for doxygen html generated online browsable documentation.
+-- Refer to redman.pdf for a pdf file of ExpenShare's documentation.
 
-##Usage
-
+##Usage - Build and Run
 #### 1. Install dependencies
 ```
 git clone https://github.com/django/django.git
@@ -76,7 +92,6 @@ python manage.py runserver
 
 ##Tests
 Run tests using: 
-
 ```
 cd Expenshare
 python manage.py test
