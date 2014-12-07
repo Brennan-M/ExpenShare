@@ -6,20 +6,15 @@
 # @date 11/26/2014
 #
 
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from share.models import PayUser, PayGroup, PaymentLog, MemberView, FellowUser
 from share.forms import UserForm, PayForm, MakeGroupForm
-from share.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import F
-from decimal import *
-from django.views.decorators.csrf import csrf_protect
-from django.template.defaulttags import csrf_token
+from decimal import Decimal
 
 ##
 # @brief Returns the default ExpenShare page.
@@ -139,9 +134,9 @@ def register(request):
     else:
         user_form = UserForm()
 
-    contextDict = {'userForm': user_form, 'registered': registered}
+    context_dict = {'userForm': user_form, 'registered': registered}
 
-    return render_to_response('register.html', contextDict, context)
+    return render_to_response('register.html', context_dict, context)
 
 ##
 # @brief This function creates a new PayGroup.
@@ -194,7 +189,6 @@ def add_groupform(request):
 #
 @login_required
 def add_payform(request):
-
     context = RequestContext(request)
 
     curr_pay_user = PayUser.objects.get(userKey=request.user)
@@ -202,17 +196,17 @@ def add_payform(request):
     print("Your Post was: ", request.POST)
 
     try:
-        clickedGroup = PayGroup.objects.get(name=request.POST['group'])
+        clicked_group = PayGroup.objects.get(name=request.POST['group'])
         part_of = False
     except:
         paygroup_list = curr_pay_user.payGroups.all()
         groupform = MakeGroupForm()
         context_dict = {'paygroups' : paygroup_list,
-                        'MakeGroupForm' : groupform, 
+                        'MakeGroupForm' : groupform,
                         'payform_error2' : True}
         return render_to_response('home.html', context_dict, context)
 
-    if clickedGroup in curr_pay_user.payGroups.all():
+    if clicked_group in curr_pay_user.payGroups.all():
         part_of = True
 
     if part_of == False:
@@ -223,42 +217,46 @@ def add_payform(request):
                         'payform_error3' : True}
         return render_to_response('home.html', context_dict, context)
 
-    if (request.method=='POST'):
+    if request.method == 'POST':
         payform = PayForm(request.POST)
 
-        if (payform.is_valid()):
+        if payform.is_valid():
             cost = payform.save(commit=False)
             cost.user = request.user
             cost.save()
 
             #Load the playlogs
-            clickedGroup.paymentLogs.add(cost)
-            payLogs = clickedGroup.paymentLogs.order_by('date')
+            clicked_group.paymentLogs.add(cost)
+            pay_logs = clicked_group.paymentLogs.order_by('date')
 
             #Calculate new cost of the group
-            for mem_view in clickedGroup.memberViews.all():
-            	if mem_view.user.id == request.user.id:
-                    mem_view.netOwed = ((Decimal(mem_view.netOwed) - Decimal(clickedGroup.groupSize - 1) * 
-                                        (Decimal(cost.amount) / Decimal(clickedGroup.groupSize))))
+            for mem_view in clicked_group.memberViews.all():
+                if mem_view.user.id == request.user.id:
+                    mem_view.netOwed = ((Decimal(mem_view.netOwed) -
+                                         Decimal(clicked_group.groupSize - 1) *
+                                         (Decimal(cost.amount) / Decimal(clicked_group.groupSize))))
                     for fels in mem_view.fellows.all():
-                        fels.owed = ((Decimal(fels.owed) - (Decimal(cost.amount) /
-                                    Decimal(clickedGroup.groupSize))))
+                        fels.owed = ((Decimal(fels.owed) -
+                                      (Decimal(cost.amount) /
+                                       Decimal(clicked_group.groupSize))))
                         fels.save()
                 else:
-                    mem_view.netOwed = ((Decimal(mem_view.netOwed) + (Decimal(cost.amount) /
-                                        Decimal(clickedGroup.groupSize))))
+                    mem_view.netOwed = ((Decimal(mem_view.netOwed) +
+                                         (Decimal(cost.amount) /
+                                          Decimal(clicked_group.groupSize))))
                     for fels in mem_view.fellows.all():
                         if fels.user.id == request.user.id:
-                            fels.owed = ((Decimal(fels.owed) + (Decimal(cost.amount) /
-                                        Decimal(clickedGroup.groupSize))))
+                            fels.owed = ((Decimal(fels.owed) +
+                                          (Decimal(cost.amount) /
+                                           Decimal(clicked_group.groupSize))))
                             fels.save()
                 mem_view.save()
             return history(request)
 
         else:
-            payLogs = clickedGroup.paymentLogs.order_by('date')
-            context_dict = {'paylog' : payLogs,
-                            'group' : clickedGroup,
+            pay_logs = clicked_group.paymentLogs.order_by('date')
+            context_dict = {'paylog' : pay_logs,
+                            'group' : clicked_group,
                             'payform_error1' : True}
             return render_to_response('ExpenseLog.html', context_dict, context)
     else:
@@ -273,7 +271,8 @@ def add_payform(request):
 
 ##
 # @brief Function which allows a User to join an existing PayGroup.
-# @details If the user correctly inputs the group name and passcode, the user is added to the PayGroup requested.
+# @details If the user correctly inputs the group name and passcode, the user is added to the
+#          PayGroup requested.
 # @param request An http request from ExpenShare
 # @return Redirects user back to their homepage with the group joined or passes an error
 #
@@ -282,23 +281,23 @@ def joingroup_form(request):
     context = RequestContext(request)
     print request.POST
     curr_pay_user = PayUser.objects.get(userKey=request.user)
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         try:
             group = PayGroup.objects.get(name=request.POST['group'])
             passcode = request.POST['passcode']
             realcode = group.passcode
-            if passcode==realcode:
+            if passcode == realcode:
                 for mem_view in group.memberViews.all():
-                	fellMem = FellowUser(user=request.user)
-                	fellMem.save()
-                	mem_view.fellows.add(fellMem)
-            	newmem_view = MemberView(user=request.user)
-            	newmem_view.save()
-            	group.memberViews.add(newmem_view)
-            	for mems in group.members.all():
-            		fellMem = FellowUser(user=mems)
-            		fellMem.save()
-            		newmem_view.fellows.add(fellMem)
+                    fell_mem = FellowUser(user=request.user)
+                    fell_mem.save()
+                    mem_view.fellows.add(fell_mem)
+                newmem_view = MemberView(user=request.user)
+                newmem_view.save()
+                group.memberViews.add(newmem_view)
+                for mems in group.members.all():
+                    fell_mem = FellowUser(user=mems)
+                    fell_mem.save()
+                    newmem_view.fellows.add(fell_mem)
                 group.members.add(request.user)
                 curr_pay_user.payGroups.add(group)
                 group.groupSize += 1
@@ -334,7 +333,8 @@ def joingroup_form(request):
 
 ##
 # @brief Function which makes a user leave a PayGroup upon request.
-# @details Pending eligibility, allows a PayUser to leave a Paygroup. If the PayGroup no longer has any members, it is deleted.
+# @details Pending eligibility, allows a PayUser to leave a Paygroup. If the PayGroup no longer has
+#          any members, it is deleted.
 # @param request An http request from ExpenShare
 # @return Directs user to their homepage with group removed, passes an error if one occured
 #
@@ -342,31 +342,31 @@ def joingroup_form(request):
 def leavegroup(request):
     context = RequestContext(request)
     curr_pay_user = PayUser.objects.get(userKey=request.user)
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         try:
             group = PayGroup.objects.get(name=request.POST['group'])
 
             #Determine if the user can leave or not
-            canLeave = True
+            can_leave = True
             mem_view = group.memberViews.get(user=request.user)
             if mem_view.netOwed != 0:
-            	canLeave = False
+                can_leave = False
             else:
                 for fel in mem_view.fellows.all():
                     if fel.owed != 0:
-                        canLeave = False
+                        can_leave = False
                         break
 
             #Remove the user from the group
-            if canLeave:
+            if can_leave:
                 for fel in mem_view.fellows.all():
-                	fel.delete()
-            	for mem in group.memberViews.all():
-            		if mem != mem_view:
-            			for fel in mem.fellows.all():
-            				if fel.user == mem_view.user:
-            					fel.delete()
-            	mem_view.delete()
+                    fel.delete()
+                for mem in group.memberViews.all():
+                    if mem != mem_view:
+                        for fel in mem.fellows.all():
+                            if fel.user == mem_view.user:
+                                fel.delete()
+                mem_view.delete()
                 group.members.remove(request.user)
                 curr_pay_user.payGroups.remove(group)
                 group.groupSize -= 1
@@ -396,7 +396,7 @@ def leavegroup(request):
                                 'leavegroup_error1' : True}
                 return render_to_response('home.html', context_dict, context)
         except:
-            print ("Error leaving Group.")
+            print "Error leaving Group."
 
     paygroup_list = curr_pay_user.payGroups.all()
     groupform = MakeGroupForm()
@@ -413,28 +413,27 @@ def leavegroup(request):
 # @param request An http request from ExpenShare
 # @return Redirects user to their homepage, passes an error if one occured
 #
-def userLogin(request):
-	context = RequestContext(request)
+def user_login(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
-	if(request.method == 'POST'):
-            username = request.POST['username']
-            password = request.POST['password']
+        user = authenticate(username=username, password=password)
 
-            user = authenticate(username=username, password=password)
-
-            #Check to see if a user with the submitted credentials was found
-            if(user):
-                #Check to see if the user account is active
-                if(user.is_active):
-                    login(request, user)
-                    return HttpResponseRedirect('/share/home')
-                else:
-                    return render_to_response('login.html', {'login_error2' : True}, context)
+        #Check to see if a user with the submitted credentials was found
+        if user:
+            #Check to see if the user account is active
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/share/home')
             else:
-                return render_to_response('login.html', {'login_error1' : True}, context)
+                return render_to_response('login.html', {'login_error2' : True}, context)
+        else:
+            return render_to_response('login.html', {'login_error1' : True}, context)
 	#Blank form
-	else:
-            return render_to_response('login.html', {}, context)
+    else:
+        return render_to_response('login.html', {}, context)
 
 ##
 # @brief Logs a User out.
@@ -442,28 +441,30 @@ def userLogin(request):
 # @return Http redirect to the homepage
 #
 @login_required
-def userLogout(request):
-	logout(request)
-	return HttpResponseRedirect('/share/')
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/share/')
 
 ##
-# @brief Confirms that a PayUser has received payment for existing expenses by a fellow member of the group.
-# @details Allows user to specify which member of the group they are reporting as having paid them back. Updates the amount owed between users and the group. 
+# @brief Confirms that a PayUser has received payment for existing expenses by a fellow member
+#        of the group.
+# @details Allows user to specify which member of the group they are reporting as having paid them
+#          back. Updates the amount owed between users and the group.
 # @param request An http request from ExpenShare
 # @return Redirects user to their homepage, will pass an error if one occured
 #
 @login_required
-def confirmPayment(request):
+def confirm_payment(request):
     context = RequestContext(request)
 
     group = PayGroup.objects.get(name=request.POST['group'])
     curr_pay_user = PayUser.objects.get(userKey=request.user)
     try:
         mem_view = group.memberViews.get(user=request.user)
-        targetUser = User.objects.get(username=request.POST['targetMember'])
-        targetMem = group.memberViews.get(user=targetUser)
-        myFellow = targetMem.fellows.get(user=request.user)
-        targetFellow = mem_view.fellows.get(user=targetUser)
+        target_user = User.objects.get(username=request.POST['target_member'])
+        target_mem = group.memberViews.get(user=target_user)
+        my_fellow = target_mem.fellows.get(user=request.user)
+        target_fellow = mem_view.fellows.get(user=target_user)
     except:
         paygroup_list = curr_pay_user.payGroups.all()
         groupform = MakeGroupForm()
@@ -486,8 +487,8 @@ def confirmPayment(request):
                         'confirmPayError1' : True}
         return render_to_response('home.html', context_dict, context)
 
-    if amount > (Decimal(-1) * targetFellow.owed) or amount <= Decimal(0):
-    	paygroup_list = curr_pay_user.payGroups.all()
+    if amount > (Decimal(-1) * target_fellow.owed) or amount <= Decimal(0):
+        paygroup_list = curr_pay_user.payGroups.all()
         groupform = MakeGroupForm()
         payform = PayForm()
         context_dict = {'PayForm' : payform,
@@ -496,14 +497,14 @@ def confirmPayment(request):
                         'confirmPayError1' : True}
         return render_to_response('home.html', context_dict, context)
 
-    targetFellow.owed += amount
-    targetFellow.save()
+    target_fellow.owed += amount
+    target_fellow.save()
     mem_view.netOwed += amount
     mem_view.save()
-    targetMem.netOwed -= amount
-    targetMem.save()
-    myFellow.owed -= amount
-    myFellow.save()
+    target_mem.netOwed -= amount
+    target_mem.save()
+    my_fellow.owed -= amount
+    my_fellow.save()
 
     paygroup_list = curr_pay_user.payGroups.all()
     groupform = MakeGroupForm()
@@ -515,49 +516,55 @@ def confirmPayment(request):
 
 ##
 # @brief Removes a payment from a group.
-# @details Removes an expense from a PayGroup and removes it from the expense history log. Then recalculates the balances owed between group members
+# @details Removes an expense from a PayGroup and removes it from the expense history log.
+#          Then recalculates the balances owed between group members
 # @param request An http request from ExpenShare
 # @return Redirect user to the expense history, passes an error if one occured
 #
 @login_required
-def removePayForm(request):
+def remove_payform(request):
     context = RequestContext(request)
     context_dict = {}
     user = request.user
 
-    if (request.method=='POST'):
+    if request.method == 'POST':
         try:
             group = PayGroup.objects.get(name=request.POST['group'])
             paylog = PaymentLog.objects.get(id=request.POST['log'])
-            Exists=False
-            Owner=False
+            exists = False
+            owner = False
 
             if paylog in group.paymentLogs.all():
-                Exists=True
+                exists = True
             if paylog.user == user:
-                Owner=True
+                owner = True
             else:
                 paylog_list = group.paymentLogs.order_by('-date')
                 groupform = MakeGroupForm()
                 context_dict = {'paylog': paylog_list, 'group': group, 'deletePFError2' : True}
                 return render_to_response('ExpenseLog.html', context_dict, context)
 
-            if Exists==True and Owner==True:
+            if exists == True and owner == True:
                 for mem_view in group.memberViews.all():
                     if mem_view.user.id == request.user.id:
-                    	mem_view.netOwed = ((Decimal(mem_view.netOwed) + Decimal(group.groupSize - 1) *
-                                            (Decimal(paylog.amount) / Decimal(group.groupSize))))
+                        mem_view.netOwed = ((Decimal(mem_view.netOwed) +
+                                             Decimal(group.groupSize - 1) *
+                                             (Decimal(paylog.amount) /
+                                              Decimal(group.groupSize))))
                         for fels in mem_view.fellows.all():
-                            fels.owed = ((Decimal(fels.owed) + (Decimal(paylog.amount) /
-                                        Decimal(group.groupSize))))
+                            fels.owed = ((Decimal(fels.owed) +
+                                          (Decimal(paylog.amount) /
+                                           Decimal(group.groupSize))))
                             fels.save()
                     else:
-                        mem_view.netOwed = ((Decimal(mem_view.netOwed) - (Decimal(paylog.amount) /
-                                            Decimal(group.groupSize))))
+                        mem_view.netOwed = ((Decimal(mem_view.netOwed) -
+                                             (Decimal(paylog.amount) /
+                                              Decimal(group.groupSize))))
                         for fels in mem_view.fellows.all():
                             if fels.user.id == request.user.id:
-                                fels.owed = ((Decimal(fels.owed) - (Decimal(paylog.amount) /
-                                            Decimal(group.groupSize))))
+                                fels.owed = ((Decimal(fels.owed) -
+                                              (Decimal(paylog.amount) /
+                                               Decimal(group.groupSize))))
                                 fels.save()
                     mem_view.save()
                 group.paymentLogs.remove(paylog)
