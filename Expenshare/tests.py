@@ -383,7 +383,7 @@ class TestExpenShare(TestCase):
 											     'group' : "Test Group"})
 		response = self.client.post('/share/confirmPayment/', {'group' : "Test Group",
 															   'payAmount' : 3,
-															   'targetMember' : "testUser"})
+															   'target_member' : "testUser"})
 		self.assertEqual(response.status_code, 200)
 
 		correctAmounts = True
@@ -404,7 +404,7 @@ class TestExpenShare(TestCase):
 
 		response = self.client.post('/share/confirmPayment/', {'group' : "Test Group",
 															   'payAmount' : 2,
-															   'targetMember' : "testUser"})
+															   'target_member' : "testUser"})
 
 		correctAmounts = True
 		for member_view in testPG.memberViews.all():
@@ -446,7 +446,7 @@ class TestExpenShare(TestCase):
 
 		response = self.client.post('/share/confirmPayment/', {'group' : "Test Group",
 															   'payAmount' : 11,
-															   'targetMember' : "testUser"})
+															   'target_member' : "testUser"})
 		self.assertEqual(response.status_code, 200)
 
 		correctAmounts = True
@@ -467,7 +467,7 @@ class TestExpenShare(TestCase):
 
 		response = self.client.post('/share/confirmPayment/', {'group' : "Test Group",
 															   'payAmount' : "asdfds",
-															   'targetMember' : "testUser"})
+															   'target_member' : "testUser"})
 		self.assertEqual(response.status_code, 200)
 
 		correctAmounts = True
