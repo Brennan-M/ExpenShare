@@ -15,7 +15,8 @@ SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
-STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+STATIC_PATH = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = 'staticfiles'
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,11 +26,11 @@ STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 SECRET_KEY = '4f)po7u!qq2=+-)acgi!f6_ic06qv)nkkg)%m==$uu_d^emfjm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
