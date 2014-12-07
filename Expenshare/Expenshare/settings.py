@@ -26,7 +26,7 @@ STATIC_ROOT = 'staticfiles'
 SECRET_KEY = '4f)po7u!qq2=+-)acgi!f6_ic06qv)nkkg)%m==$uu_d^emfjm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
