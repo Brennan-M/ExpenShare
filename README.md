@@ -38,12 +38,12 @@ Taylor Andrews, Ian Char, and Brennan McConnell
 | ----------------------- | ---------------------------------------- |
 | ExpenshareER.pdf        | ER diagram for ExpenShare database       |
 | refman.pdf              | Latex generated output for documentation |
-| manage.py               | Launches the ExpenShare websie           | 
+| manage.py               | Launches the ExpenShare website          | 
 | populate.py             | Populates the ExpenShare database        |
 | settings.py             | Overall settings for the website         |
-| forms.py                | Implementation of Django forms           |
-| models.py               | Implementation of Django models          |
-| views.py                | Implementation of Django views           |
+| forms.py                | User Forms on ExpenShare website         |
+| models.py               | ExpenShare Database Models               |
+| views.py                | The Functions Behind ExpenShare          |
 | urls.py                 | Determines format of website urls        |
 | home.html               | Expenshare user homepage                 |
 | login.html              | Login page for users                     |
