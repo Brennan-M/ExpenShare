@@ -73,8 +73,10 @@ cd doc/latex
 make
 ```
 Find documentation under ExpenShare/doc
+```
 -- Refer to the html folder for doxygen html generated online browsable documentation.
 -- Refer to redman.pdf for a pdf file of ExpenShare's documentation.
+```
 
 ##Usage - Build and Run
 #### 1. Install dependencies
