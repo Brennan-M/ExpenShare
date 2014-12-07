@@ -1,14 +1,14 @@
 body{
-	background-color: #2D2D2D;
+	background-color: #2F2933;
 	font-family: 'Noto Sans', sans-serif;
 }
 
 #logo{
-	font-family: 'Changa One', cursive;
+	font-family:'Poiret One', cursive;
 	position: center;
 	margin-left: 3.75em;
 	font-size: 6em;
-	color: #3BC3F1;
+	color: #29D9C2;
 	margin-bottom: -0.5em;
 	padding-bottom: 0em;
 }
@@ -38,21 +38,21 @@ body{
 
 #mainBoxOuter{
 	margin-top: 5em;
-	background-color: #6E3ADD;
+	background-color: #74F271;
 	margin-bottom: 2em;
-	border: solid #000000 5px;
+	border: solid #000000 3px;
 	padding: 1em;
 	margin-right: 1em;
 	margin-left: 3em;
 }
 #bodyContent{
-	background-color: #D9D4CC;
-	border: solid black 1px;
+	border: solid #29D9C2 2px;
+	margin-top: 0em;
 	padding-bottom: 0em;
 }
 
 #bodyContent2{
-	border: solid #3BC3F1 1px;
+	border: solid #29D9C2 2px;
 	padding-bottom: 0em;
 	margin-top: 0em;
 }
@@ -65,7 +65,7 @@ body{
 	margin-top: 7em;
 	background-color: #FFFFFF;
 	margin-bottom: 7em;
-	border: solid #6E3ADD 5px;
+	border: solid #74F271 5px;
 	padding-bottom: 3em;
 }
 #reportBox{
@@ -73,7 +73,7 @@ body{
 	margin-top: 5em;
 	background-color: #FFFFFF;
 	margin-bottom: 2em;
-	border: solid #6E3ADD 5px;
+	border: solid #74F271 5px;
 	padding-bottom: 3em;
 }
 
