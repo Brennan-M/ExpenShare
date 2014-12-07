@@ -95,10 +95,7 @@ def history(request):
                         'MakeGroupForm' : groupform, 'history_error2' : True}
         return render_to_response('home.html', context_dict, context)
 
-    print request.POST['group']
-
     paylog_list = curr_group.paymentLogs.order_by('-date')
-    print paylog_list
     context_dict = {'paylog': paylog_list, 'group': curr_group}
     return render_to_response('ExpenseLog.html', context_dict, context)
 
@@ -199,8 +196,6 @@ def add_payform(request):
 
     curr_pay_user = PayUser.objects.get(userKey=request.user)
 
-    print("Your Post was: ", request.POST)
-
     try:
         clickedGroup = PayGroup.objects.get(name=request.POST['group'])
         part_of = False
@@ -280,7 +275,6 @@ def add_payform(request):
 @login_required
 def joingroup_form(request):
     context = RequestContext(request)
-    print request.POST
     curr_pay_user = PayUser.objects.get(userKey=request.user)
     if (request.method == 'POST'):
         try:
