@@ -280,7 +280,11 @@ def joingroup_form(request):
             group = PayGroup.objects.get(name=request.POST['group'])
             passcode = request.POST['passcode']
             realcode = group.passcode
-            if passcode == realcode:
+            currentMember = False
+            for member in group.members.all():
+            	if member.username == request.user.username:
+            		currentMember = True
+            if passcode == realcode and not currentMember:
                 for mem_view in group.memberViews.all():
                     fell_mem = FellowUser(user=request.user)
                     fell_mem.save()

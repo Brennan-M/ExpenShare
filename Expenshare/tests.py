@@ -148,6 +148,33 @@ class TestExpenShare(TestCase):
 				added = True
 		self.assertEqual(added, True)
 
+	def test_joinGroup_alreadyJoined_error(self):
+		self.client.post('/share/register/', {'email' : "testEmail@emails.test",
+														 'username' : "testUser",
+														 'password' : "secret"})
+		self.client.post('/share/login/', {'username' : "testUser",
+									 	   'password' : "secret"})
+		testPG = PayGroup(name = "Test Group", description = "test", passcode = "secret")
+		testPG.save()
+		self.client.post('/share/joingroup_form/', {'group': "Test Group",
+													'passcode' : "secret"})
+		response = self.client.post('/share/joingroup_form/', {'group': "Test Group",
+															 'passcode' : "secret"})
+		self.assertEqual(response.status_code, 200)
+		timesAdded = 0
+		for member in testPG.members.all():
+			if member.username == "testUser":
+				timesAdded += 1
+		print timesAdded
+		self.assertEqual(timesAdded, 1)
+		timesAdded = 0
+		for member_view in testPG.memberViews.all():
+			if member_view.user.username == "testUser":
+				timesAdded = 1
+		print timesAdded
+		self.assertEqual(timesAdded, 1)
+
+
 	def test_joinGroup_noGroup_error(self):
 		self.client.post('/share/register/', {'email' : "testEmail@emails.test",
 														 'username' : "testUser",
