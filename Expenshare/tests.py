@@ -165,13 +165,11 @@ class TestExpenShare(TestCase):
 		for member in testPG.members.all():
 			if member.username == "testUser":
 				timesAdded += 1
-		print timesAdded
 		self.assertEqual(timesAdded, 1)
 		timesAdded = 0
 		for member_view in testPG.memberViews.all():
 			if member_view.user.username == "testUser":
 				timesAdded = 1
-		print timesAdded
 		self.assertEqual(timesAdded, 1)
 
 
