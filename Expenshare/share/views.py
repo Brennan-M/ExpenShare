@@ -284,7 +284,16 @@ def joingroup_form(request):
             for member in group.members.all():
             	if member.username == request.user.username:
             		currentMember = True
-            if passcode == realcode and not currentMember:
+            if not currentMemebr:
+                paygroup_list = curr_pay_user.payGroups.all()
+                groupform = MakeGroupForm()
+                payform = PayForm()
+                context_dict = {'PayForm' : payform,
+                                'paygroups' : paygroup_list,
+                                'MakeGroupForm' : groupform,
+                                'joingroup_error3' : True}
+                return render_to_response('home.html', context_dict, context)
+            if passcode == realcode:
                 for mem_view in group.memberViews.all():
                     fell_mem = FellowUser(user=request.user)
                     fell_mem.save()

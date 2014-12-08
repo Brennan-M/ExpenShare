@@ -16,7 +16,7 @@ PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(BASE_DIR,'static')
-STATIC_ROOT = 'static'
+STATIC_ROOT = 'staticfiles'
 
 
 # Quick-start development settings - unsuitable for production
@@ -62,18 +62,8 @@ WSGI_APPLICATION = 'Expenshare.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'shareDB',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'admin',
-        'PASSWORD': 'InkandZuko',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
+import dj_database_url
+DATABASES = {'default' : dj_database_url.config(default='postgres://localhost')} 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

@@ -58,6 +58,9 @@
 									{% if joingroup_error1 %}
 									<h4><font color="red">Incorrect groupname or passcode!</font></h4>
 									{% endif %}
+									{% if joingroup_error3 %}
+									<h4><font color="red">You already belong to this group.</font></h4>
+									{% endif %}
 									{% if leavegroup_error1 %}
 									<h4><font color="red">You cannot leave this group until all debts concerning you have been paid.</font></h4>					
 									{% endif %}
