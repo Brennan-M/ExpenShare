@@ -4,7 +4,8 @@
 ExpenShare is an online application designed to help people split costs and share expenses. You can now create one or more group(s) with your friends and log your transactions, then let ExpenShare do the work and calculate how much each group member owes each other. This application can be used for roommates to split living expenses, friends to split travel costs, or any other necessary use!
 
 Check out the finished product at http://expen-share.herokuapp.com/share/
-See a video dem at https://www.youtube.com/watch?v=WwXUiUC29nI
+
+See a video demo at https://www.youtube.com/watch?v=WwXUiUC29nI
 
 ##Contributors
 Taylor Andrews, Ian Char, and Brennan McConnell
