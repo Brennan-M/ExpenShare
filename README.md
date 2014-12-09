@@ -9,7 +9,15 @@ Check out the finished product at http://expen-share.herokuapp.com/share/
 Taylor Andrews, Ian Char, and Brennan McConnell
 
 ##Dependencies
- * [django](https://www.djangoproject.com/)
+ * Django==1.7.1
+ * dj-database-url==0.3.0
+ * dj-static==0.0.6
+ * gunicorn==19.1.1
+ * psycopg2==2.5.1
+ * static==0.4
+ * wsgiref==0.1.2
+ * simplejson==3.6.2
+ * Pillow==2.3.0
 
 ##Repository Organization
 ```
@@ -40,6 +48,8 @@ Taylor Andrews, Ian Char, and Brennan McConnell
     |   |   └── register.html
     |   ├── manage.py
     |   ├── populate.py
+    |   ├── Procfile            # Contains execution information for Heroku
+    |   ├── requirements.txt    # Requirements to run app on Heroku
     |   └── tests.py            # Automated test cases for testing ExpenShare. Uses Pythons Unittest Module.
     ├── doc                     # Folder containing the documentation.
     |	├── html                # Contains doxygen generated HTML files for online browsable documentation.
@@ -78,27 +88,43 @@ Find documentation under ExpenShare/doc
 -- Refer to redman.pdf for a pdf file of ExpenShare's documentation.
 ```
 
-##Usage - Build and Run
+##Usage - Build and Run Locally
 #### 1. Install dependencies
 ```
-git clone https://github.com/django/django.git
+cd Expenshare
+pip install -r requirements.txt
 ```
+#### 2. Change DATABASES
+Change DATABASES in Expenshare/settings.py to the following:
+```
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'mydb',                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': 'myuser',
+            'PASSWORD': 'password',
+            'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+            'PORT': '',                      # Set to empty string for default.
+        }
+    
+```
+**Note:** this may require you to install and setup your own Postgre database. In order to do this follow steps 4 and 7 [here.](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
 
-#### 2. Run manage.py
+#### 3. Run manage.py
 ```
 cd Expenshare
 python manage.py runserver
 ```
 
-#### 3. Open localhost in browser
+#### 4. Open localhost in browser
 
 ##Tests
-Run tests using: 
+Once you have gotten Expenshare running locally you can run tests using:
 ```
 cd Expenshare
 python manage.py test
 ```
-
 
 
 
