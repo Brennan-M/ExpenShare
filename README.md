@@ -48,6 +48,7 @@ Taylor Andrews, Ian Char, and Brennan McConnell
     |   |   └── register.html
     |   ├── manage.py
     |   ├── populate.py
+    |   ├── db.sqlite3
     |   ├── Procfile            # Contains execution information for Heroku
     |   ├── requirements.txt    # Requirements to run app on Heroku
     |   └── tests.py            # Automated test cases for testing ExpenShare. Uses Pythons Unittest Module.
@@ -95,45 +96,37 @@ cd Expenshare
 pip install -r requirements.txt
 ```
 #### 2. Change DATABASES
-Change DATABASES in Expenshare/settings.py to the following:
+Change DATABASES in Expenshare/settings.py to the following so that it uses SQLite3:
 ```
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'mydb',                      # Or path to database file if using sqlite3.
-            # The following settings are not used with sqlite3:
-            'USER': 'myuser',
-            'PASSWORD': 'password',
-            'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-            'PORT': '',                      # Set to empty string for default.
-        }
-    
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'db.sqlite3'                      # Or path to database file if using sqlite3.
+    }
+}
+```
+Additionally, at the top of the same document make the following change:
+```
+STATIC_ROOT = 'static'
+```
+Then run the following code in the terminal in Expenshare/Expenshare:
+```
+python manage.py syncdb
+python manage.py makemigrations
+pyton manage.py migrate
 ```
 **Note:** this may require you to install and setup your own Postgre database. In order to do this follow steps 4 and 7 [here.](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
 
 #### 3. Run manage.py
+In the terminal, type the following command in Expenshare/Expenshare
 ```
-cd Expenshare
 python manage.py runserver
 ```
 
 #### 4. Open localhost in browser
 
 ##Tests
-Once you have gotten Expenshare running locally you can run tests using:
+Once you have gotten Expenshare running locally you can run tests in Expenshare/Expenshare by:
 ```
-cd Expenshare
 python manage.py test
 ```
-
-
-
-
-
-
-
-
-
-
-
-
