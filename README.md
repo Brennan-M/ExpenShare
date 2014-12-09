@@ -124,6 +124,7 @@ python manage.py runserver
 ```
 
 #### 4. Open localhost in browser
+Expenshare can then be found at http://127.0.0.1:8000/share/
 
 ##Tests
 Once you have gotten Expenshare running locally you can run tests in Expenshare/Expenshare by:
