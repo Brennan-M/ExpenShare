@@ -284,7 +284,7 @@ def joingroup_form(request):
             for member in group.members.all():
             	if member.username == request.user.username:
             		currentMember = True
-            if not currentMemebr:
+            if currentMember:
                 paygroup_list = curr_pay_user.payGroups.all()
                 groupform = MakeGroupForm()
                 payform = PayForm()
